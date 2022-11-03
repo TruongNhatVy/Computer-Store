@@ -6,11 +6,12 @@ import ProductRouter from "./routers/ProductRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const userName = 'igodl';
-const password = 'truongnhatvY0';
-const databaseName = "WebBanMayTinh";
+const userName = "vytruong";
+const password = "truongnhatvY0";
+const databaseName = "ComputerStore";
+const cluster = "@cluster0.m4rmngd.mongodb.net";
 const URL =
-  "mongodb+srv://" + userName + ':' + password + "@cluster0.37vbo9d.mongodb.net/" + databaseName;
+  "mongodb+srv://" + userName + ":" + password + cluster + "/" + databaseName;
 
 //add system services
 app.use(bodyParser.json());
