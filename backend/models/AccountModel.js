@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-const schema = new mongoose.schema({
-  MaTaiKhoan: {
+const schema = new mongoose.Schema({
+  AccountId: {
+    type: Number,
+    require: true,
+  },
+  FirstName: {
     type: String,
     require: true,
   },
-  HoLot: {
-    type: String,
-    require: true,
-  },
-  Ten: {
+  LastName: {
     type: String,
     require: true,
   },
@@ -21,21 +21,21 @@ const schema = new mongoose.schema({
     type: String,
     require: true,
   },
-  MatKhau: {
+  Password: {
     type: String,
     require: true,
   },
-  KichHoat: {
+  IsActive: {
+    type: Boolean,
+    require: true,
+  },
+  Role: {
     type: String,
     require: true,
   },
-  Quyen: {
-    type: String,
-    require: true,
-  },
-  GhiChu: {
+  Status: {
     type: String,
   },
 });
 
-export const TaiKhoanModel = mongoose.model("TaiKhoan", schema);
+export const AccountModel = mongoose.model("accounts", schema);

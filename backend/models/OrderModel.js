@@ -1,42 +1,46 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-  ProductId: {
+  OderId: {
     type: Number,
     require: true,
   },
-  Quantity: {
-    type: String,
+  AccountId: {
+    type: Number,
     require: true,
   },
-  BrandId: {
-    type: String,
+  Date: {
+    type: Date,
     require: true,
   },
-  Name: {
-    type: String,
-    require: true,
-  },
-  CategoryId: {
-    type: String,
-    require: true,
-  },
-  Image: {
-    type: String,
-    require: true,
-  },
-  Description: {
-    type: String,
-    require: true,
-  },
-  Price: {
-    type: String,
+  Total: {
+    type: Number,
     require: true,
   },
   Status: {
     type: String,
     require: true,
   },
+  Email: {
+    type: String,
+    require: true,
+  },
+  Phone: {
+    type: Number,
+    require: true,
+  },
+  Address: {
+    type: String,
+    require: true,
+  },
+  Province: {
+    type: String,
+    require: true,
+  },
+  District: {
+    type: String,
+    require: true,
+  },
 });
 
-export const ProductModel = mongoose.model("products", schema);
+export const OrderModel = mongoose.model("orders", schema);

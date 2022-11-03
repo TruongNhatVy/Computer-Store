@@ -12,6 +12,4 @@ export const addProductRe = async (req, res) => {
   await product.save();
 };
 
-export const updateProductRe = async (req, res) => {
-
-};
+export const updateProductRe = async (req, res) => {};
