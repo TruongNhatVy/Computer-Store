@@ -26,7 +26,7 @@ const schema = new mongoose.Schema({
     require: true,
   },
   Phone: {
-    type: Number,
+    type: String,
     require: true,
   },
   Address: {

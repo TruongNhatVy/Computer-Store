@@ -6,11 +6,11 @@ const schema = new mongoose.Schema({
     require: true,
   },
   Quantity: {
-    type: String,
+    type: Number,
     require: true,
   },
   BrandId: {
-    type: String,
+    type: Number,
     require: true,
   },
   Name: {
@@ -18,7 +18,7 @@ const schema = new mongoose.Schema({
     require: true,
   },
   CategoryId: {
-    type: String,
+    type: Number,
     require: true,
   },
   Image: {
@@ -30,7 +30,7 @@ const schema = new mongoose.Schema({
     require: true,
   },
   Price: {
-    type: String,
+    type: Number,
     require: true,
   },
   Status: {
@@ -40,3 +40,18 @@ const schema = new mongoose.Schema({
 });
 
 export const ProductModel = mongoose.model("products", schema);
+
+//Convert type db
+// db.products.find({}).forEach(function (doc) {
+//   db.products.updateOne(
+//     {
+//       _id: doc._id,
+//     },
+//     {
+//       $set: {
+//         BrandId: Boolean(doc.BrandId),
+//         Name: NumberInt(doc.Name),
+//       },
+//     }
+//   );
+// });
