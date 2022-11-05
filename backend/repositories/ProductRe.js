@@ -1,15 +1,21 @@
 import { ProductModel } from "../models/ProductModel.js";
 
-export const getAllProductsRe = async (req, res) => {
-  const allProducts = await ProductModel.find();
-
-  return allProducts;
+export const getAllProducts = async () => {
+  return await ProductModel.find();
 };
 
-export const addProductRe = async (req, res) => {
-  const product = new ProductModel(req); //res is newProduct (body)
-
-  await product.save();
+export const getProductById = async (productId) => {
+  return await ProductModel.findOne({ ProductId: productId });
 };
 
-export const updateProductRe = async (req, res) => {};
+export const addProduct = async (product) => {
+  return await ProductModel.create(product);
+};
+
+export const updateProductById = async (productId, product) => {
+  await ProductModel.findOneAndUpdate({ ProductId: productId }, product);
+};
+
+export const deleteProductById = async (productId) => {
+  await ProductModel.findOneAndDelete({ ProductId: productId });
+};

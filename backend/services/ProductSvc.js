@@ -1,35 +1,23 @@
-import { addProductRe, getAllProductsRe } from "../repositories/ProductRe.js";
+import * as ProductRepo from "../repositories/ProductRe.js";
 
-export const getAllProductsSvc = async (req, res) => {
-  const product = await getAllProductsRe(req, res);
-
-  try {
-    return res.status(200).json({
-      message: "ok",
-      length: product.length,
-      data: product,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "fail",
-      error: error,
-    });
-  }
+export const getAllProducts = async () => {
+  return await ProductRepo.getAllProducts();
 };
 
-export const addProductSvc = async (req, res) => {
-  const newProduct = req.body;
-  await addProductRe(newProduct, res);
+export const getProductById = async (productId) => {
+  return await ProductRepo.getProductById(productId);
+};
 
-  try {
-    return res.status(200).json({
-      message: "ok",
-      data: newProduct,
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: "fail",
-      error: error,
-    });
-  }
+export const addProduct = async (product) => {
+  return await ProductRepo.addProduct(product);
+};
+
+export const updateProductById = async (productId, product) => {
+  await ProductRepo.updateProductById(productId, product);
+
+  return getProductById(productId);
+};
+
+export const deleteProductById = async (productId) => {
+  await ProductRepo.deleteProductById(productId);
 };
