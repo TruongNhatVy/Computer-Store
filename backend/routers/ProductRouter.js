@@ -9,19 +9,19 @@ ProductRouter.post("/products/addProduct", ProductController.addProduct);
 //Read
 ProductRouter.get("/products/getAllProducts", ProductController.getAllProducts);
 ProductRouter.get(
-  "/products/getProductById/:productId",
+  "/products/getProductById/:_id",
   ProductController.getProductById
 );
 
 //Update
 ProductRouter.put(
-  "/products/updateProduct/:productId",
+  "/products/updateProduct/:_id",
   ProductController.updateProductById
 );
 
 //Delete
 ProductRouter.delete(
-  "/products/deleteProduct/:productId",
+  "/products/deleteProduct/:_id",
   ProductController.deleteProductById
 );
 

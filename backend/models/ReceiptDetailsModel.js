@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaType } from "mongoose";
 
 const schema = new mongoose.Schema({
   ReceiptId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     require: true,
   },
   ProductId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     require: true,
   },
   UnitPrice: {

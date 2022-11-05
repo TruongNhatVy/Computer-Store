@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 import ProductRouter from "./routers/ProductRouter.js";
 
 const app = express();
-const PORT = process.env.PORT || 5007;
+const PORT = process.env.PORT || 5000;
 const userName = "vytruong";
 const password = "truongnhatvY0";
 const databaseName = "ComputerStore";

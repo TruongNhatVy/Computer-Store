@@ -1,12 +1,12 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaType } from "mongoose";
 
 const schema = new mongoose.Schema({
   OrderId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   ProductId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     required: true,
   },
   UnitPrice: {
@@ -23,4 +23,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-export const OrderDetails = mongoose.model('orderDetails',schema);
+export const OrderDetails = mongoose.model("orderDetails", schema);
