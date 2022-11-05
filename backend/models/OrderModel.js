@@ -1,12 +1,8 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaType } from "mongoose";
 
 const schema = new mongoose.Schema({
-  OderId: {
-    type: Number,
-    require: true,
-  },
   AccountId: {
-    type: Number,
+    type: Schema.Types.ObjectId,
     require: true,
   },
   Date: {

@@ -15,9 +15,9 @@ export const getAllProducts = async (req, res) => {
 
 export const getProductById = async (req, res) => {
   try {
-    const { productId } = req.params;
+    const { _id } = req.params;
 
-    const product = await ProductSvc.getProductById(productId);
+    const product = await ProductSvc.getProductById(_id);
     return res.status(200).json(product);
   } catch (error) {
     res.status(500).json({
@@ -43,12 +43,12 @@ export const addProduct = async (req, res) => {
 
 export const updateProductById = async (req, res) => {
   try {
-    const { productId } = req.params;
+    const {_id } = req.params;
     const product = req.body;
 
-    await ProductSvc.updateProductById(productId, product);
+    await ProductSvc.updateProductById(_id, product);
 
-    const productUpdate = await ProductSvc.getProductById(productId);
+    const productUpdate = await ProductSvc.getProductById(_id);
 
     return res.status(200).json(productUpdate);
   } catch (error) {
@@ -61,9 +61,9 @@ export const updateProductById = async (req, res) => {
 
 export const deleteProductById = async (req, res) => {
   try {
-    const productId = req.params.productId;
+    const {_id} = req.params;
 
-    await ProductSvc.deleteProductById(productId);
+    await ProductSvc.deleteProductById(_id);
 
     return res.status(200).json({
       Message: "ok",

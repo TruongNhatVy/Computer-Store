@@ -4,18 +4,18 @@ export const getAllProducts = async () => {
   return await ProductModel.find();
 };
 
-export const getProductById = async (productId) => {
-  return await ProductModel.findOne({ ProductId: productId });
+export const getProductById = async (_id) => {
+  return await ProductModel.findById(_id);
 };
 
 export const addProduct = async (product) => {
   return await ProductModel.create(product);
 };
 
-export const updateProductById = async (productId, product) => {
-  await ProductModel.findOneAndUpdate({ ProductId: productId }, product);
+export const updateProductById = async (_id, product) => {
+  await ProductModel.findByIdAndUpdate(_id, product);
 };
 
-export const deleteProductById = async (productId) => {
-  await ProductModel.findOneAndDelete({ ProductId: productId });
+export const deleteProductById = async (_id) => {
+  await ProductModel.findByIdAndDelete(_id);
 };

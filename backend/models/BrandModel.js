@@ -1,10 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaType } from "mongoose";
 
-const schema = new mongoose.Schema({
-  BrandId: {
-    type: Number,
-    require: true,
-  },
+const schema = new mongoose.schema({
   Name: {
     type: String,
     require: true,

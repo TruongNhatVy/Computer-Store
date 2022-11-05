@@ -1,24 +1,20 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaType } from "mongoose";
 
 const schema = new mongoose.Schema({
-  ProductId: {
-    type: Number,
+  CategoryId: {
+    type: Schema.Types.ObjectId,
+    require: true,
+  },
+  BrandId: {
+    type: Schema.Types.ObjectId,
     require: true,
   },
   Quantity: {
     type: Number,
     require: true,
   },
-  BrandId: {
-    type: Number,
-    require: true,
-  },
   Name: {
     type: String,
-    require: true,
-  },
-  CategoryId: {
-    type: Number,
     require: true,
   },
   Image: {
@@ -49,8 +45,8 @@ export const ProductModel = mongoose.model("products", schema);
 //     },
 //     {
 //       $set: {
-//         BrandId: Boolean(doc.BrandId),
-//         Name: NumberInt(doc.Name),
+//         BrandId: ObjectId(doc.BrandId),
+//         CategoryId: ObjectId(doc.CategoryId),
 //       },
 //     }
 //   );

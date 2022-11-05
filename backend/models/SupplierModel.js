@@ -1,10 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, SchemaType } from "mongoose";
 
 const schema = new mongoose.Schema({
-  SupplierId: {
-    type: Number,
-    required: true,
-  },
   Name: {
     type: String,
     require: true,
