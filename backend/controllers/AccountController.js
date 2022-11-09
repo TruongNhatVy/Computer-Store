@@ -2,15 +2,8 @@ import * as AccountSvc from "../services/AccountSvc.js";
 
 export const getAccounts = async (req, res) => {
   try {
-    const {page} = req.params;
+    const { page } = req.params;
     const accounts = await AccountSvc.getAccounts(page);
-
-    // const bcrypt = require("bcrypt");
-    // const salt = await bcrypt.genSalt(10);
-    // const password = "123";
-    // const passHash = await bcrypt.hash(password, salt);
-
-    // console.log(passHash);
 
     return res.status(200).json(accounts);
   } catch (error) {
