@@ -21,7 +21,14 @@ ProductRouter.get(
   "/products/getProductByStatus/:status/:page",
   ProductController.getProductByStatus
 );
-
+ProductRouter.get(
+  "/products/getProductByName/:name",
+  ProductController.getProductByName
+);
+ProductRouter.get(
+  "/products/getProductByName/:name/:page",
+  ProductController.getProductByName
+);
 //Update
 ProductRouter.put(
   "/products/updateProduct/:_id",

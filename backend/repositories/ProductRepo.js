@@ -34,6 +34,25 @@ export const getProductByStatus = async (status, page) => {
   }
 };
 
+export const getProductByName = async (name, page) => {
+  if (page) {
+    page = parseInt(page);
+    page = page < 1 ? 1 : page;
+
+    const skipProducts = (page - 1) * PAGE_SIZE;
+
+    return await ProductModel.find({
+      Name: { $regex: ".*" + name + ".*", $options: "i" },
+    })
+      .skip(skipProducts)
+      .limit(PAGE_SIZE);
+  } else {
+    return await ProductModel.find({
+      Name: { $regex: ".*" + name + ".*", $options: "i" },
+    });
+  }
+};
+
 export const addProduct = async (product) => {
   return await ProductModel.create(product);
 };
