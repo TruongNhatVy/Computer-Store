@@ -7,7 +7,8 @@ const AccountRouter = express.Router();
 AccountRouter.post("/accounts/addAccount", AccountController.addAccount);
 
 //Read
-AccountRouter.get("/accounts/getAllAccounts", AccountController.getAllAccounts);
+AccountRouter.get("/accounts/getAccounts", AccountController.getAccounts);
+AccountRouter.get("/accounts/getAccounts/:page", AccountController.getAccounts);
 AccountRouter.get(
   "/accounts/getAccountById/:_id",
   AccountController.getAccountById

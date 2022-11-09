@@ -1,7 +1,18 @@
 import { AccountModel } from "../models/AccountModel.js";
 
-export const getAllAccounts = async () => {
-  return await AccountModel.find();
+const PAGE_SIZE = 1;
+
+export const getAccounts = async (page) => {
+  if (page) {
+    page = parseInt(page);
+    page = page < 1 ? 1 : page;
+
+    const skipAccounts = (page - 1) * PAGE_SIZE;
+
+    return await AccountModel.find().skip(skipAccounts).limit(PAGE_SIZE);
+  } else {
+    return await AccountModel.find();
+  }
 };
 
 export const getAccountById = async (_id) => {

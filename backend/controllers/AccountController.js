@@ -1,8 +1,9 @@
 import * as AccountSvc from "../services/AccountSvc.js";
 
-export const getAllAccounts = async (req, res) => {
+export const getAccounts = async (req, res) => {
   try {
-    const accounts = await AccountSvc.getAllAccounts();
+    const {page} = req.params;
+    const accounts = await AccountSvc.getAccounts(page);
 
     // const bcrypt = require("bcrypt");
     // const salt = await bcrypt.genSalt(10);
