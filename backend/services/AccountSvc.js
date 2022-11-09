@@ -1,7 +1,7 @@
 import * as AccountRepo from "../repositories/AccountRepo.js";
 
-export const getAllAccounts = async () => {
-  return await AccountRepo.getAllAccounts();
+export const getAccounts = async (page) => {
+  return await AccountRepo.getAccounts(page);
 };
 
 export const getAccountById = async (_id) => {

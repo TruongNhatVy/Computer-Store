@@ -7,6 +7,7 @@ const ProductRouter = express.Router();
 ProductRouter.post("/products/addProduct", ProductController.addProduct);
 
 //Read
+ProductRouter.get("/products/getProducts", ProductController.getProducts);
 ProductRouter.get("/products/getProducts/:page", ProductController.getProducts);
 ProductRouter.get(
   "/products/getProductById/:_id",

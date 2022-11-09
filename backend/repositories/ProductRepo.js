@@ -7,7 +7,7 @@ export const getProducts = async (page) => {
     page = parseInt(page);
     page = page < 1 ? 1 : page;
 
-    var skipProducts = (page - 1) * PAGE_SIZE;
+    const skipProducts = (page - 1) * PAGE_SIZE;
 
     return await ProductModel.find().skip(skipProducts).limit(PAGE_SIZE);
   } else {
