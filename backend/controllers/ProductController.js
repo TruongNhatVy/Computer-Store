@@ -2,7 +2,7 @@ import * as ProductSvc from "../services/ProductSvc.js";
 
 export const getProducts = async (req, res) => {
   try {
-    const {page} = req.params;
+    const { page } = req.params;
     const products = await ProductSvc.getProducts(page);
 
     return res.status(200).json(products);
@@ -20,6 +20,20 @@ export const getProductById = async (req, res) => {
 
     const product = await ProductSvc.getProductById(_id);
     return res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({
+      Message: "Fail",
+      Error: error,
+    });
+  }
+};
+
+export const getProductByStatus = async (req, res) => {
+  try {
+    const { status,page } = req.params;
+
+    const products = await ProductSvc.getProductByStatus(status,page);
+    return res.status(200).json(products);
   } catch (error) {
     res.status(500).json({
       Message: "Fail",

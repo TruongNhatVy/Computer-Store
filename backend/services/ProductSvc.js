@@ -8,6 +8,10 @@ export const getProductById = async (_id) => {
   return await ProductRepo.getProductById(_id);
 };
 
+export const getProductByStatus = async (status,page) => {
+  return await ProductRepo.getProductByStatus(status,page);
+};
+
 export const addProduct = async (product) => {
   return await ProductRepo.addProduct(product);
 };

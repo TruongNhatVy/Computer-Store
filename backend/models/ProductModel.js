@@ -37,7 +37,7 @@ const schema = new mongoose.Schema({
 
 export const ProductModel = mongoose.model("products", schema);
 
-//Convert type db
+// Convert type db
 // db.products.find({}).forEach(function (doc) {
 //   db.products.updateOne(
 //     {

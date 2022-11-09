@@ -13,6 +13,14 @@ ProductRouter.get(
   "/products/getProductById/:_id",
   ProductController.getProductById
 );
+ProductRouter.get(
+  "/products/getProductByStatus/:status",
+  ProductController.getProductByStatus
+);
+ProductRouter.get(
+  "/products/getProductByStatus/:status/:page",
+  ProductController.getProductByStatus
+);
 
 //Update
 ProductRouter.put(
