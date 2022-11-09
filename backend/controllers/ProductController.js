@@ -1,8 +1,9 @@
 import * as ProductSvc from "../services/ProductSvc.js";
 
-export const getAllProducts = async (req, res) => {
+export const getProducts = async (req, res) => {
   try {
-    const products = await ProductSvc.getAllProducts();
+    const {page} = req.params;
+    const products = await ProductSvc.getProducts(page);
 
     return res.status(200).json(products);
   } catch (error) {
@@ -41,12 +42,12 @@ export const addProduct = async (req, res) => {
   }
 };
 
-export const updateProductById = async (req, res) => {
+export const updateProduct = async (req, res) => {
   try {
-    const {_id } = req.params;
+    const { _id } = req.params;
     const product = req.body;
 
-    await ProductSvc.updateProductById(_id, product);
+    await ProductSvc.updateProduct(_id, product);
 
     const productUpdate = await ProductSvc.getProductById(_id);
 
@@ -59,11 +60,11 @@ export const updateProductById = async (req, res) => {
   }
 };
 
-export const deleteProductById = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   try {
-    const {_id} = req.params;
+    const { _id } = req.params;
 
-    await ProductSvc.deleteProductById(_id);
+    await ProductSvc.deleteProduct(_id);
 
     return res.status(200).json({
       Message: "ok",

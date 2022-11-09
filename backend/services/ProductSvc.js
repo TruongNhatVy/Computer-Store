@@ -1,7 +1,7 @@
-import * as ProductRepo from "../repositories/ProductRe.js";
+import * as ProductRepo from "../repositories/ProductRepo.js";
 
-export const getAllProducts = async () => {
-  return await ProductRepo.getAllProducts();
+export const getProducts = async (page) => {
+  return await ProductRepo.getProducts(page);
 };
 
 export const getProductById = async (_id) => {
@@ -12,12 +12,12 @@ export const addProduct = async (product) => {
   return await ProductRepo.addProduct(product);
 };
 
-export const updateProductById = async (_id, product) => {
-  await ProductRepo.updateProductById(_id, product);
+export const updateProduct = async (_id, product) => {
+  await ProductRepo.updateProduct(_id, product);
 
   return getProductById(_id);
 };
 
-export const deleteProductById = async (_id) => {
-  await ProductRepo.deleteProductById(_id);
+export const deleteProduct = async (_id) => {
+  await ProductRepo.deleteProduct(_id);
 };
