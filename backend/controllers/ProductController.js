@@ -42,6 +42,20 @@ export const getProductByStatus = async (req, res) => {
   }
 };
 
+export const getProductByName = async (req, res) => {
+  try {
+    const { name, page } = req.params;
+
+    const products = await ProductSvc.getProductByName(name, page);
+    return res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({
+      Message: "Fail",
+      Error: error,
+    });
+  }
+};
+
 export const addProduct = async (req, res) => {
   try {
     const product = req.body;

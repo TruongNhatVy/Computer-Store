@@ -12,6 +12,10 @@ export const getProductByStatus = async (status,page) => {
   return await ProductRepo.getProductByStatus(status,page);
 };
 
+export const getProductByName = async (name, page) => {
+  return await ProductRepo.getProductByName(name, page);
+};
+
 export const addProduct = async (product) => {
   return await ProductRepo.addProduct(product);
 };
