@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import ProductRouter from "./routers/ProductRouter.js";
+import AccountRouter from "./routers/AccountRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.set("json spaces", 2); //formatted Json
 
 //routers
 app.use("/", ProductRouter);
+app.use("/", AccountRouter);
 
 //connect MongoDb
 mongoose

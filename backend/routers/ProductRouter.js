@@ -7,7 +7,7 @@ const ProductRouter = express.Router();
 ProductRouter.post("/products/addProduct", ProductController.addProduct);
 
 //Read
-ProductRouter.get("/products/getAllProducts", ProductController.getAllProducts);
+ProductRouter.get("/products/getProducts/:page", ProductController.getProducts);
 ProductRouter.get(
   "/products/getProductById/:_id",
   ProductController.getProductById
@@ -16,13 +16,13 @@ ProductRouter.get(
 //Update
 ProductRouter.put(
   "/products/updateProduct/:_id",
-  ProductController.updateProductById
+  ProductController.updateProduct
 );
 
 //Delete
 ProductRouter.delete(
   "/products/deleteProduct/:_id",
-  ProductController.deleteProductById
+  ProductController.deleteProduct
 );
 
 export default ProductRouter;
