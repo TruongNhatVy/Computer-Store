@@ -15,6 +15,7 @@ const products = [
     category: "Dell",
     price: "15560000",
     categoryslug: "Dell-vostro",
+    rating: 3.5,
   },
   {
     id: 2,
@@ -28,6 +29,7 @@ const products = [
     category: "Dell",
     price: "15560000",
     categoryslug: "Dell-vostro",
+    rating: 4.44,
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ const products = [
     category: "MSI",
     price: "17000000",
     categoryslug: "Msi-modern",
+    rating: 5,
   },
   {
     id: 4,
@@ -53,6 +56,7 @@ const products = [
     category: "MSI",
     categoryslug: "Msi-modern1",
     price: "17000000",
+    rating: 4.44,
   },
   {
     id: 5,
@@ -66,6 +70,7 @@ const products = [
     category: "MSI",
     categoryslug: "Msi-modern",
     price: "17000000",
+    rating: 3,
   },
   {
     id: 6,
@@ -77,8 +82,9 @@ const products = [
     img: img2,
     img2: Msi,
     category: "MSI",
-    categoryslug: "Msi-modern",
+    categoryslug: "Msi-katana",
     price: "17000000",
+    rating: 3.5,
   },
   {
     id: 7,
@@ -105,12 +111,23 @@ const products = [
     category: "MSI",
     categoryslug: "Msi-modern",
     price: "17000000",
+    rating: 3.5,
   },
 ];
-
+const proc=() => {
+  return products
+}
 const getALLproducts = () => {
-  return products;
+  const value = new Promise((resolve, reject) => {
+    setTimeout(function () {
+      resolve(products);
+    });
+    
+  });
+  return value;
+
 };
+
 const getProducts = (counts) => {
   const max = products.length - counts;
   const min = 0;
@@ -118,13 +135,15 @@ const getProducts = (counts) => {
   return products.slice(start, start + counts);
 };
 const getProductById = (id) => {
-  const findId= products.find((e) => {
+  const findId = products.find((e) => {
     return e.id == id;
   });
 
   return findId;
 };
+
 const productsData = {
+  proc,
   getALLproducts,
   getProducts,
   getProductById,

@@ -1,15 +1,21 @@
-import React from 'react'
-import Layout from './components/Layout/Layout'
-import Routerslink from './routes/Routers'
+import React from "react";
+
+import SignIn from "./pages/SignIn";
+import Routerslink from "./routes/Routers";
+import SignUp from "./pages/SignUp";
+import { Route, Routes } from "react-router-dom";
 
 const App = () => {
   return (
- 
-    <Layout>
+    <>
+    
+      
         <Routerslink />
-    </Layout>
-  
-  )
-}
+      
+      
+    
+    </>
+  );
+};
 
-export default App
+export default App;

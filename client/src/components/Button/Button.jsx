@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+
 const Button = props => {
     const size=props.size ? 'btn-'+ props.size :""
     const aninmation =props.animation ? '' :'btn-animation'

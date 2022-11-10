@@ -1,7 +1,6 @@
 .header {
     background-color: $main-bg;
     position: fixed;
-    top: 0;
     left: 0;
     right: 0;
     z-index: 99;
@@ -10,34 +9,26 @@
 
     @include tablet {
         height: $header-tablet-height;
+
     }
 
     @include mobile {
-        height: $header-mobile-height;
+        top: 0;
+        height: $header-tablet-height;
     }
 
-    .container {
-        height: 100%;
-    }
-
-    &__logo {
-        @include flex(center, center);
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-
-    }
+    .container {}
 
     &.shrink {
         height: $header-shrink-height;
         box-shadow: $box-shadow;
-        z-index:100;    
+        z-index: 100;
+        top: 0;
 
     }
 
     &__menu {
         @include flex(center, space-between);
-        height: 100%;
         font-size: 1.2rem;
 
 
@@ -86,6 +77,7 @@
 
         &__right {
             font-size: 2em;
+            margin-left: 1rem;
 
             &__item {
                 @include flex(center, center);
@@ -101,6 +93,8 @@
         }
 
         &__left {
+            margin: auto;
+
             &__close {
                 display: none;
             }
@@ -118,10 +112,11 @@
                 background-color: $main-bg;
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+
                 &.active {
                     transform: translate(0);
                 }
-                
+
 
                 &__item~&__item {
                     margin-left: unset;
@@ -135,7 +130,7 @@
                     font-size: 1.5em;
                 }
             }
-            
+
             @include mobile {
                 flex-direction: column;
                 position: fixed;
@@ -149,10 +144,11 @@
                 background-color: $main-bg;
                 transform: translateX(-100%);
                 transition: transform 0.3s ease;
+
                 &.active {
                     transform: translate(0);
                 }
-                
+
 
                 &__item~&__item {
                     margin-left: unset;
@@ -170,7 +166,7 @@
             @include mobile {
                 display: none;
             }
-        
+
         }
 
         &__mobile-toggle {
@@ -186,7 +182,7 @@
 
             }
         }
-        
+
     }
 
 }

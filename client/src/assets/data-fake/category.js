@@ -135,23 +135,25 @@
 //   }
 // ];
 // export default category;
-const category = [
+import { LaptopOutlined, AppleOutlined } from "@ant-design/icons";
+
+const items = [
   {
-    key: "MSI",
+    key: "1",
     label: "Hãng MSI",
-    icon: "laptop",
+    icon: <LaptopOutlined />,
     type: "",
     category: "MSI",
     children: [
       {
-        label: "Laptop MSI",
+        label: "Laptop MSI Modern",
         key: "MSImodernreal",
         categoryslug: "Msi-modern",
       },
       {
-        label: "Laptop MSI",
+        label: "Laptop MSI Katana",
         key: "MSImodern",
-        categoryslug: "Laptop MSI",
+        categoryslug: "Msi-katana",
       },
       {
         label: "Laptop MSI",
@@ -161,10 +163,32 @@ const category = [
     ],
   },
   {
-    key: "Apple",
+    key: "2",
     label: "Hãng Apple",
-    icon: "apple",
-    type: "logo",
+    icon: <AppleOutlined />,
+    category: "Apple",
+    children: [
+      {
+        label: "Macbook Pro M1",
+        key: "AppleMacPro",
+        categoryslug: "MacbookPRO",
+      },
+      {
+        label: "Macbook Pro M2",
+        key: "AppleMac Pro M2",
+        categoryslug: "Laptop MSI",
+      },
+      {
+        label: "Macbook Air",
+        key: "AppleMacAir",
+        categoryslug: "Laptop MSI",
+      },
+    ],
+  },
+  {
+    key: "4",
+    label: "Hãng Apple",
+    icon: <AppleOutlined />,
     category: "Apple",
     children: [
       {
@@ -183,6 +207,29 @@ const category = [
         categoryslug: "Laptop MSI",
       },
     ],
-  }
+  },
+  {
+    key: "3",
+    label: "Hãng Apple",
+    icon: <AppleOutlined />,
+    category: "Apple",
+    children: [
+      {
+        label: "Macbook",
+        key: "AppleMacPro",
+        categoryslug: "Msi-modern",
+      },
+      {
+        label: "Macbook",
+        key: "AppleMacProm2",
+        categoryslug: "Laptop MSI",
+      },
+      {
+        label: "Macbook",
+        key: "AppleMacProm3",
+        categoryslug: "Laptop MSI",
+      },
+    ],
+  },
 ];
-export default category;
+export default items;

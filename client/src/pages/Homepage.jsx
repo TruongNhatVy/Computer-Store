@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Sliders from "../components/Slider/Slider";
 import Helmet from "../components/Helmet";
 import sliderImage from "../assets/data-fake/data-img";
+import logos from "../assets/data-fake/Logo";
 import Section from "../components/Section/Section";
 import SectionBody from "../components/Section/SectionBody";
 import SectionTitle from "../components/Section/SectionTitle";
@@ -11,21 +12,16 @@ import policy from "../assets/data-fake/policy-data";
 import Grid from "../components/Grid/Grid";
 // import productData from "../assets/data-fake/product-data";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { productData, getProducts, getALLproducts } from "../api/getProduct";
+// import { productData, getProducts, getALLproducts } from "../api";
 import PageError from "../components/PageServerLoading/PageError";
 import PageLoading from "../components/PageServerLoading/PageLoading";
-
+import { getALLproducts } from "../action";
+import Sliderlogo from "../components/Slider/Sliderlogo";
 const Homepage = () => {
-  const [product, setProduct] = useState([]);
-  const { isError, data, isLoading } = useQuery(
-    ["products"],
-    getALLproducts,
-    {
-      staleTime: 1000,
-    }
-  );
-  console.log(data);
-
+  const { isError, data, isLoading } = useQuery(["product"], getALLproducts, {
+    staleTime: 1000,
+  });
+  console.log(data)
   useEffect(() => {
     console.log("components mounted");
   }, []);
@@ -36,6 +32,7 @@ const Homepage = () => {
       </div>
     );
   }
+
   if (isLoading) {
     return (
       <div>
@@ -43,11 +40,18 @@ const Homepage = () => {
       </div>
     );
   }
+
   return (
     <div>
       {/* this is slider-content */}
       <Helmet title="Trang chủ">
         <Sliders data={sliderImage} />
+        <Section>
+          <SectionTitle>Thương hiệu nổi bật</SectionTitle>
+          <SectionBody>
+            <Sliderlogo data={logos} />
+          </SectionBody>
+        </Section>
 
         {/* this is policy section  */}
         <Section>
@@ -78,12 +82,12 @@ const Homepage = () => {
                 return (
                   <ProductCard
                     key={index}
-                    img={item.Anh}
-                    title={item.TenSanPham}
-                    img2={item.Anh}
-                    price={parseInt(item.Gia)}
-                    category={item.MaDanhMuc}
-                    id={item._id}
+                    Image={item.Image}
+                    Name={item.Name}
+                    Image2={item.Image}
+                    Price={parseInt(item.Price)}
+                    category={item.CategoryId}
+                    _id={item._id}
                   />
                 );
               })}
