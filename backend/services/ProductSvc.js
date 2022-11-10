@@ -1,19 +1,14 @@
 import * as ProductRepo from "../repositories/ProductRepo.js";
+import * as Utils from "../utils/Utils.js";
 
-export const getProducts = async (page) => {
-  return await ProductRepo.getProducts(page);
+export const getFiltersProduct = async (filters) => {
+  Utils.cleanObject(filters);
+
+  return await ProductRepo.getFiltersProduct(filters);
 };
 
 export const getProductById = async (_id) => {
   return await ProductRepo.getProductById(_id);
-};
-
-export const getProductByStatus = async (status,page) => {
-  return await ProductRepo.getProductByStatus(status,page);
-};
-
-export const getProductByName = async (name, page) => {
-  return await ProductRepo.getProductByName(name, page);
 };
 
 export const addProduct = async (product) => {
