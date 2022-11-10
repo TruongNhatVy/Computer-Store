@@ -2,20 +2,18 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-
 import Button from "../Button/Button";
 import numberWithCommas from "../../utils/ConvertNumber";
 const ProductView = (props) => {
   let product = props.product;
   if (product === undefined)
     product = {
-      title: "",
-      price: "",
-      img: null,
-      img2: null,
+      Name: "",
+      Price: "",
+      Image: null,
       categoryslug: "",
-      description: "",
-      category: "",
+      Description: "",
+      Category: "",
     };
 
   const [previewImg, setPreviewImg] = useState(product.img);
@@ -33,7 +31,7 @@ const ProductView = (props) => {
   };
 
   useEffect(() => {
-    setPreviewImg(product.img);
+    setPreviewImg(product.Image);
     setQuantity(1);
   }, [product]);
 
@@ -43,15 +41,15 @@ const ProductView = (props) => {
         <div className="product__images__list">
           <div
             className="product__images__list__item"
-            onClick={() => setPreviewImg(product.img)}
+            onClick={() => setPreviewImg(product.Image)}
           >
-            <img src={product.img} alt="" />
+            <img src={product.Image} alt="" />
           </div>
           <div
             className="product__images__list__item"
-            onClick={() => setPreviewImg(product.img2)}
+            onClick={() => setPreviewImg(product.Image)}
           >
-            <img src={product.img2} alt="" />
+            <img src={product.Image} alt="" />
           </div>
         </div>
         <div className="product__images__main">
@@ -63,7 +61,7 @@ const ProductView = (props) => {
           <div className="product-description__title">Chi tiết sản phẩm</div>
           <div
             className="product-description__content"
-            dangerouslySetInnerHTML={{ __html: product.description }}
+            dangerouslySetInnerHTML={{ __html: product.Description }}
           ></div>
           <div className="product-description__toggle">
             <Button
@@ -79,7 +77,7 @@ const ProductView = (props) => {
         <h1 className="product__info__title">{product.title}</h1>
         <div className="product__info__item">
           <span className="product__info__item__price">
-            {numberWithCommas(product.price)}
+            {numberWithCommas(product.Price)}
           </span>
         </div>
         <div className="product__info__item">
@@ -89,7 +87,7 @@ const ProductView = (props) => {
               className="product__info__item__quantity__btn"
               onClick={() => updateQuantity("minus")}
             >
-              <i className="bx bx-minus"></i>
+              <i className="bx bx-minus">-</i>
             </div>
             <div className="product__info__item__quantity__input">
               {quantity}
@@ -98,7 +96,7 @@ const ProductView = (props) => {
               className="product__info__item__quantity__btn"
               onClick={() => updateQuantity("plus")}
             >
-              <i className="bx bx-plus"></i>
+              <i className="bx bx-plus">+</i>
             </div>
           </div>
         </div>
@@ -115,7 +113,7 @@ const ProductView = (props) => {
         <div className="product-description__title">Chi tiết sản phẩm</div>
         <div
           className="product-description__content"
-          dangerouslySetInnerHTML={{ __html: product.description }}
+          dangerouslySetInnerHTML={{ __html: product.Description }}
         ></div>
         <div className="product-description__toggle">
           <Button

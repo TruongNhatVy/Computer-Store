@@ -90,7 +90,7 @@ $value in $colors {
 .main {
     margin-top: $header-height;
     margin-bottom: 2rem;
-    min-height: 40rem;
+    min-height: 55rem;
 
     @include tablet {
         margin-top: calc(($header-tablet-height)+20px)

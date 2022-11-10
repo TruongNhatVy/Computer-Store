@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Helmet from "../components/Helmet";
 import Section from "../components/Section/Section";
 import SectionTitle from "../components/Section/SectionTitle";
@@ -9,17 +9,46 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import ProductView from "../components/ProductView/ProductView";
 import { useParams } from "react-router-dom";
 import productsData from "../assets/data-fake/product-data";
+import { getALLproducts } from "../action";
+import PageError from "../components/PageServerLoading/PageError";
+import PageLoading from "../components/PageServerLoading/PageLoading";
 
 const Product = () => {
   const params = useParams();
-  const product = productsData.getProductById(params.id);
-  console.log(product);
-  const relatedProducts = productsData.getProducts(params.id);
-  React.useEffect(() => {
+  const { isError, data, isLoading } = useQuery(["products"], getALLproducts, {
+    staleTime: 1000,
+  });
+
+  const getProductById = (_id) => {
+    const findId = data?.find((e) => {
+      return e._id === _id;
+    });
+
+    return findId;
+  };
+
+  const product = getProductById(params._id);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);
+  if (isError) {
+    return (
+      <div>
+        <PageError />
+      </div>
+    );
+  }
+  if (isLoading) {
+    return (
+      <div>
+        <PageLoading />
+      </div>
+    );
+  }
+
   return (
-    <Helmet title={product.title}>
+    <Helmet title={product?.Name}>
       <Section>
         <SectionBody>
           <ProductView product={product} />
@@ -29,15 +58,16 @@ const Product = () => {
         <SectionTitle>Khám phá thêm</SectionTitle>
         <SectionBody>
           <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {relatedProducts.map((item, index) => (
+            {data?.map((item, index) => (
               <ProductCard
                 key={index}
-                img={item.img}
-                title={item.title}
-                img2={item.img2}
-                price={parseInt(item.price)}
+                Image2={item.Image}
+                title={item.Name}
+                Image={item.Image}
+                Price={parseInt(item.Price)}
                 category={item.category}
-                id={item.id}
+                _id={item._id}
+                rating={item.rating}
               />
             ))}
           </Grid>
