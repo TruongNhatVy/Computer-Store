@@ -1,4 +1,4 @@
-import { AccountModel } from "../models/AccountModel.js";
+import { AccountModel } from "../models/data/AccountModel.js";
 
 const PAGE_SIZE = 1;
 
