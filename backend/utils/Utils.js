@@ -27,24 +27,53 @@ export const isEmpty = (value) => {
   );
 };
 
-export const getQueryFilters = (needFilters, filterModel) => {
-  let query = {};
-
+export const addQueryNearlyRight = (query, needFilters, filterModel, regex) => {
   Object.keys(filterModel).forEach(function (key) {
     if (key == "_doc") {
       Object.keys(filterModel[key]).forEach(function (subKey) {
         let val = filterModel[key][subKey];
+
         needFilters.forEach((element) => {
           if (element == subKey) {
             query[element] = {
-              $regex: val,
-              $options: "i",
+              $regex: new RegExp(val, "i"),
+              //$regex: regexFiltersNearlyRight(val),
             };
           }
         });
       });
     }
   });
+};
 
-  return query;
+export const addQueryIgnoreCase = (query, ignoreCase, filterModel) => {
+  Object.keys(filterModel).forEach(function (key) {
+    if (key == "_doc") {
+      Object.keys(filterModel[key]).forEach(function (subKey) {
+        let val = filterModel[key][subKey];
+
+        ignoreCase.forEach((element) => {
+          if (element == subKey) {
+            query[element] = {
+              $regex: new RegExp("^" + val + "$", "i"),
+            };
+          }
+        });
+      });
+    }
+  });
+};
+
+export const addQueryLeft = (query, addedQuery, filterModel) => {
+  Object.keys(filterModel).forEach(function (key) {
+    if (key == "_doc") {
+      Object.keys(filterModel[key]).forEach(function (subKey) {
+        let val = filterModel[key][subKey];
+
+        if (!addedQuery.includes(subKey)) {
+          query[subKey] = val;
+        }
+      });
+    }
+  });
 };
