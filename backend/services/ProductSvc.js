@@ -1,10 +1,24 @@
 import * as ProductRepo from "../repositories/ProductRepo.js";
 import * as Utils from "../utils/Utils.js";
+import { ProductFiltersModel } from "../models/filters/ProductFiltersModel.js";
+
+const PAGE_SIZE = 10;
 
 export const getFiltersProduct = async (filters) => {
   Utils.cleanObject(filters);
 
-  return await ProductRepo.getFiltersProduct(filters);
+  const needFilters = ["Name", "Status"];
+  const productFilters = new ProductFiltersModel(filters);
+  const query = Utils.getQueryFilters(needFilters, productFilters);
+  let skipProducts = -1;
+
+  if (filters.page) {
+    filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
+
+    skipProducts = (filters.page - 1) * PAGE_SIZE;
+  }
+
+  return await ProductRepo.getFiltersProduct(query, skipProducts, PAGE_SIZE);
 };
 
 export const getProductById = async (_id) => {

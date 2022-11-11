@@ -1,35 +1,11 @@
-import { ProductModel } from "../models/ProductModel.js";
-import { ProductFiltersModel } from "../models/ProductFiltersModel.js";
+import { ProductModel } from "../models/data/ProductModel.js";
 
-const PAGE_SIZE = 10;
-
-export const getProducts = async (page) => {
-  if (page) {
-    page = parseInt(page);
-    page = page < 1 ? 1 : page;
-
-    const skipProducts = (page - 1) * PAGE_SIZE;
-
-    return await ProductModel.find().skip(skipProducts).limit(PAGE_SIZE);
-  } else {
-    return await ProductModel.find();
+export const getFiltersProduct = async (query, skipProducts, PAGE_SIZE) => {
+  if (skipProducts >= 0) {
+    return await ProductModel.find(query).skip(skipProducts).limit(PAGE_SIZE);
   }
-};
 
-export const getFiltersProduct = async (filters) => {
-  const productFilters = new ProductFiltersModel(filters);
-
-  if (filters.page) {
-    filters.page = parseInt(filters.page) < 1 ? 1 : parseInt(filters.page);
-
-    const skipProducts = (filters.page - 1) * PAGE_SIZE;
-
-    return await ProductModel.find(productFilters)
-      .skip(skipProducts)
-      .limit(PAGE_SIZE);
-  } else {
-    return await ProductModel.find(productFilters);
-  }
+  return await ProductModel.find(query);
 };
 
 export const getProductById = async (_id) => {

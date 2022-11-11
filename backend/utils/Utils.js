@@ -26,3 +26,25 @@ export const isEmpty = (value) => {
     value === null
   );
 };
+
+export const getQueryFilters = (needFilters, filterModel) => {
+  let query = {};
+
+  Object.keys(filterModel).forEach(function (key) {
+    if (key == "_doc") {
+      Object.keys(filterModel[key]).forEach(function (subKey) {
+        let val = filterModel[key][subKey];
+        needFilters.forEach((element) => {
+          if (element == subKey) {
+            query[element] = {
+              $regex: val,
+              $options: "i",
+            };
+          }
+        });
+      });
+    }
+  });
+
+  return query;
+};

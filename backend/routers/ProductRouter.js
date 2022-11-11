@@ -8,7 +8,6 @@ ProductRouter.get(
   "/products/getProductsFilters",
   ProductController.getFiltersProduct
 );
-//ProductRouter.get("/products/getProducts/:page", ProductController.getProducts);
 ProductRouter.get(
   "/products/getProductById/:_id",
   ProductController.getProductById

@@ -21,7 +21,7 @@ const schema = new mongoose.Schema(
       type: String,
     },
   },
-  { _id: false }
+  { _id: false}
 );
 
 export const ProductFiltersModel = mongoose.model(
