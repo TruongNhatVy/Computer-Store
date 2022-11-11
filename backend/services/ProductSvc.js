@@ -1,16 +1,30 @@
 import * as ProductRepo from "../repositories/ProductRepo.js";
 import * as Utils from "../utils/Utils.js";
 import { ProductFiltersModel } from "../models/filters/ProductFiltersModel.js";
+import { query } from "express";
 
 const PAGE_SIZE = 10;
 
 export const getFiltersProduct = async (filters) => {
   Utils.cleanObject(filters);
 
-  const needFilters = ["Name", "Status"];
+  const nearlyRight = ["Name"];
+  const ignoreCases = ["Status"];
   const productFilters = new ProductFiltersModel(filters);
-  const query = Utils.getQueryFilters(needFilters, productFilters);
+  const query = {};
   let skipProducts = -1;
+
+  Utils.addQueryNearlyRight(query, nearlyRight, productFilters);
+  Utils.addQueryIgnoreCase(query, ignoreCases, productFilters);
+  Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), productFilters);
+
+  query["Price"] = {
+    $gte: query["PriceStart"],
+    $lte: query["PriceEnd"],
+  };
+
+  delete query["PriceStart"];
+  delete query["PriceEnd"];
 
   if (filters.page) {
     filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);

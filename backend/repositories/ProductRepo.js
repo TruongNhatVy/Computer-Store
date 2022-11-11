@@ -1,6 +1,8 @@
 import { ProductModel } from "../models/data/ProductModel.js";
 
 export const getFiltersProduct = async (query, skipProducts, PAGE_SIZE) => {
+//console.log(query);
+
   if (skipProducts >= 0) {
     return await ProductModel.find(query).skip(skipProducts).limit(PAGE_SIZE);
   }
