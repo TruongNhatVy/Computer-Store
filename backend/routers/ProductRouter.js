@@ -9,6 +9,10 @@ ProductRouter.get(
   ProductController.getFiltersProduct
 );
 ProductRouter.get(
+  "/products/getProductById/:offset/:limit",
+  ProductController.getProductByOffsetLimit
+);
+ProductRouter.get(
   "/products/getProductById/:_id",
   ProductController.getProductById
 );
