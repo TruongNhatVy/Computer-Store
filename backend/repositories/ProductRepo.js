@@ -12,6 +12,11 @@ export const getProductById = async (_id) => {
   return await ProductModel.findById(_id);
 };
 
+export const getProductByOffsetLimit = async (offset,limit) => {
+  return await ProductModel.find().skip(offset).limit(limit);
+};
+
+
 export const addProduct = async (product) => {
   return await ProductModel.create(product);
 };

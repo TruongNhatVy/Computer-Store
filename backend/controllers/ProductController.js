@@ -15,9 +15,21 @@ export const getFiltersProduct = async (req, res) => {
 
 export const getProductById = async (req, res) => {
   try {
-    const { _id } = req.params;
+    const product = await ProductSvc.getProductById(req.params);
+    return res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({
+      Message: "Fail",
+      Error: error,
+    });
+  }
+};
 
-    const product = await ProductSvc.getProductById(_id);
+export const getProductByOffsetLimit = async (req, res) => {
+  try {
+    const { offset,limit } = req.params;
+
+    const product = await ProductSvc.getProductByOffsetLimit(offset, limit);
     return res.status(200).json(product);
   } catch (error) {
     res.status(500).json({

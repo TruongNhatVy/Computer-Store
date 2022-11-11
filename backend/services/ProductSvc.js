@@ -25,6 +25,13 @@ export const getProductById = async (_id) => {
   return await ProductRepo.getProductById(_id);
 };
 
+export const getProductByOffsetLimit = async (offset, limit) => {
+  offset = Number(offset);
+  limit = Number(limit);
+
+  return await ProductRepo.getProductByOffsetLimit(offset - 1, limit + 1);
+};
+
 export const addProduct = async (product) => {
   return await ProductRepo.addProduct(product);
 };
