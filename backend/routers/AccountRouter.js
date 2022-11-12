@@ -3,10 +3,10 @@ import * as AccountController from "../controllers/AccountController.js";
 
 const AccountRouter = express.Router();
 
-//Create
+//==================Post==================
 AccountRouter.post("/accounts/addAccount", AccountController.addAccount);
 
-//Read
+//==================Get==================
 AccountRouter.get("/accounts/getAccounts", AccountController.getAccounts);
 AccountRouter.get("/accounts/getAccounts/:page", AccountController.getAccounts);
 AccountRouter.get(
@@ -14,13 +14,13 @@ AccountRouter.get(
   AccountController.getAccountById
 );
 
-//Update
+//==================Put==================
 AccountRouter.put(
   "/accounts/updateAccount/:_id",
   AccountController.updateAccount
 );
 
-//Delete
+//==================Delete==================
 AccountRouter.delete(
   "/accounts/deleteAccount/:_id",
   AccountController.deleteAccount
