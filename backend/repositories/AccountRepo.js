@@ -24,7 +24,7 @@ export const addAccount = async (account) => {
 };
 
 export const updateAccount = async (_id, account) => {
-  await AccountModel.findByIdAndUpdate(_id, account);
+  return await AccountModel.findByIdAndUpdate(_id, account);
 };
 
 export const deleteAccount = async (_id) => {

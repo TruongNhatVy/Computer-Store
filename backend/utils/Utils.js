@@ -55,7 +55,7 @@ export const addQueryIgnoreCase = (query, ignoreCase, filterModel) => {
         ignoreCase.forEach((element) => {
           if (element == subKey) {
             query[element] = {
-              $regex: new RegExp("^" + val + "$", "i"),
+              $regex: new RegExp("^" + val + "$", "iu"),
             };
           }
         });

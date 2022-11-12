@@ -50,9 +50,8 @@ export const addProduct = async (product) => {
 };
 
 export const updateProduct = async (_id, product) => {
-  await ProductRepo.updateProduct(_id, product);
-
-  return getProductById(_id);
+  return await ProductRepo.updateProduct(_id, product);
+  //return getProductById(_id);
 };
 
 export const deleteProduct = async (_id) => {
