@@ -4,6 +4,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import ProductRouter from "./routers/ProductRouter.js";
 import AccountRouter from "./routers/AccountRouter.js";
+import OrderRouter from "./routers/OrderRouter.js";
+import OrderDetailsRouter from "./routers/OrderDetailsRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -23,6 +25,8 @@ app.set("json spaces", 2); //formatted Json
 //routers
 app.use("/", ProductRouter);
 app.use("/", AccountRouter);
+app.use("/", OrderRouter);
+app.use("/", OrderDetailsRouter);
 
 //connect MongoDb
 mongoose
