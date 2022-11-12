@@ -1,7 +1,6 @@
 import * as ProductRepo from "../repositories/ProductRepo.js";
-import * as Utils from "../utils/Utils.js";
 import { ProductFiltersModel } from "../models/filters/ProductFiltersModel.js";
-import { query } from "express";
+import * as Utils from "../utils/Utils.js";
 
 const PAGE_SIZE = 10;
 
