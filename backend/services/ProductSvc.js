@@ -33,8 +33,6 @@ export const getFiltersProduct = async (filters) => {
     skipProducts = (filters.page - 1) * PAGE_SIZE;
   }
 
-  console.log(query);
-
   return await ProductRepo.getFiltersProduct(query, skipProducts, PAGE_SIZE);
 };
 

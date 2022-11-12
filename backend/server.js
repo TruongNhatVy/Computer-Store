@@ -6,6 +6,7 @@ import ProductRouter from "./routers/ProductRouter.js";
 import AccountRouter from "./routers/AccountRouter.js";
 import OrderRouter from "./routers/OrderRouter.js";
 import OrderDetailsRouter from "./routers/OrderDetailsRouter.js";
+import CategoryRouter from "./routers/CategoryRouter.js"
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,6 +28,7 @@ app.use("/", ProductRouter);
 app.use("/", AccountRouter);
 app.use("/", OrderRouter);
 app.use("/", OrderDetailsRouter);
+app.use("/", CategoryRouter);
 
 //connect MongoDb
 mongoose

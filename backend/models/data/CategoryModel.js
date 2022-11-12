@@ -8,6 +8,7 @@ const schema = new mongoose.Schema(
     },
     Status: {
       type: String,
+      require: true,
     },
   },
   {

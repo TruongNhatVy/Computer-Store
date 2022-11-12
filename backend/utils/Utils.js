@@ -36,8 +36,7 @@ export const addQueryNearlyRight = (query, needFilters, filterModel, regex) => {
         needFilters.forEach((element) => {
           if (element == subKey) {
             query[element] = {
-              $regex: new RegExp(val, "i"),
-              //$regex: regexFiltersNearlyRight(val),
+              $regex: new RegExp(val, "i"), //Search NEARLY RIGHT + ignore case
             };
           }
         });
@@ -55,7 +54,7 @@ export const addQueryIgnoreCase = (query, ignoreCase, filterModel) => {
         ignoreCase.forEach((element) => {
           if (element == subKey) {
             query[element] = {
-              $regex: new RegExp("^" + val + "$", "iu"),
+              $regex: new RegExp("^" + val + "$", "iu"), //Search EXACTLY + ignore case
             };
           }
         });
