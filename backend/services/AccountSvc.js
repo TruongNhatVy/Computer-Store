@@ -16,9 +16,8 @@ export const addAccount = async (account) => {
 };
 
 export const updateAccount = async (_id, account) => {
-  await AccountRepo.updateAccount(_id, account);
-
-  return getAccountById(_id);
+  return await AccountRepo.updateAccount(_id, account);
+  //return getAccountById(_id);
 };
 
 export const deleteAccount = async (_id) => {
