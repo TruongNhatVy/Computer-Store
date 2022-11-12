@@ -1,9 +1,8 @@
 import * as AccountSvc from "../services/AccountSvc.js";
 
-export const getAccounts = async (req, res) => {
+export const getFiltersAccount = async (req, res) => {
   try {
-    const { page } = req.params;
-    const accounts = await AccountSvc.getAccounts(page);
+    const accounts = await AccountSvc.getFiltersAccount(req.query);
 
     return res.status(200).json(accounts);
   } catch (error) {
@@ -16,9 +15,7 @@ export const getAccounts = async (req, res) => {
 
 export const getAccountById = async (req, res) => {
   try {
-    const { _id } = req.params;
-
-    const account = await AccountSvc.getAccountById(_id);
+    const account = await AccountSvc.getAccountById(req.params);
     return res.status(200).json(account);
   } catch (error) {
     res.status(500).json({

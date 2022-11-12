@@ -9,13 +9,13 @@ export const getFiltersCategory = async (filters) => {
 
   const nearlyRight = ["Name"];
   const ignoreCases = ["Status"];
-  const CategoryFilters = new CategoryFiltersModel(filters);
+  const categoryFilters = new CategoryFiltersModel(filters);
   const query = {};
   let skipCategories = -1;
 
-  Utils.addQueryNearlyRight(query, nearlyRight, CategoryFilters);
-  Utils.addQueryIgnoreCase(query, ignoreCases, CategoryFilters);
-  Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), CategoryFilters);
+  Utils.addQueryNearlyRight(query, nearlyRight, categoryFilters);
+  Utils.addQueryIgnoreCase(query, ignoreCases, categoryFilters);
+  Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), categoryFilters);
 
   if (filters.page) {
     filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
