@@ -1,22 +1,41 @@
 import * as AccountRepo from "../repositories/AccountRepo.js";
+import { AccountFiltersModel } from "../models/filters/AccountFiltersModel.js";
 import * as Utils from "../utils/Utils.js";
 
-export const getAccounts = async (page) => {
-  return await AccountRepo.getAccounts(page);
+const PAGE_SIZE = 10;
+
+export const getFiltersAccount = async (filters) => {
+  Utils.cleanObject(filters);
+
+  const nearlyRight = ["FirstName", "LastName", "Email", "Phone"];
+  const ignoreCases = ["IsActive", "Role", "Status"];
+  const accountFilters = new AccountFiltersModel(filters);
+  const query = {};
+  let skipCategories = -1;
+
+  Utils.addQueryNearlyRight(query, nearlyRight, accountFilters);
+  Utils.addQueryIgnoreCase(query, ignoreCases, accountFilters);
+  Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), accountFilters);
+
+  if (filters.page) {
+    filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
+
+    skipCategories = (filters.page - 1) * PAGE_SIZE;
+  }
+
+  return await AccountRepo.getFiltersAccount(query, skipCategories, PAGE_SIZE);
 };
 
 export const getAccountById = async (_id) => {
   return await AccountRepo.getAccountById(_id);
 };
 
-export const addAccount = async (account) => {
-  account.Password = await Utils.HashPassword(account.Password);
-
-  return await AccountRepo.addAccount(account);
+export const addAccount = async (Account) => {
+  return await AccountRepo.addAccount(Account);
 };
 
-export const updateAccount = async (_id, account) => {
-  return await AccountRepo.updateAccount(_id, account);
+export const updateAccount = async (_id, Account) => {
+  return await AccountRepo.updateAccount(_id, Account);
   //return getAccountById(_id);
 };
 

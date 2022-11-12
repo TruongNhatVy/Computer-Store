@@ -1,30 +1,23 @@
 import { AccountModel } from "../models/data/AccountModel.js";
 
-const PAGE_SIZE = 1;
-
-export const getAccounts = async (page) => {
-  if (page) {
-    page = parseInt(page);
-    page = page < 1 ? 1 : page;
-
-    const skipAccounts = (page - 1) * PAGE_SIZE;
-
-    return await AccountModel.find().skip(skipAccounts).limit(PAGE_SIZE);
-  } else {
-    return await AccountModel.find();
+export const getFiltersAccount = async (query, skipCategories, PAGE_SIZE) => {
+  if (skipCategories >= 0) {
+    return await AccountModel.find(query).skip(skipCategories).limit(PAGE_SIZE);
   }
+
+  return await AccountModel.find(query);
 };
 
 export const getAccountById = async (_id) => {
   return await AccountModel.findById(_id);
 };
 
-export const addAccount = async (account) => {
-  return await AccountModel.create(account);
+export const addAccount = async (Account) => {
+  return await AccountModel.create(Account);
 };
 
-export const updateAccount = async (_id, account) => {
-  return await AccountModel.findByIdAndUpdate(_id, account);
+export const updateAccount = async (_id, Account) => {
+  return await AccountModel.findByIdAndUpdate(_id, Account);
 };
 
 export const deleteAccount = async (_id) => {

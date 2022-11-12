@@ -3,16 +3,19 @@ import * as AccountController from "../controllers/AccountController.js";
 
 const AccountRouter = express.Router();
 
-//==================Post==================
-AccountRouter.post("/accounts/addAccount", AccountController.addAccount);
-
 //==================Get==================
-AccountRouter.get("/accounts/getAccounts", AccountController.getAccounts);
-AccountRouter.get("/accounts/getAccounts/:page", AccountController.getAccounts);
+AccountRouter.get(
+  "/accounts/getCategoriesFilters",
+  AccountController.getFiltersAccount
+);
+
 AccountRouter.get(
   "/accounts/getAccountById/:_id",
   AccountController.getAccountById
 );
+
+//==================Post==================
+AccountRouter.post("/accounts/addAccount", AccountController.addAccount);
 
 //==================Put==================
 AccountRouter.put(
