@@ -17,19 +17,23 @@ export const getFiltersProduct = async (filters) => {
   Utils.addQueryIgnoreCase(query, ignoreCases, productFilters);
   Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), productFilters);
 
-  query["Price"] = {
-    $gte: query["PriceStart"],
-    $lte: query["PriceEnd"],
-  };
+  if (query["PriceStart"] && query["PriceEnd"]) {
+    query["Price"] = {
+      $gte: query["PriceStart"],
+      $lte: query["PriceEnd"],
+    };
 
-  delete query["PriceStart"];
-  delete query["PriceEnd"];
+    delete query["PriceStart"];
+    delete query["PriceEnd"];
+  }
 
   if (filters.page) {
     filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
 
     skipProducts = (filters.page - 1) * PAGE_SIZE;
   }
+
+  console.log(query);
 
   return await ProductRepo.getFiltersProduct(query, skipProducts, PAGE_SIZE);
 };
@@ -42,7 +46,10 @@ export const getProductByOffsetLimit = async (offset, limit) => {
   offset = Number(offset);
   limit = Number(limit);
 
-  return await ProductRepo.getProductByOffsetLimit(offset - 1, limit + 1);
+  return await ProductRepo.getProductByOffsetLimit(
+    offset - 1,
+    limit - offset + 1
+  );
 };
 
 export const addProduct = async (product) => {
