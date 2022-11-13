@@ -21,8 +21,17 @@ const schema = new mongoose.Schema(
       type: String,
     },
   },
-  { _id: false}
+  { _id: false }
 );
+
+//use: this.regexNearlyRight(value) ; Outputs: /value/iu
+// schema.methods.regexNearlyRight = function (value) {
+//   return new RegExp(value, "iu");
+// };
+
+// schema.methods.regexExactly = function (value) {
+//   return new RegExp("^" + value + "$", "iu");
+// };
 
 export const ProductFiltersModel = mongoose.model(
   "ProductFiltersModel",

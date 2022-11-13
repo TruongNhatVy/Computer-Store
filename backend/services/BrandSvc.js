@@ -13,8 +13,20 @@ export const getFiltersBrand = async (filters) => {
   const query = {};
   let skipBrands = -1;
 
-  Utils.addQueryNearlyRight(query, nearlyRight, brandFilters);
-  Utils.addQueryIgnoreCase(query, ignoreCases, brandFilters);
+  Utils.addQueryFilters(
+    query,
+    nearlyRight,
+    productFilters,
+    Utils.regexNearlyRight(),
+    "iu"
+  );
+  Utils.addQueryFilters(
+    query,
+    ignoreCases,
+    productFilters,
+    Utils.regexExactly(),
+    "iu"
+  );
   Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), brandFilters);
 
   if (filters.page) {

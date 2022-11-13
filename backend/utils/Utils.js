@@ -1,5 +1,6 @@
-import bcrypt, { hash } from "bcrypt";
+import bcrypt from "bcrypt";
 
+const UNIQUE_KEY = "5E611B6F-77BE-4013-AC01-35F20356C066"; //select NEWID() in SQL Server
 const SALT = await bcrypt.genSalt(10);
 
 export const hashPassword = async (password) => {
@@ -27,7 +28,13 @@ export const isEmpty = (value) => {
   );
 };
 
-export const addQueryNearlyRight = (query, needFilters, filterModel, regex) => {
+export const addQueryFilters = (
+  query,
+  needFilters,
+  filterModel,
+  regex,
+  regexFlags
+) => {
   Object.keys(filterModel).forEach(function (key) {
     if (key == "_doc") {
       Object.keys(filterModel[key]).forEach(function (subKey) {
@@ -36,25 +43,10 @@ export const addQueryNearlyRight = (query, needFilters, filterModel, regex) => {
         needFilters.forEach((element) => {
           if (element == subKey) {
             query[element] = {
-              $regex: new RegExp(val, "i"), //Search NEARLY RIGHT + ignore case
-            };
-          }
-        });
-      });
-    }
-  });
-};
-
-export const addQueryIgnoreCase = (query, ignoreCase, filterModel) => {
-  Object.keys(filterModel).forEach(function (key) {
-    if (key == "_doc") {
-      Object.keys(filterModel[key]).forEach(function (subKey) {
-        let val = filterModel[key][subKey];
-
-        ignoreCase.forEach((element) => {
-          if (element == subKey) {
-            query[element] = {
-              $regex: new RegExp("^" + val + "$", "iu"), //Search EXACTLY + ignore case
+              $regex: new RegExp(
+                regex.toString().replace(UNIQUE_KEY, val).replaceAll("/", ""),
+                regexFlags
+              ), //Search NEARLY RIGHT + ignore case
             };
           }
         });
@@ -75,6 +67,14 @@ export const addQueryLeft = (query, addedQuery, filterModel) => {
       });
     }
   });
+};
+
+export const regexNearlyRight = (value = UNIQUE_KEY) => {
+  return new RegExp(value);
+};
+
+export const regexExactly = (value = UNIQUE_KEY) => {
+  return new RegExp("^" + value + "$");
 };
 
 export const formatDate = (date) => {
