@@ -7,23 +7,23 @@ const PAGE_SIZE = 10;
 export const getFiltersOrder = async (filters) => {
   Utils.cleanObject(filters);
 
-  //const nearlyRight = [];
+  const nearlyRight = [];
   const ignoreCases = ["Status"];
-  const productFilters = new OrderFiltersModel(filters);
+  const orderFilters = new OrderFiltersModel(filters);
   const query = {};
   let skipProducts = -1;
 
   Utils.addQueryFilters(
     query,
     nearlyRight,
-    productFilters,
+    orderFilters,
     Utils.regexNearlyRight(),
     "iu"
   );
   Utils.addQueryFilters(
     query,
     ignoreCases,
-    productFilters,
+    orderFilters,
     Utils.regexExactly(),
     "iu"
   );

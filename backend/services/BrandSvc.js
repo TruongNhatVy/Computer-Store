@@ -16,14 +16,14 @@ export const getFiltersBrand = async (filters) => {
   Utils.addQueryFilters(
     query,
     nearlyRight,
-    productFilters,
+    brandFilters,
     Utils.regexNearlyRight(),
     "iu"
   );
   Utils.addQueryFilters(
     query,
     ignoreCases,
-    productFilters,
+    brandFilters,
     Utils.regexExactly(),
     "iu"
   );

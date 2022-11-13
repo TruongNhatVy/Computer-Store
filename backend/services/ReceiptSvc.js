@@ -16,14 +16,14 @@ export const getFiltersReceipt = async (filters) => {
   Utils.addQueryFilters(
     query,
     nearlyRight,
-    productFilters,
+    receiptFilters,
     Utils.regexNearlyRight(),
     "iu"
   );
   Utils.addQueryFilters(
     query,
     ignoreCases,
-    productFilters,
+    receiptFilters,
     Utils.regexExactly(),
     "iu"
   );
@@ -53,13 +53,6 @@ export const getReceiptById = async (_id) => {
 };
 
 export const addReceipt = async (receipt) => {
-
-
-
-
-
-
-
   return await ReceiptRepo.addReceipt(receipt);
 };
 

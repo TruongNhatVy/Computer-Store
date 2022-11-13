@@ -16,14 +16,14 @@ export const getFiltersSupplier = async (filters) => {
   Utils.addQueryFilters(
     query,
     nearlyRight,
-    productFilters,
+    supplierFilters,
     Utils.regexNearlyRight(),
     "iu"
   );
   Utils.addQueryFilters(
     query,
     ignoreCases,
-    productFilters,
+    supplierFilters,
     Utils.regexExactly(),
     "iu"
   );
