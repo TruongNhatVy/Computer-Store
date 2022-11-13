@@ -16,14 +16,14 @@ export const getFiltersAccount = async (filters) => {
   Utils.addQueryFilters(
     query,
     nearlyRight,
-    productFilters,
+    accountFilters,
     Utils.regexNearlyRight(),
     "iu"
   );
   Utils.addQueryFilters(
     query,
     ignoreCases,
-    productFilters,
+    accountFilters,
     Utils.regexExactly(),
     "iu"
   );
