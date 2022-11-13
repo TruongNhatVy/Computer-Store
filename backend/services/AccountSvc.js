@@ -13,8 +13,20 @@ export const getFiltersAccount = async (filters) => {
   const query = {};
   let skipCategories = -1;
 
-  Utils.addQueryNearlyRight(query, nearlyRight, accountFilters);
-  Utils.addQueryIgnoreCase(query, ignoreCases, accountFilters);
+  Utils.addQueryFilters(
+    query,
+    nearlyRight,
+    productFilters,
+    Utils.regexNearlyRight(),
+    "iu"
+  );
+  Utils.addQueryFilters(
+    query,
+    ignoreCases,
+    productFilters,
+    Utils.regexExactly(),
+    "iu"
+  );
   Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), accountFilters);
 
   if (filters.page) {
@@ -30,8 +42,10 @@ export const getAccountById = async (_id) => {
   return await AccountRepo.getAccountById(_id);
 };
 
-export const addAccount = async (Account) => {
-  return await AccountRepo.addAccount(Account);
+export const addAccount = async (account) => {
+  account["Password"] = await Utils.hashPassword(account["Password"]);
+
+  return await AccountRepo.addAccount(account);
 };
 
 export const updateAccount = async (_id, Account) => {
