@@ -11,7 +11,7 @@ export const getFiltersBrand = async (filters) => {
   const ignoreCases = ["Status"];
   const brandFilters = new BrandFiltersModel(filters);
   const query = {};
-  let skipCategories = -1;
+  let skipBrands = -1;
 
   Utils.addQueryNearlyRight(query, nearlyRight, brandFilters);
   Utils.addQueryIgnoreCase(query, ignoreCases, brandFilters);
@@ -20,12 +20,12 @@ export const getFiltersBrand = async (filters) => {
   if (filters.page) {
     filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
 
-    skipCategories = (filters.page - 1) * PAGE_SIZE;
+    skipBrands = (filters.page - 1) * PAGE_SIZE;
   }
 
   return await BrandRepo.getFiltersBrand(
     query,
-    skipCategories,
+    skipBrands,
     PAGE_SIZE
   );
 };

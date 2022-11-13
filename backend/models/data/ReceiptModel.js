@@ -3,7 +3,7 @@ import mongoose, { Schema, SchemaType } from "mongoose";
 const schema = new mongoose.Schema(
   {
     Date: {
-      type: Date,
+      type: String,
       require: true,
     },
     Total: {
