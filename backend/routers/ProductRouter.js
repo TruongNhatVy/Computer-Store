@@ -10,7 +10,7 @@ ProductRouter.get(
 );
 
 ProductRouter.get(
-  "/products/getProductById/:offset/:limit",
+  "/products/getProductByOffsetLimit/:offset/:limit",
   ProductController.getProductByOffsetLimit
 );
 

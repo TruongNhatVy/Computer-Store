@@ -2,17 +2,17 @@ import mongoose, { Schema } from "mongoose";
 
 const schema = new mongoose.Schema(
   {
-    Name: {
+    DateStart: {
       type: String,
     },
-    Address: {
+    DateEnd: {
       type: String,
     },
   },
   { _id: false }
 );
 
-export const SupplierFiltersModel = mongoose.model(
-  "SupplierFiltersModel",
+export const ReceiptFiltersModel = mongoose.model(
+  "ReceiptFiltersModel",
   schema
 );

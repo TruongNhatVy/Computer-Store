@@ -8,6 +8,7 @@ import OrderRouter from "./routers/OrderRouter.js";
 import OrderDetailsRouter from "./routers/OrderDetailsRouter.js";
 import CategoryRouter from "./routers/CategoryRouter.js";
 import BrandRouter from "./routers/BrandRouter.js";
+import SupplierRouter from "./routers/SupplierRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -31,6 +32,7 @@ app.use("/", OrderRouter);
 app.use("/", OrderDetailsRouter);
 app.use("/", CategoryRouter);
 app.use("/", BrandRouter);
+app.use("/", SupplierRouter);
 
 //connect MongoDb
 mongoose
