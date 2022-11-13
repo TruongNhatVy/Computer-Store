@@ -17,4 +17,16 @@ ReceiptRouter.get(
 //==================Post==================
 ReceiptRouter.post("/receipts/addReceipt", ReceiptController.addReceipt);
 
+//==================Put==================
+ReceiptRouter.put(
+  "/receipts/updateReceipt/:_id",
+  ReceiptController.updateReceipt
+);
+
+//==================Delete==================
+ReceiptRouter.delete(
+  "/receipts/deleteReceipt/:_id",
+  ReceiptController.deleteReceipt
+);
+
 export default ReceiptRouter;

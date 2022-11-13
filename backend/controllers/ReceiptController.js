@@ -38,3 +38,38 @@ export const addReceipt = async (req, res) => {
     });
   }
 };
+
+export const updateReceipt = async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const receipt = req.body;
+
+    await ReceiptSvc.updateReceipt(_id, receipt);
+
+    const receiptUpdate = await ReceiptSvc.getReceiptById(_id);
+
+    return res.status(200).json(receiptUpdate);
+  } catch (error) {
+    res.status(500).json({
+      Message: "Fail",
+      Error: error,
+    });
+  }
+};
+
+export const deleteReceipt = async (req, res) => {
+  try {
+    const { _id } = req.params;
+
+    await ReceiptSvc.deleteReceipt(_id);
+
+    return res.status(200).json({
+      Message: "ok",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      Message: "Fail",
+      Error: error,
+    });
+  }
+};

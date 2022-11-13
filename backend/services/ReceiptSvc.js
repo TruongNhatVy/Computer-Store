@@ -13,14 +13,26 @@ export const getFiltersReceipt = async (filters) => {
   const query = {};
   let skipReceipts = -1;
 
-  Utils.addQueryNearlyRight(query, nearlyRight, receiptFilters);
-  Utils.addQueryIgnoreCase(query, ignoreCases, receiptFilters);
+  Utils.addQueryFilters(
+    query,
+    nearlyRight,
+    productFilters,
+    Utils.regexNearlyRight(),
+    "iu"
+  );
+  Utils.addQueryFilters(
+    query,
+    ignoreCases,
+    productFilters,
+    Utils.regexExactly(),
+    "iu"
+  );
   Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), receiptFilters);
 
   if (query["DateStart"] && query["DateEnd"]) {
     query["Date"] = {
-      $gte: new Date(query["DateStart"]),
-      $lte: new Date(query["DateEnd"]),
+      $gte: query["DateStart"],
+      $lte: query["DateEnd"],
     };
 
     delete query["DateStart"];
@@ -41,5 +53,21 @@ export const getReceiptById = async (_id) => {
 };
 
 export const addReceipt = async (receipt) => {
+
+
+
+
+
+
+
   return await ReceiptRepo.addReceipt(receipt);
+};
+
+export const updateReceipt = async (_id, receipt) => {
+  return await ReceiptRepo.updateReceipt(_id, receipt);
+  //return getReceiptById(_id);
+};
+
+export const deleteReceipt = async (_id) => {
+  await ReceiptRepo.deleteReceipt(_id);
 };
