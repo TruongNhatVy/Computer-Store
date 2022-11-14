@@ -2,30 +2,13 @@ import mongoose, { Schema } from "mongoose";
 
 const schema = new mongoose.Schema(
   {
-    FirstName: {
+    name: {
       type: String,
     },
-    LastName: {
+    email: {
       type: String,
-      require: true,
     },
-    Email: {
-      type: String,
-      require: true,
-    },
-    Phone: {
-      type: String,
-      require: true,
-    },
-    IsActive: {
-      type: Boolean,
-      require: true,
-    },
-    Role: {
-      type: String,
-      require: true,
-    },
-    Status: {
+    role: {
       type: String,
     },
   },

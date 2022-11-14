@@ -73,3 +73,16 @@ export const deleteReceipt = async (req, res) => {
     });
   }
 };
+
+export const warehouseReceived = async (req, res) => {
+  try {
+    await ReceiptSvc.warehouseReceived(req);
+
+    return res.status(200).json({ Message: "ok" });
+  } catch (error) {
+    res.status(500).json({
+      Message: "Fail",
+      Error: error,
+    });
+  }
+};

@@ -2,7 +2,13 @@ import * as ProductSvc from "../services/ProductSvc.js";
 
 export const getFiltersProduct = async (req, res) => {
   try {
-    const products = await ProductSvc.getFiltersProduct(req.query);
+    const nearlyRight = ["Name"];
+    const ignoreCases = ["Status"];
+    const products = await ProductSvc.getFiltersProduct(
+      req.query,
+      nearlyRight,
+      ignoreCases
+    );
 
     return res.status(200).json(products);
   } catch (error) {
@@ -27,7 +33,7 @@ export const getProductById = async (req, res) => {
 
 export const getProductByOffsetLimit = async (req, res) => {
   try {
-    const { offset,limit } = req.params;
+    const { offset, limit } = req.params;
 
     const product = await ProductSvc.getProductByOffsetLimit(offset, limit);
     return res.status(200).json(product);

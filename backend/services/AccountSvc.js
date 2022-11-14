@@ -7,8 +7,8 @@ const PAGE_SIZE = 10;
 export const getFiltersAccount = async (filters) => {
   Utils.cleanObject(filters);
 
-  const nearlyRight = ["FirstName", "LastName", "Email", "Phone"];
-  const ignoreCases = ["IsActive", "Role", "Status"];
+  const nearlyRight = ["name", "email"];
+  const ignoreCases = ["role"];
   const accountFilters = new AccountFiltersModel(filters);
   const query = {};
   let skipCategories = -1;

@@ -1,6 +1,9 @@
 import * as ReceiptRepo from "../repositories/ReceiptRepo.js";
-import { ReceiptFiltersModel } from "../models/filters/ReceiptFiltersModel.js";
+import * as ReceiptDetailsSvc from "./ReceiptDetailsSvc.js";
+import * as ProductSvc from "../services/ProductSvc.js";
 import * as Utils from "../utils/Utils.js";
+import { ReceiptFiltersModel } from "../models/filters/ReceiptFiltersModel.js";
+import moment from "moment";
 
 const PAGE_SIZE = 10;
 
@@ -64,3 +67,49 @@ export const updateReceipt = async (_id, receipt) => {
 export const deleteReceipt = async (_id) => {
   await ReceiptRepo.deleteReceipt(_id);
 };
+
+export const warehouseReceived = async () => {
+  const productOld = {
+    Total: 160940000, //6363f9e950420980842dfd6e - 2 ; 6363f9e950420980842dfd6f - 3 ; 6363f9e950420980842dfd70 - 1
+    Products: [
+      {
+        ProductId: "6363f9e950420980842dfd6e",
+        UnitPrice: 25990000,
+        Quantity: 2,
+        Total: 51980000,
+      },
+      {
+        ProductId: "6363f9e950420980842dfd6f",
+        UnitPrice: 25490000,
+        Quantity: 3,
+        Total: 76470000,
+      },
+      {
+        ProductId: "6363f9e950420980842dfd70",
+        UnitPrice: 32490000,
+        Quantity: 1,
+        Total: 32490000,
+      },
+    ],
+  };
+
+  //---------------------add receipt---------------------
+  const receipt = {
+    Date: moment(Date.now()).format("YYYY-MM-DD"),
+    Total: productOld.Total,
+  };
+
+  const receiptAdd = await addReceipt(receipt);
+
+  //---------------------add receipt details---------------------
+  productOld.Products.forEach((element) => {
+    element["ReceiptId"] = receiptAdd["_id"].toString();
+  });
+
+  await ReceiptDetailsSvc.addReceiptDetails(productOld.Products);
+
+  //---------------------add quantity products---------------------
+  await ProductSvc.addQuantityProduct(productOld.Products);
+};
+
+

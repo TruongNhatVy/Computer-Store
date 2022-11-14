@@ -17,6 +17,8 @@ ReceiptRouter.get(
 //==================Post==================
 ReceiptRouter.post("/receipts/addReceipt", ReceiptController.addReceipt);
 
+ReceiptRouter.post("/receipts/warehouseReceived", ReceiptController.warehouseReceived);
+
 //==================Put==================
 ReceiptRouter.put(
   "/receipts/updateReceipt/:_id",

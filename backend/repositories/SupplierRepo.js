@@ -1,9 +1,9 @@
 import { SupplierModel } from "../models/data/SupplierModel.js";
 
-export const getFiltersSupplier = async (query, skipCategories, PAGE_SIZE) => {
-  if (skipCategories >= 0) {
+export const getFiltersSupplier = async (query, skipSuppliers, PAGE_SIZE) => {
+  if (skipSuppliers >= 0) {
     return await SupplierModel.find(query)
-      .skip(skipCategories)
+      .skip(skipSuppliers)
       .limit(PAGE_SIZE);
   }
 
