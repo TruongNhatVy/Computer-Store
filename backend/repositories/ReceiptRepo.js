@@ -12,8 +12,8 @@ export const getReceiptById = async (_id) => {
   return await ReceiptModel.findById(_id);
 };
 
-export const addReceipt = async (Receipt) => {
-  return await ReceiptModel.create(Receipt);
+export const addReceipt = async (receipt) => {
+  return await ReceiptModel.create(receipt);
 };
 
 export const updateReceipt = async (_id, receipt) => {

@@ -4,11 +4,9 @@ import * as Utils from "../utils/Utils.js";
 
 const PAGE_SIZE = 10;
 
-export const getFiltersProduct = async (filters) => {
+export const getFiltersProduct = async (filters, nearlyRight, ignoreCases) => {
   Utils.cleanObject(filters);
 
-  const nearlyRight = ["Name"];
-  const ignoreCases = ["Status"];
   const productFilters = new ProductFiltersModel(filters);
   const query = {};
   let skipProducts = -1;
@@ -74,4 +72,28 @@ export const updateProduct = async (_id, product) => {
 
 export const deleteProduct = async (_id) => {
   await ProductRepo.deleteProduct(_id);
+};
+
+export const addQuantityProduct = async (products) => {
+  for (const item of products) {
+    let product = await getProductById(item["ProductId"]);
+    product.Quantity += item["Quantity"];
+
+    await updateProduct(product["_id"], product);
+  }
+};
+
+export const isNewProduct = async (name) => {
+  const filter = {
+    Name: name,
+  };
+  const nearlyRight = ["Name"];
+
+  const product = await getFiltersProduct(filter, nearlyRight, []);
+
+  if (product != null) {
+    return true;
+  }
+
+  return false;
 };

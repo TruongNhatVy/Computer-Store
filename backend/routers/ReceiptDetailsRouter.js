@@ -5,13 +5,24 @@ const ReceiptDetailsRouter = express.Router();
 
 //==================Get==================
 ReceiptDetailsRouter.get(
-  "/receipts/getReceiptDetailsByReceiptId/:_id",
-  ReceiptDetailsController.getReceiptDetailsByReceiptId
+  "/receiptDetails/getReceiptDetailsFilters/",
+  ReceiptDetailsController.getFiltersReceiptDetails
 );
-//==================Post==================
 
+// ReceiptDetailsRouter.get(
+//   "/receiptDetails/getReceiptDetailsByReceiptId/:_id",
+//   ReceiptDetailsController.getReceiptDetailsByReceiptId
+// );
+//==================Post==================
+ReceiptDetailsRouter.post(
+  "/receiptDetails/addReceiptDetails",
+  ReceiptDetailsController.addReceiptDetails
+);
 //==================Put==================
 
 //==================Delete==================
-
+ReceiptDetailsRouter.delete(
+  "/receiptDetails/deleteReceiptDetailsByReceiptId/:receiptId",
+  ReceiptDetailsController.deleteReceiptDetailsByReceiptId
+);
 export default ReceiptDetailsRouter;

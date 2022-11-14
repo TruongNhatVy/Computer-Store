@@ -1,8 +1,8 @@
 import { AccountModel } from "../models/data/AccountModel.js";
 
-export const getFiltersAccount = async (query, skipCategories, PAGE_SIZE) => {
-  if (skipCategories >= 0) {
-    return await AccountModel.find(query).skip(skipCategories).limit(PAGE_SIZE);
+export const getFiltersAccount = async (query, skipAccounts, PAGE_SIZE) => {
+  if (skipAccounts >= 0) {
+    return await AccountModel.find(query).skip(skipAccounts).limit(PAGE_SIZE);
   }
 
   return await AccountModel.find(query);

@@ -1,8 +1,8 @@
 import { BrandModel } from "../models/data/BrandModel.js";
 
-export const getFiltersBrand = async (query, skipCategories, PAGE_SIZE) => {
-  if (skipCategories >= 0) {
-    return await BrandModel.find(query).skip(skipCategories).limit(PAGE_SIZE);
+export const getFiltersBrand = async (query, skipBrands, PAGE_SIZE) => {
+  if (skipBrands >= 0) {
+    return await BrandModel.find(query).skip(skipBrands).limit(PAGE_SIZE);
   }
 
   return await BrandModel.find(query);

@@ -2,36 +2,28 @@ import mongoose, { Schema, SchemaType } from "mongoose";
 
 const schema = new mongoose.Schema(
   {
-    FirstName: {
+    name: {
       type: String,
-      require: true,
+      required: [true, "Please enter your name !"],
     },
-    LastName: {
+    email: {
       type: String,
-      require: true,
+      required: [true, "Please enter your email !"],
+      trim: true,
+      unique: true,
     },
-    Email: {
+    password: {
       type: String,
-      require: true,
+      required: [true, "Please enter your password !"],
     },
-    Phone: {
+    role: {
       type: String,
-      require: true,
+      default: "0", // 0 = user, 1 = admin
     },
-    Password: {
+    avatar: {
       type: String,
-      require: true,
-    },
-    IsActive: {
-      type: Boolean,
-      require: true,
-    },
-    Role: {
-      type: String,
-      require: true,
-    },
-    Status: {
-      type: String,
+      default:
+        "https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_thumb,g_faces/couple.jpg",
     },
   },
   {
