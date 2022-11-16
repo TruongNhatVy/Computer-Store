@@ -74,9 +74,33 @@ export const deleteReceipt = async (req, res) => {
   }
 };
 
-export const warehouseReceived = async (req, res) => {
+export const warehouseReceived = async (receiptProducts, res) => {
   try {
-    await ReceiptSvc.warehouseReceived(req);
+    receiptProducts = {
+      Total: 160940000, //6363f9e950420980842dfd6e - 2 ; 6363f9e950420980842dfd6f - 3 ; 6363f9e950420980842dfd70 - 1
+      Products: [
+        {
+          ProductId: "6363f9e950420980842dfd6e",
+          UnitPrice: 25990000,
+          Quantity: 2,
+          Total: 51980000,
+        },
+        {
+          ProductId: "6363f9e950420980842dfd6f",
+          UnitPrice: 25490000,
+          Quantity: 3,
+          Total: 76470000,
+        },
+        {
+          ProductId: "6363f9e950420980842dfd70",
+          UnitPrice: 32490000,
+          Quantity: 1,
+          Total: 32490000,
+        },
+      ],
+    };
+
+    await ReceiptSvc.warehouseReceived(receiptProducts);
 
     return res.status(200).json({ Message: "ok" });
   } catch (error) {

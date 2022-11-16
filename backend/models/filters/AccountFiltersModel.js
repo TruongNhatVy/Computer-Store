@@ -8,6 +8,12 @@ const schema = new mongoose.Schema(
     email: {
       type: String,
     },
+    phone: {
+      type: String,
+    },
+    address: {
+      type: String,
+    },
     role: {
       type: String,
     },

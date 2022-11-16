@@ -30,14 +30,6 @@ const schema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    Province: {
-      type: String,
-      require: true,
-    },
-    District: {
-      type: String,
-      require: true,
-    },
   },
   {
     collection: "orders",

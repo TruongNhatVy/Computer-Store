@@ -1,6 +1,11 @@
 import * as OrderRepo from "../repositories/OrderRepo.js";
 import * as Utils from "../utils/Utils.js";
+import * as OrderDetailsSvc from "../services/OrderDetailsSvc.js";
+import * as ProductsSvc from "../services/ProductSvc.js";
 import { OrderFiltersModel } from "../models/filters/OrderFiltersModel.js";
+import moment from "moment";
+import { Router } from "express";
+import { Error } from "mongoose";
 
 const PAGE_SIZE = 10;
 
@@ -27,7 +32,7 @@ export const getFiltersOrder = async (filters) => {
     Utils.regexExactly(),
     "iu"
   );
-  //Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), productFilters);
+  Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), orderFilters);
 
   if (filters.page) {
     filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
@@ -46,7 +51,79 @@ export const getOrderById = async (_id) => {
   return await OrderRepo.getOrderById(_id);
 };
 
+export const addOrder = async (order) => {
+  return await OrderRepo.addOrder(order);
+};
+
+export const payment = async (storeAccount, storeCart) => {
+  const orderDetails = [];
+  const productsNotProvideEnough = [];
+
+  // bat loi khong du so luong cung cap
+  for (let i = 0; i < storeCart.length; i++) {
+    const product = await ProductsSvc.getProductById(storeCart[i]._id);
+
+    if (product.Quantity < storeCart[i].cartQuantity) {
+      const b = {
+        _id: storeCart[i]._id,
+        Name: storeCart[i].Name,
+        RemainingQuantity: product.Quantity,
+        QuantityRequired: storeCart[i].cartQuantity,
+      };
+
+      productsNotProvideEnough[i] = b;
+    }
+  }
+
+  if (productsNotProvideEnough.length > 0) {
+    const error = {
+      Message: "Some products are not enough to provide !",
+      Products: productsNotProvideEnough,
+    };
+
+    throw(error);
+  }
+
+  //xu ly thanh toan
+  const cart = {
+    AccountId: storeAccount.payload.user._id,
+    Date: moment(Date.now()).format("yyyy-MM-DD"),
+    Total: 0, //160940000
+    Status: "Processing",
+    Email: storeAccount.payload.user.email,
+    Phone: storeAccount.payload.user.phone,
+    Address: storeAccount.payload.user.address,
+  };
+
+  storeCart.forEach((element) => {
+    cart.Total += element.cartQuantity * element.Price;
+  });
+
+  const orderAdd = await addOrder(cart);
+
+  for (let i = 0; i < storeCart.length; i++) {
+    let orderDetailsItem = {
+      OrderId: orderAdd._id,
+      ProductId: storeCart[i]._id,
+      UnitPrice: storeCart[i].Price,
+      Quantity: storeCart[i].cartQuantity,
+      Total: 0,
+    };
+    orderDetailsItem.Total =
+      orderDetailsItem.Quantity * orderDetailsItem.UnitPrice;
+
+    orderDetails[i] = orderDetailsItem;
+  }
+
+  await OrderDetailsSvc.addOrderDetails(orderDetails);
+  await ProductsSvc.calculationQuantityProduct(orderDetails, "sub");
+};
+
 export const updateOrder = async (_id, order) => {
   return await OrderRepo.updateOrder(_id, order);
   //return getOrderById(_id);
+};
+
+export const deleteOrder = async (_id) => {
+  await OrderRepo.deleteOrder(_id);
 };
