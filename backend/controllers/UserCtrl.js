@@ -12,7 +12,7 @@ const {CLIENT_URL} = process.env
 const userCtrl = {
     register: async(req, res) => {
         try{
-            const {name, email, password} = req.body
+            const {name, email, password, } = req.body
 
             if(!name || !email || !password)
                 return res.status(400).json({msg: "Please fill in all the field."})
