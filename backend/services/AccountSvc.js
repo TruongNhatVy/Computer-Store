@@ -7,7 +7,7 @@ const PAGE_SIZE = 10;
 export const getFiltersAccount = async (filters) => {
   Utils.cleanObject(filters);
 
-  const nearlyRight = ["name", "email"];
+  const nearlyRight = ["name", "email","address","phone"];
   const ignoreCases = ["role"];
   const accountFilters = new AccountFiltersModel(filters);
   const query = {};
@@ -43,7 +43,7 @@ export const getAccountById = async (_id) => {
 };
 
 export const addAccount = async (account) => {
-  account["Password"] = await Utils.hashPassword(account["Password"]);
+  account["password"] = await Utils.hashPassword(account["password"]);
 
   return await AccountRepo.addAccount(account);
 };

@@ -74,10 +74,15 @@ export const deleteProduct = async (_id) => {
   await ProductRepo.deleteProduct(_id);
 };
 
-export const addQuantityProduct = async (products) => {
+export const calculationQuantityProduct = async (products, calculation) => {
   for (const item of products) {
     let product = await getProductById(item["ProductId"]);
-    product.Quantity += item["Quantity"];
+
+    if (calculation.localeCompare("plus", undefined, { sensitivity: "accent" }) === 0)
+      product.Quantity += item["Quantity"];
+
+    if (calculation.localeCompare("sub", undefined, { sensitivity: "accent" }) === 0)
+      product.Quantity -= item["Quantity"];
 
     await updateProduct(product["_id"], product);
   }

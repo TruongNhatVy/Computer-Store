@@ -12,12 +12,12 @@ export const getAccountById = async (_id) => {
   return await AccountModel.findById(_id);
 };
 
-export const addAccount = async (Account) => {
-  return await AccountModel.create(Account);
+export const addAccount = async (account) => {
+  return await AccountModel.create(account);
 };
 
-export const updateAccount = async (_id, Account) => {
-  return await AccountModel.findByIdAndUpdate(_id, Account);
+export const updateAccount = async (_id, account) => {
+  return await AccountModel.findByIdAndUpdate(_id, account);
 };
 
 export const deleteAccount = async (_id) => {

@@ -16,6 +16,14 @@ const schema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter your password !"],
     },
+    phone: {
+      type: String,
+      required: [true, "Please enter your phone !"],
+    },
+    address: {
+      type: String,
+      required: [true, "Please enter your address !"],
+    },
     role: {
       type: String,
       default: "0", // 0 = user, 1 = admin

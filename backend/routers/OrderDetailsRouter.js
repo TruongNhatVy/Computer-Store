@@ -5,13 +5,19 @@ const OrderDetailsRouter = express.Router();
 
 //==================Get==================
 OrderDetailsRouter.get(
-  "/orders/getOrderDetailsByOrderId/:_id",
+  "/orderDetails/getOrderDetailsByOrderId/:_id",
   OrderDetailsController.getOrderDetailsByOrderId
 );
 //==================Post==================
-
+OrderDetailsRouter.post(
+  "/orderDetails/addOrderDetails",
+  OrderDetailsController.addOrderDetails
+);
 //==================Put==================
 
 //==================Delete==================
-
+OrderDetailsRouter.delete(
+  "/orderDetails/deleteOrderDetailsByOrderId/:orderId",
+  OrderDetailsController.deleteOrderDetailsByOrderId
+);
 export default OrderDetailsRouter;
