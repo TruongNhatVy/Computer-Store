@@ -30,7 +30,9 @@ const Search = ({ CartItem }) => {
                 </Link>
               </div>
               <div className="header__menu__right__item header__menu__item">
-                <box-icon type="bx" name="user"></box-icon>
+                <Link to="/SignIn">
+                  <box-icon type="bx" name="user" va></box-icon>
+                </Link>
               </div>
             </div>
         </div>
