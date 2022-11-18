@@ -11,6 +11,7 @@ import BrandRouter from "./routers/BrandRouter.js";
 import SupplierRouter from "./routers/SupplierRouter.js";
 import ReceiptRouter from "./routers/ReceiptRouter.js";
 import ReceiptDetailsRouter from "./routers/ReceiptDetailsRouter.js";
+import StatisticRouter from "./routers/StatisticRouter.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,6 +38,7 @@ app.use("/", BrandRouter);
 app.use("/", SupplierRouter);
 app.use("/", ReceiptRouter);
 app.use("/", ReceiptDetailsRouter);
+app.use("/", StatisticRouter);
 
 //connect MongoDb
 mongoose

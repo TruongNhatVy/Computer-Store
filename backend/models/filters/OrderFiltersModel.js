@@ -5,6 +5,12 @@ const schema = new mongoose.Schema(
     Status: {
       type: String,
     },
+    DateStart: {
+      type: String,
+    },
+    DateEnd: {
+      type: String,
+    },
   },
   { _id: false }
 );
