@@ -34,6 +34,16 @@ export const getFiltersOrder = async (filters) => {
   );
   Utils.addQueryLeft(query, nearlyRight.concat(ignoreCases), orderFilters);
 
+  if (query["DateStart"] && query["DateEnd"]) {
+    query["Date"] = {
+      $gte: query["DateStart"],
+      $lte: query["DateEnd"],
+    };
+
+    delete query["DateStart"];
+    delete query["DateEnd"];
+  }
+
   if (filters.page) {
     filters.page = Number(filters.page) < 1 ? 1 : Number(filters.page);
 

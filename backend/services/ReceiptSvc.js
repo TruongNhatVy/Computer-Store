@@ -85,5 +85,5 @@ export const warehouseReceived = async (receiptProducts) => {
   await ReceiptDetailsSvc.addReceiptDetails(receiptProducts.Products);
 
   //---------------------add quantity products---------------------
-  await ProductSvc.calculationQuantityProduct(receiptProducts.Products,'plus');
+  await ProductSvc.calculationQuantityProduct(receiptProducts.Products, "plus");
 };
