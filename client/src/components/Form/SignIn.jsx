@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import {useDispatch} from "react-redux";
 import {dispatchLogin} from "../../redux/actions/AuthAction";
-import { isEmpty, isMatch, isEmail, isLength } from "../../utils/Validation";
+
 import { showErrMsg, showSuccessMsg } from "../../utils/Notification";
 
 const initialState = {
@@ -28,7 +28,7 @@ function SignIn() {
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await axios.post('/user/login', { email, password })
+      const res = await axios.post("http://localhost:5000/accounts/addAccount", { email, password })
       setUser({ ...user, err: '', success: res.data.msg })
 
       localStorage.setItem('firstLogin', true)

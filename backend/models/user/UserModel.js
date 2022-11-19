@@ -17,21 +17,21 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please enter your password!"]
     },
-    phone: {
+    role: {
         type: String,
-        required: [true, "Please enter your phone number!"]
+        default: "0" // 0 = user, 1 = admin
+    },
+    avatar: {
+        type: String,
+        default: "https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_thumb,g_faces/couple.jpg"
     },
     address: {
         type: String,
         required: [true, "Please enter your address!"]
     },
-    role: {
-        type: Number,
-        default: 0 // 0 = user, 1 = admin
-    },
-    avatar: {
+    phone: {
         type: String,
-        default: "https://res.cloudinary.com/demo/image/upload/w_100,h_100,c_thumb,g_faces/couple.jpg"
+        required: [true, "Please enter your phone number!"]
     }
 }, {
     timestamps: true

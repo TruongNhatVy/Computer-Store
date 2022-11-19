@@ -12,9 +12,9 @@ const {CLIENT_URL} = process.env
 const userCtrl = {
     register: async(req, res) => {
         try{
-            const {name, email, password, } = req.body
+            const {name, email, password, address, phone } = req.body
 
-            if(!name || !email || !password)
+            if(!name || !email || !password || !address || !phone)
                 return res.status(400).json({msg: "Please fill in all the field."})
 
             if(!validateEmail(email))
@@ -28,18 +28,19 @@ const userCtrl = {
                 return res.status(400).json({msg: "Password must be at least 6 character."})
 
             const passwordHash = await bcrypt.hash(password, 12)
-            const newUser = {
-                name, email, password: passwordHash
-            }
-            const activation_token = createActivationToken(newUser)
+            const newUser = new Users({
+                name, email, password: passwordHash, address, phone
+            })
+            await newUser.save();
+            //const activation_token = createActivationToken(newUser)
 
             //console.log({name, email, password})
-            const url = `${CLIENT_URL}/user/activate/${activation_token}`
+            //const url = `${CLIENT_URL}/user/activate/${activation_token}`
 
             //sendMail(email, url)
-            sendMail(email, url, "Verify your email address")
+            //sendMail(email, url, "Verify your email address")
 
-            res.json({msg: "Register Success! Please activate your email to start."})
+            //res.json({msg: "Register Success! Please activate your email to start."})
         }catch(err){
             return res.status(500).json({msg: err.message})
         }
@@ -49,13 +50,13 @@ const userCtrl = {
             const {activation_token} = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const {name, email, password} = user
+            const {name, email, password, address, phone} = user
 
             const check = await Users.findOne({email})
             if(check) return res.status(400).json({msg:"This email already exists."})
 
             const newUser = new Users({
-                name, email, password
+                name, email, password, address, phone
             })
 
             await newUser.save()
@@ -75,12 +76,12 @@ const userCtrl = {
             const isMatch = await bcrypt.compare(password, user.password)
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
-            const refresh_token = createRefreshToken({id: user._id})
-            res.cookie('refresh_token', refresh_token, {
-                httpOnly: true,
-                path: '/user/refresh_token',
-                maxAge: 7*24*60*60*1000 //7 days
-            })
+            // const refresh_token = createRefreshToken({id: user._id})
+            // res.cookie('refresh_token', refresh_token, {
+            //     httpOnly: true,
+            //     path: '/user/refresh_token',
+            //     maxAge: 7*24*60*60*1000 //7 days
+            // })
 
             res.json({msg: "Login success!"})
         } catch (err) {

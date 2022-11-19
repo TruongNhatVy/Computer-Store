@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import { isEmpty, isMatch, isEmail, isLength } from "../../utils/Validation";
-import { showErrMsg, showSuccessMsg } from "../../utils/Notification";
+import { isEmpty, isMatch, isEmail, isLength, isPhoneNumber } from "../../utils/Validation";
+//import { showErrMsg, showSuccessMsg } from "../../utils/Notification";
+import API_URL from "../../url/url";
 
 const initialState = {
   name: '',
   email: '',
   password: '',
-  cf_password: '', 
+  cf_password: '',
+  address: '',
+  phone: '',
   err: '',
   success: ''
 }
@@ -16,7 +18,7 @@ const initialState = {
 function SignUp() {
   const [user, setUser] = useState(initialState)
 
-  const { name, email, password, cf_password, err, success } = user
+  const { name, email, password, cf_password, address, phone, err, success } = user
 
 
   const handleChangeInput = e => {
@@ -26,7 +28,7 @@ function SignUp() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    if (isEmpty(name) || isEmpty(password))
+    if (isEmpty(name) || isEmpty(password)||isEmpty(address)||isEmpty(phone))
       return setUser({ ...user, err: "Please fill in all fields.", success: '' })
 
     if (!isEmail(email))
@@ -37,9 +39,13 @@ function SignUp() {
 
     if (!isMatch(password, cf_password))
       return setUser({ ...user, err: "Password did not match.", success: '' })
+
+    if(!isPhoneNumber(phone)){
+      return setUser({ ...user, err: "Invalid phone number.", success: '' })
+    }
     try {
-      const res = await axios.post('/user/register', {
-        name, email, password
+      const res = await axios.post('http://localhost:5000/accounts/addAccount', {
+        name, email, password, address, phone
       })
 
       setUser({ ...user, err: '', success: res.data.msg })
@@ -51,8 +57,9 @@ function SignUp() {
   }
   return (
     <div className="form-container sign-up-container">
-      <form action="#" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h1>Create Account</h1>
+
         <div className="social-container">
           <a href="#" className="social"><i className="fab fa-facebook-f"></i></a>
           <a href="#" className="social"><i className="fab fa-google-plus-g"></i></a>
@@ -62,8 +69,10 @@ function SignUp() {
         <input type="text" placeholder="Name" value={name} name="name" onChange={handleChangeInput} />
         <input type="email" placeholder="Email" value={email} name="email" onChange={handleChangeInput} />
         <input type="password" placeholder="Password" value={password} name="password" onChange={handleChangeInput} />
-        <input type="password" placeholder="Password" value={cf_password} name="cf_password" onChange={handleChangeInput} />
-        <button>Sign Up</button>
+        <input type="password" placeholder="Confirm Password" value={cf_password} name="cf_password" onChange={handleChangeInput} />
+        <input type="text" placeholder="Address" value={address} name="address" onChange={handleChangeInput} />
+        <input type="text" placeholder="Phone Number" value={phone} name="phone" onChange={handleChangeInput} />
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   )

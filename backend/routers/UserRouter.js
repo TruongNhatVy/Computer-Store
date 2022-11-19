@@ -1,9 +1,10 @@
 const router = require('express').Router()
-import userCtrl from "../controllers/UserCtrl";
-import auth from "../middleware/Auth";
-import authAdmin from "../middleware/AuthAdmin";
+const userCtrl = require('../controllers/userCtrl')
+const auth = require('../middleware/auth')
+const authAdmin = require('../middleware/authAdmin')
+const API_URL = require('../../client/src/url/url')
 
-router.post('/register', userCtrl.register);
+router.post(`${API_URL}/accounts/addAccount`, userCtrl.register);
 
 router.post('/activation', userCtrl.activateEmail);
 
