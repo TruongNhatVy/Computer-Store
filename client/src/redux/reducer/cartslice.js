@@ -26,13 +26,13 @@ const cartSlice = createSlice({
           ...state.cartItems[existingIndex],
           cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
         };
-  
 
       }
       
       else {
         let tempProductItem = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(tempProductItem);
+        console.log(tempProductItem)
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },

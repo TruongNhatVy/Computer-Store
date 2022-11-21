@@ -54,6 +54,7 @@ function Sliderlogo(props) {
       {data.map((item, index) => {
         return (
           <div className="image_container" key={index} style={{ display: "flex", alignItems: "center" }}>
+          <Link to={item.path}>
             <img
              
               src={item.img}
@@ -61,7 +62,9 @@ function Sliderlogo(props) {
               width="80%"
               height="100px"
                           />
+          </Link>
           </div>
+         
         );
       })}
     </Slider>
