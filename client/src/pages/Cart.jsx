@@ -53,6 +53,7 @@ const Cart = () => {
       {cart.cartItems.length === 0 ? (
         <div className="cart-empty">
           <p>Your cart is currently empty</p>
+          <i class="fa-solid fa-9x fa-cart-shopping"></i>
           <div className="start-shopping">
             <Link to="/">
               <svg
@@ -69,8 +70,10 @@ const Cart = () => {
                 />
               </svg>
               <span>Start Shopping</span>
+              
             </Link>
           </div>
+          
         </div>
       ) : (
         <div>

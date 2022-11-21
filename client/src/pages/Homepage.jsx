@@ -15,10 +15,10 @@ import ProductCard from "../components/ProductCard/ProductCard";
 // import { productData, getProducts, getALLproducts } from "../api";
 import PageError from "../components/PageServerLoading/PageError";
 import PageLoading from "../components/PageServerLoading/PageLoading";
-import { getALLproducts } from "../action";
+import {  getproducts} from "../action/getProduct";
 import Sliderlogo from "../components/Slider/Sliderlogo";
 const Homepage = () => {
-  const { isError, data, isLoading } = useQuery(["product"], getALLproducts, {
+  const { isError, data, isLoading } = useQuery(["product"], getproducts, {
     staleTime: 1000,
   });
   console.log(data)
@@ -40,7 +40,7 @@ const Homepage = () => {
       </div>
     );
   }
-
+  console.log(data)
   return (
     <div>
       {/* this is slider-content */}
@@ -79,6 +79,7 @@ const Homepage = () => {
           <SectionBody>
             <Grid col={4} mdCol={2} smCol={1} gap={20}>
               {data?.map((item, index) => {
+                console.log(item.Image)
                 return (
                   <ProductCard
                     key={index}
@@ -86,8 +87,9 @@ const Homepage = () => {
                     Name={item.Name}
                     Image2={item.Image}
                     Price={parseInt(item.Price)}
-                    category={item.CategoryId}
+                    CategoryId={item.CategoryId}
                     _id={item._id}
+                    Quantity={item.Quantity}
                   />
                 );
               })}

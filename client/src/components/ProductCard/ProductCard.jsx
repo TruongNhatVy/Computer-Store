@@ -24,13 +24,14 @@
 
     return (
         <div className="product-card">
-        <Link to={`/catelog/CategoryId/${props._id}`}>
+        <Link to={`/catelog/${props.CategoryId}/${props._id}`}>
             <div className="product-card__image">
-            <img src={props.Image} alt="img" />
             <img src={props.Image2} alt="img" />
+            <img src={props.Image} alt="img" />
+          
             </div>
             <h3 className="product-card__name">{props.Name}</h3>
-            <Star rating={props.rating} />
+            <Star rating={props.Quantity} />
             <div className="product-card__price">
             {numberWithCommas(props.Price)}
             <span className="product-card__price__old">

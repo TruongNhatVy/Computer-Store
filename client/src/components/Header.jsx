@@ -58,6 +58,7 @@ const Header = () => {
       <div className="header" ref={headerRef}>
         <Search />
 
+
         <div className="container">
           <div className="header__menu">
             <div className="header__menu__mobile-toggle" onClick={menuToggle}>

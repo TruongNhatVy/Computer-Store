@@ -74,10 +74,10 @@ const ProductView = (props) => {
         </div>
       </div>
       <div className="product__info">
-        <h1 className="product__info__title">{product.title}</h1>
+        <h1 className="product__info__title">Tên sản phẩm: {product.Name}</h1>
         <div className="product__info__item">
           <span className="product__info__item__price">
-            {numberWithCommas(product.Price)}
+              Giá Tiền: {numberWithCommas(product.Price)}
           </span>
         </div>
         <div className="product__info__item">
