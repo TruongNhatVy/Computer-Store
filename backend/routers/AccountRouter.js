@@ -5,7 +5,7 @@ const AccountRouter = express.Router();
 
 //==================Get==================
 AccountRouter.get(
-  "/accounts/getCategoriesFilters",
+  "/accounts/getAccountsFilters",
   AccountController.getFiltersAccount
 );
 

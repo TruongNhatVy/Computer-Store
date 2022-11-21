@@ -6,66 +6,33 @@ import TableHeader from "../../components/Table/TableHeader";
 import TableRows from "../../components/Table/TableRows";
 import TableRow from "../../components/Table/TableRow";
 import { useEffect, useState } from "react";
-
 import axios from "axios";
-
-const data_dummy = [
-  {
-    id: 1,
-    name: "Khuong Huy Hieu",
-    phone: "0764509124",
-    email: "abc@gmail.com",
-  },
-  {
-    id: 2,
-    name: "Truong Nhat Vy",
-    phone: "0764509124",
-    email: "abc@gmail.com",
-  },
-  {
-    id: 3,
-    name: "Phan The Hieu",
-    phone: "0764509124",
-    email: "abc@gmail.com",
-  },
-  {
-    id: 4,
-    name: "Thai Kim Luong",
-    phone: "0764509124",
-    email: "abc@gmail.com",
-  },
-  {
-    id: 5,
-    name: "Lam Chi Hien",
-    phone: "0764509124",
-    email: "abc@gmail.com",
-  },
-];
+import numberWithCommas from "../../../utils/ConvertNumber";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
-const ManaAccount = () => {
-  const [listPokemon, setListPokemon] = useState([]);
-  const [offset, setOffset] = useState(1);
+const ManageReceipt = () => {
+  const [receipts, setReceipt] = useState([]);
+  const [page, setOffset] = useState(1);
 
   useEffect(() => {
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon?limit=10&offset=${offset}`)
-      .then((res) => setListPokemon(res.data));
-  }, [offset]);
+      .get(`http://localhost:5000/receipts/getReceiptsFilters?page=${page}`)
+      .then((res) => setReceipt(res.data));
+  }, [page]);
 
   return (
     <TableContainer
       showPagination={true}
-      totalPages={(listPokemon?.results || []).length}
-      activePage={offset}
+      totalPages={(receipts || []).length}
+      activePage={page}
       handleSelect={(e) => {
         setOffset(e);
       }}
     >
       <TableHeader
         showNewButton={true}
-        show={true}
+        show={false}
         listDataOption={listDataOption}
         // handleSelect={(e) => {
         //   handleSelectRole(e);
@@ -73,24 +40,29 @@ const ManaAccount = () => {
       />
       <TableBody>
         <TableCol
-          listCol={[{ title: "Hieu" }, { title: "Hien" }, { title: "Edit" }]}
+          listCol={[{ title: "Id" }, { title: "Date" }, { title: "Total" }]}
         />
         <TableRows>
-          {(listPokemon?.results || []).map((item) => {
+          {(receipts || []).map((item) => {
             return (
               <>
                 <TableRow key={item}>
                   <TableCell>
-                    <h6 className="mb-0 text-sm">{item.name}</h6>
+                    <h6 className="mb-0 text-sm">{item._id}</h6>
                   </TableCell>
                   <TableCell>
-                    <h6 className="mb-0 text-sm">{item.name}</h6>
+                    <h6 className="mb-0 text-sm">{item.Date}</h6>
                   </TableCell>
                   <TableCell>
+                    <h6 className="mb-0 text-sm">
+                      {numberWithCommas(item.Total)}
+                    </h6>
+                  </TableCell>
+                  {/* <TableCell>
                     <button type="type" className="btn btn-sm btn-danger">
                       Remove
                     </button>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               </>
             );
@@ -101,4 +73,4 @@ const ManaAccount = () => {
   );
 };
 
-export default ManaAccount;
+export default ManageReceipt;
