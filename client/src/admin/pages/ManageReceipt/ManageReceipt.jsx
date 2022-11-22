@@ -40,7 +40,12 @@ const ManageReceipt = () => {
       />
       <TableBody>
         <TableCol
-          listCol={[{ title: "Id" }, { title: "Date" }, { title: "Total" }]}
+          listCol={[
+            { title: "Id" },
+            { title: "Date" },
+            { title: "Total" },
+            { title: "Action" },
+          ]}
         />
         <TableRows>
           {(receipts || []).map((item) => {
@@ -58,11 +63,14 @@ const ManageReceipt = () => {
                       {numberWithCommas(item.Total)}
                     </h6>
                   </TableCell>
-                  {/* <TableCell>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      Remove
+                  <TableCell>
+                    <button type="type" className="btn btn-sm btn-info">
+                      <i class="fa-solid fa-pencil"></i>
                     </button>
-                  </TableCell> */}
+                    <button type="type" className="btn btn-sm btn-danger">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </TableCell>
                 </TableRow>
               </>
             );

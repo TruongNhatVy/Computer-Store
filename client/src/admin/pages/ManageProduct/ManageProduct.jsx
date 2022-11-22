@@ -9,18 +9,40 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
+import { useCallback } from "react";
 
-const listDataOption = [{ name: "Hieu", value: 1 }];
+const listDataOption = [
+  { name: "Trading", value: "Trading" },
+  { name: "Stop trading", value: "Stop trading" },
+  { name: "Sold out", value: "Sold out" },
+];
 
 const ManageProduct = () => {
   const [products, setProduct] = useState([]);
+  const [filterStatus, setFilterStatus] = useState("");
   const [page, setOffset] = useState(1);
+  const [brands, setBrand] = useState([]);
+  const [categories, setCategory] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/products/getProductsFilters?page=${page}`)
+      .get(
+        `http://localhost:5000/products/getProductsFilters?page=${page}&Status=${filterStatus}`
+      )
       .then((res) => setProduct(res.data));
-  }, [page]);
+  }, [page, filterStatus]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:5000/brands/getBrandFilters`)
+  //     .then((res) => setBrand(res.data));
+  // }, [brands]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get(`http://localhost:5000/categories/getCategoriesFilters`)
+  //     .then((res) => setCategory(res.data));
+  // }, [categories]);
 
   return (
     <TableContainer
@@ -33,11 +55,11 @@ const ManageProduct = () => {
     >
       <TableHeader
         showNewButton={true}
-        show={false}
+        show={true}
         listDataOption={listDataOption}
-        // handleSelect={(e) => {
-        //   handleSelectRole(e);
-        // }}
+        handleSelect={(e) => {
+          setFilterStatus(e);
+        }}
       />
       <TableBody>
         <TableCol
@@ -47,9 +69,10 @@ const ManageProduct = () => {
             { title: "Quantity" },
             { title: "BrandId" },
             { title: "CategoryId" },
-            { title: "Description" },
+            // { title: "Description" },
             { title: "Price" },
             { title: "Status" },
+            { title: "Action" },
           ]}
         />
         <TableRows>
@@ -58,15 +81,15 @@ const ManageProduct = () => {
               <>
                 <TableRow key={item}>
                   <TableCell>
-                    <h6 className="mb-0 text-sm">{item._id}</h6>
+                    <h5 className="mb-0 text-sm">{item._id}</h5>
                   </TableCell>
                   <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Name}</h6>
+                    <h5 className="mb-0 text-sm">{item.Name}</h5>
                   </TableCell>
                   <TableCell>
-                    <h6 className="mb-0 text-sm">
+                    <h5 className="mb-0 text-sm">
                       {numberWithCommas(item.Quantity)}
-                    </h6>
+                    </h5>
                   </TableCell>
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.BrandId}</h6>
@@ -74,22 +97,25 @@ const ManageProduct = () => {
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.CategoryId}</h6>
                   </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Description}</h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">
-                      {numberWithCommas(item.Price)}
-                    </h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Status}</h6>
-                  </TableCell>
                   {/* <TableCell>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      Remove
-                    </button>
+                    <h6 className="mb-0 text-sm">{item.Description}</h6>
                   </TableCell> */}
+                  <TableCell>
+                    <h5 className="mb-0 text-sm">
+                      {numberWithCommas(item.Price)}
+                    </h5>
+                  </TableCell>
+                  <TableCell>
+                    <h5 className="mb-0 text-sm">{item.Status}</h5>
+                  </TableCell>
+                  <TableCell>
+                    <button type="type" className="btn btn-sm btn-info">
+                      <i className="fa-solid fa-pencil"></i>
+                    </button>
+                    <button type="type" className="btn btn-sm btn-danger">
+                      <i className="fas fa-trash-alt"></i>
+                    </button>
+                  </TableCell>
                 </TableRow>
               </>
             );

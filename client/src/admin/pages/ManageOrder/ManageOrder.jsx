@@ -46,9 +46,10 @@ const ManageOrder = () => {
             { title: "Date" },
             { title: "Total" },
             { title: "Status" },
-            { title: "Email" },
-            { title: "Phone" },
-            { title: "Address" },
+            // { title: "Email" },
+            // { title: "Phone" },
+            // { title: "Address" },
+            { title: "Action" },
           ]}
         />
         <TableRows>
@@ -73,7 +74,7 @@ const ManageOrder = () => {
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.Status}</h6>
                   </TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     <h6 className="mb-0 text-sm">{item.Email}</h6>
                   </TableCell>
                   <TableCell>
@@ -81,12 +82,15 @@ const ManageOrder = () => {
                   </TableCell>
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.Address}</h6>
-                  </TableCell>
-                  {/* <TableCell>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      Remove
-                    </button>
                   </TableCell> */}
+                  <TableCell>
+                    <button type="type" className="btn btn-sm btn-info">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button type="type" className="btn btn-sm btn-danger">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </TableCell>
                 </TableRow>
               </>
             );

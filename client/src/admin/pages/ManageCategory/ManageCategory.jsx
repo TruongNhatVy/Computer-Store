@@ -39,7 +39,12 @@ const ManageCategory = () => {
       />
       <TableBody>
         <TableCol
-          listCol={[{ title: "Id" }, { title: "Name" }, { title: "Status" }]}
+          listCol={[
+            { title: "Id" },
+            { title: "Name" },
+            { title: "Status" },
+            { title: "Action" },
+          ]}
         />
         <TableRows>
           {(categories || []).map((item) => {
@@ -55,11 +60,14 @@ const ManageCategory = () => {
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.Status}</h6>
                   </TableCell>
-                  {/* <TableCell>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      Remove
+                  <TableCell>
+                    <button type="type" className="btn btn-sm btn-info">
+                      <i class="fa-solid fa-pencil"></i>
                     </button>
-                  </TableCell> */}
+                    <button type="type" className="btn btn-sm btn-danger">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </TableCell>
                 </TableRow>
               </>
             );

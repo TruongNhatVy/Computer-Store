@@ -8,7 +8,6 @@ import TableRow from "../../components/Table/TableRow";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
 const ManageAccount = () => {
@@ -47,6 +46,7 @@ const ManageAccount = () => {
             { title: "Phone" },
             { title: "Address" },
             { title: "Role" },
+            { title: "Action" },
           ]}
         />
         <TableRows>
@@ -72,11 +72,14 @@ const ManageAccount = () => {
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.role}</h6>
                   </TableCell>
-                  {/* <TableCell>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      Remove
+                  <TableCell>
+                    <button type="type" className="btn btn-sm btn-info">
+                      <i class="fa-solid fa-pencil"></i>
                     </button>
-                  </TableCell> */}
+                    <button type="type" className="btn btn-sm btn-danger">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </TableCell>
                 </TableRow>
               </>
             );

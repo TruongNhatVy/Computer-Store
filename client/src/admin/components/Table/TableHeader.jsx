@@ -11,7 +11,7 @@ const TableHeader = ({
 }) => {
   const handleSetFilter = useCallback(
     (numberFilter) => {
-      handleSelect(Number(numberFilter.target.value));
+      handleSelect(numberFilter.target.value);
     },
     [handleSelect]
   );

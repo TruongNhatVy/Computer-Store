@@ -39,7 +39,12 @@ const ManageSupplier = () => {
       />
       <TableBody>
         <TableCol
-          listCol={[{ title: "Id" }, { title: "Name" }, { title: "Address" }]}
+          listCol={[
+            { title: "Id" },
+            { title: "Name" },
+            // { title: "Address" },
+            { title: "Action" },
+          ]}
         />
         <TableRows>
           {(suppliers || []).map((item) => {
@@ -52,14 +57,17 @@ const ManageSupplier = () => {
                   <TableCell>
                     <h6 className="mb-0 text-sm">{item.Name}</h6>
                   </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Address}</h6>
-                  </TableCell>
                   {/* <TableCell>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      Remove
-                    </button>
+                    <h6 className="mb-0 text-sm">{item.Address}</h6>
                   </TableCell> */}
+                  <TableCell>
+                    <button type="type" className="btn btn-sm btn-info">
+                      <i class="fa-solid fa-pencil"></i>
+                    </button>
+                    <button type="type" className="btn btn-sm btn-danger">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </TableCell>
                 </TableRow>
               </>
             );
