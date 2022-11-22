@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 import AddAccountPopup from "./AddAccountPopup";
+import ConfirmRemove from "./ConfirmRemove";
+import { useCallback } from "react";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
@@ -16,12 +18,18 @@ const ManageAccount = () => {
   const [accounts, setAccount] = useState([]);
   const [page, setOffset] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
+  const [showPopupConfirm, setShowPopupConfirm] = useState(false);
+  // const [idItem, setIdItem] = useState("");
 
   useEffect(() => {
     axios
       .get(`http://localhost:5000/accounts/getAccountsFilters?page=${page}`)
       .then((res) => setAccount(res.data));
   }, [page]);
+
+  // const handleRemovePopup = useCallback((value) => {
+  //   setIdItem(value);
+  // }, []);
 
   return (
     <ContainerMainLayoutAdmin>
@@ -81,7 +89,11 @@ const ManageAccount = () => {
                       <button type="type" className="btn btn-sm btn-info">
                         <i class="fa-solid fa-pencil"></i>
                       </button>
-                      <button type="type" className="btn btn-sm btn-danger">
+                      <button
+                        type="type"
+                        className="btn btn-sm btn-danger"
+                        // onClick={() => handleRemovePopup(item.id)}
+                      >
                         <i class="fas fa-trash-alt"></i>
                       </button>
                     </TableCell>
@@ -96,6 +108,11 @@ const ManageAccount = () => {
       <AddAccountPopup
         showPopup={showPopup}
         handleClosePopup={(e) => setShowPopup(e)}
+      />
+      <ConfirmRemove
+        showPopup={showPopupConfirm}
+        handleClosePopup={(e) => setShowPopupConfirm(e)}
+        // idItem={idItem}
       />
     </ContainerMainLayoutAdmin>
   );
