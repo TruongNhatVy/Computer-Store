@@ -92,6 +92,7 @@ const ManageAccount = () => {
           </TableRows>
         </TableBody>
       </TableContainer>
+
       <AddAccountPopup
         showPopup={showPopup}
         handleClosePopup={(e) => setShowPopup(e)}

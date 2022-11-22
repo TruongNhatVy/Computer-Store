@@ -4,7 +4,13 @@ import { useCallback } from "react";
 import Popup from "../../components/Popup/Popup";
 
 const AddAccountPopup = ({ showPopup, handleClosePopup }) => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [role, setRole] = useState("");
+  // const [avatar, setAvatar] = useState("");
 
   const handleClose = useCallback(
     (value) => {
@@ -14,13 +20,21 @@ const AddAccountPopup = ({ showPopup, handleClosePopup }) => {
   );
 
   const handleCreateStaff = useCallback(() => {
-    const params = {
-      name: email,
+    const account = {
+      name: name,
+      email: email,
+      password: password,
+      phone: phone,
+      address: address,
+      role: role,
     };
     axios
-      .post(`http://localhost:5000/accounts/getAccountsFilters?page=1}`, params)
-      .then((res) => res);
-  }, [email]);
+      .post("http://localhost:5000/accounts/addAccount", account)
+      .then((res) => res.json())
+      .catch((error) => error);
+
+    handleClosePopup(false);
+  }, [name, email, password, phone, address, role, handleClosePopup]);
 
   return (
     <>
@@ -32,13 +46,65 @@ const AddAccountPopup = ({ showPopup, handleClosePopup }) => {
         modelBody={
           <form>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Email address</label>
+              <label htmlFor="exampleFormControlInput1">Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">Email</label>
               <input
                 type="email"
                 className="form-control"
                 id="exampleFormControlInput1"
-                placeholder="name@example.com"
+                placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">Password</label>
+              <input
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">Phone</label>
+              <input
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Phone"
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">Address</label>
+              <input
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Address"
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">Role</label>
+              <input
+                type="number"
+                min="0"
+                max="1"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Ex: 0 - 1"
+                onChange={(e) => setRole(e.target.value)}
               />
             </div>
             {/* <div className="form-group">

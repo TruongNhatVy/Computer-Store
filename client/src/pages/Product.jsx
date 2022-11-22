@@ -12,6 +12,7 @@ import productsData from "../assets/data-fake/product-data";
 import { getproducts } from "../action/getProduct";
 import PageError from "../components/PageServerLoading/PageError";
 import PageLoading from "../components/PageServerLoading/PageLoading";
+import Layout from "../components/Layout/Layout";
 
 const Product = () => {
   const params = useParams();
@@ -21,7 +22,7 @@ const Product = () => {
 
   const getProductById = (_id) => {
     const findId = data?.find((e) => {
-      console.log(e._id)
+      console.log(e._id);
       return e._id === _id;
     });
 
@@ -49,32 +50,34 @@ const Product = () => {
   }
 
   return (
-    <Helmet title={product?.Name}>
-      <Section>
-        <SectionBody>
-          <ProductView product={product} />
-        </SectionBody>
-      </Section>
-      <Section>
-        <SectionTitle>Khám phá thêm</SectionTitle>
-        <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {data?.map((item, index) => (
-              <ProductCard
-                key={index}
-                Image2={item.Image}
-                title={item.Name}
-                Image={item.Image}
-                Price={parseInt(item.Price)}
-                CategoryId={item.CategoryId}
-                _id={item._id}
-                Quantity={item.Quantity}
-              />
-            ))}
-          </Grid>
-        </SectionBody>
-      </Section>
-    </Helmet>
+    <Layout>
+      <Helmet title={product?.Name}>
+        <Section>
+          <SectionBody>
+            <ProductView product={product} />
+          </SectionBody>
+        </Section>
+        <Section>
+          <SectionTitle>Khám phá thêm</SectionTitle>
+          <SectionBody>
+            <Grid col={4} mdCol={2} smCol={1} gap={20}>
+              {data?.map((item, index) => (
+                <ProductCard
+                  key={index}
+                  Image2={item.Image}
+                  title={item.Name}
+                  Image={item.Image}
+                  Price={parseInt(item.Price)}
+                  CategoryId={item.CategoryId}
+                  _id={item._id}
+                  Quantity={item.Quantity}
+                />
+              ))}
+            </Grid>
+          </SectionBody>
+        </Section>
+      </Helmet>
+    </Layout>
   );
 };
 

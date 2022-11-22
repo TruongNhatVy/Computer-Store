@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import { useCallback } from "react";
+import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 
 const listDataOption = [
   { name: "Trading", value: "Trading" },
@@ -45,84 +46,86 @@ const ManageProduct = () => {
   // }, [categories]);
 
   return (
-    <TableContainer
-      showPagination={true}
-      totalPages={(products || []).length}
-      activePage={page}
-      handleSelect={(e) => {
-        setOffset(e);
-      }}
-    >
-      <TableHeader
-        showNewButton={true}
-        show={true}
-        listDataOption={listDataOption}
+    <ContainerMainLayoutAdmin>
+      <TableContainer
+        showPagination={true}
+        totalPages={(products || []).length}
+        activePage={page}
         handleSelect={(e) => {
-          setFilterStatus(e);
+          setOffset(e);
         }}
-      />
-      <TableBody>
-        <TableCol
-          listCol={[
-            { title: "Id" },
-            { title: "Name" },
-            { title: "Quantity" },
-            { title: "BrandId" },
-            { title: "CategoryId" },
-            // { title: "Description" },
-            { title: "Price" },
-            { title: "Status" },
-            { title: "Action" },
-          ]}
+      >
+        <TableHeader
+          showNewButton={true}
+          show={true}
+          listDataOption={listDataOption}
+          handleSelect={(e) => {
+            setFilterStatus(e);
+          }}
         />
-        <TableRows>
-          {(products || []).map((item) => {
-            return (
-              <>
-                <TableRow key={item}>
-                  <TableCell>
-                    <h5 className="mb-0 text-sm">{item._id}</h5>
-                  </TableCell>
-                  <TableCell>
-                    <h5 className="mb-0 text-sm">{item.Name}</h5>
-                  </TableCell>
-                  <TableCell>
-                    <h5 className="mb-0 text-sm">
-                      {numberWithCommas(item.Quantity)}
-                    </h5>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.BrandId}</h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.CategoryId}</h6>
-                  </TableCell>
-                  {/* <TableCell>
+        <TableBody>
+          <TableCol
+            listCol={[
+              { title: "Id" },
+              { title: "Name" },
+              { title: "Quantity" },
+              { title: "BrandId" },
+              { title: "CategoryId" },
+              // { title: "Description" },
+              { title: "Price" },
+              { title: "Status" },
+              { title: "Action" },
+            ]}
+          />
+          <TableRows>
+            {(products || []).map((item) => {
+              return (
+                <>
+                  <TableRow key={item}>
+                    <TableCell>
+                      <h5 className="mb-0 text-sm">{item._id}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="mb-0 text-sm">{item.Name}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="mb-0 text-sm">
+                        {numberWithCommas(item.Quantity)}
+                      </h5>
+                    </TableCell>
+                    <TableCell>
+                      <h6 className="mb-0 text-sm">{item.BrandId}</h6>
+                    </TableCell>
+                    <TableCell>
+                      <h6 className="mb-0 text-sm">{item.CategoryId}</h6>
+                    </TableCell>
+                    {/* <TableCell>
                     <h6 className="mb-0 text-sm">{item.Description}</h6>
                   </TableCell> */}
-                  <TableCell>
-                    <h5 className="mb-0 text-sm">
-                      {numberWithCommas(item.Price)}
-                    </h5>
-                  </TableCell>
-                  <TableCell>
-                    <h5 className="mb-0 text-sm">{item.Status}</h5>
-                  </TableCell>
-                  <TableCell>
-                    <button type="type" className="btn btn-sm btn-info">
-                      <i className="fa-solid fa-pencil"></i>
-                    </button>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      <i className="fas fa-trash-alt"></i>
-                    </button>
-                  </TableCell>
-                </TableRow>
-              </>
-            );
-          })}
-        </TableRows>
-      </TableBody>
-    </TableContainer>
+                    <TableCell>
+                      <h5 className="mb-0 text-sm">
+                        {numberWithCommas(item.Price)}
+                      </h5>
+                    </TableCell>
+                    <TableCell>
+                      <h5 className="mb-0 text-sm">{item.Status}</h5>
+                    </TableCell>
+                    <TableCell>
+                      <button type="type" className="btn btn-sm btn-info">
+                        <i className="fa-solid fa-pencil"></i>
+                      </button>
+                      <button type="type" className="btn btn-sm btn-danger">
+                        <i className="fas fa-trash-alt"></i>
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                </>
+              );
+            })}
+          </TableRows>
+        </TableBody>
+      </TableContainer>
+    </ContainerMainLayoutAdmin>
   );
 };
 

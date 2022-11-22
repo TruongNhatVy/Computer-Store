@@ -8,6 +8,7 @@ import TableRow from "../../components/Table/TableRow";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
+import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
@@ -22,62 +23,64 @@ const ManageReceipt = () => {
   }, [page]);
 
   return (
-    <TableContainer
-      showPagination={true}
-      totalPages={(receipts || []).length}
-      activePage={page}
-      handleSelect={(e) => {
-        setOffset(e);
-      }}
-    >
-      <TableHeader
-        showNewButton={true}
-        show={false}
-        listDataOption={listDataOption}
-        // handleSelect={(e) => {
-        //   handleSelectRole(e);
-        // }}
-      />
-      <TableBody>
-        <TableCol
-          listCol={[
-            { title: "Id" },
-            { title: "Date" },
-            { title: "Total" },
-            { title: "Action" },
-          ]}
+    <ContainerMainLayoutAdmin>
+      <TableContainer
+        showPagination={true}
+        totalPages={(receipts || []).length}
+        activePage={page}
+        handleSelect={(e) => {
+          setOffset(e);
+        }}
+      >
+        <TableHeader
+          showNewButton={true}
+          show={false}
+          listDataOption={listDataOption}
+          // handleSelect={(e) => {
+          //   handleSelectRole(e);
+          // }}
         />
-        <TableRows>
-          {(receipts || []).map((item) => {
-            return (
-              <>
-                <TableRow key={item}>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item._id}</h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Date}</h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">
-                      {numberWithCommas(item.Total)}
-                    </h6>
-                  </TableCell>
-                  <TableCell>
-                    <button type="type" className="btn btn-sm btn-info">
-                      <i class="fa-solid fa-pencil"></i>
-                    </button>
-                    <button type="type" className="btn btn-sm btn-danger">
-                      <i class="fas fa-trash-alt"></i>
-                    </button>
-                  </TableCell>
-                </TableRow>
-              </>
-            );
-          })}
-        </TableRows>
-      </TableBody>
-    </TableContainer>
+        <TableBody>
+          <TableCol
+            listCol={[
+              { title: "Id" },
+              { title: "Date" },
+              { title: "Total" },
+              { title: "Action" },
+            ]}
+          />
+          <TableRows>
+            {(receipts || []).map((item) => {
+              return (
+                <>
+                  <TableRow key={item}>
+                    <TableCell>
+                      <h6 className="mb-0 text-sm">{item._id}</h6>
+                    </TableCell>
+                    <TableCell>
+                      <h6 className="mb-0 text-sm">{item.Date}</h6>
+                    </TableCell>
+                    <TableCell>
+                      <h6 className="mb-0 text-sm">
+                        {numberWithCommas(item.Total)}
+                      </h6>
+                    </TableCell>
+                    <TableCell>
+                      <button type="type" className="btn btn-sm btn-info">
+                        <i class="fa-solid fa-pencil"></i>
+                      </button>
+                      <button type="type" className="btn btn-sm btn-danger">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                </>
+              );
+            })}
+          </TableRows>
+        </TableBody>
+      </TableContainer>
+    </ContainerMainLayoutAdmin>
   );
 };
 

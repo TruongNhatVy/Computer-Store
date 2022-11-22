@@ -20,6 +20,8 @@ import ManageCategory from "../admin/pages/ManageCategory/ManageCategory";
 import ManageOrder from "../admin/pages/ManageOrder/ManageOrder";
 import ManageReceipt from "../admin/pages/ManageReceipt/ManageReceipt";
 import ManageSupplier from "../admin/pages/ManageSupplier/ManageSupplier";
+// import ManageStatistic from "../admin/pages/ManageSupplier/ManageStatistic";
+
 const client = new QueryClient();
 
 const Routerslink = () => {
@@ -27,6 +29,7 @@ const Routerslink = () => {
     <>
       <QueryClientProvider client={client}>
         <Routes>
+          {/* -------------------Client------------------- */}
           <Route exact path="/" element={<Homepage />} />
           <Route exact path="catelog/:CategoryId/:_id" element={<Product />} />
           <Route exact path="*" element={<NoMatch />} />
@@ -34,7 +37,8 @@ const Routerslink = () => {
           <Route exact path="/SignIn" element={<SignIn />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route path="/admin/test" element={<TestAdmin />} />
+          {/* -------------------Admin------------------- */}
+          <Route path="/admin/" element={<TestAdmin />} />
           <Route path="/admin/account" element={<ManageAccount />} />
           <Route path="/admin/product" element={<ManageProduct />} />
           <Route path="/admin/brand" element={<ManageBrand />} />
@@ -42,6 +46,7 @@ const Routerslink = () => {
           <Route path="/admin/order" element={<ManageOrder />} />
           <Route path="/admin/receipt" element={<ManageReceipt />} />
           <Route path="/admin/supplier" element={<ManageSupplier />} />
+          {/* <Route path="/admin/statistic" element={<ManageStatistic />} /> */}
         </Routes>
       </QueryClientProvider>
     </>

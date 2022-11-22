@@ -5,6 +5,7 @@ import TableHeader from "../../components/Table/TableHeader";
 import TableRows from "../../components/Table/TableRows";
 import TableRow from "../../components/Table/TableRow";
 import TableCell from "../../components/Table/TableCell";
+import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 
 const data_dummy = [
   {
@@ -49,45 +50,51 @@ const TestAdmin = () => {
   const totalPages = 10;
   const activePage = 2;
   return (
-    <>
-      <TableContainer
-        showPagination={true}
-        totalPages={totalPages}
-        activePage={activePage}
-      >
-        <TableHeader
-          showNewButton={true}
-          show={true}
-          listDataOption={listDataOption}
-        />
-        <TableBody>
-          <TableCol
-            listCol={[{ title: "Hieu" }, { title: "Hien" }, { title: "Edit" }]}
+    <ContainerMainLayoutAdmin>
+      {/* <>
+        <TableContainer
+          showPagination={true}
+          totalPages={totalPages}
+          activePage={activePage}
+        >
+          <TableHeader
+            showNewButton={true}
+            show={true}
+            listDataOption={listDataOption}
           />
-          <TableRows>
-            {data_dummy.map((item) => {
-              return (
-                <>
-                  <TableRow key={item}>
-                    <TableCell>
-                      <h6 className="mb-0 text-sm">{item.name}</h6>
-                    </TableCell>
-                    <TableCell>
-                      <h6 className="mb-0 text-sm">{item.name}</h6>
-                    </TableCell>
-                    <TableCell>
-                      <button type="type" className="btn btn-sm btn-danger">
-                        Remove
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                </>
-              );
-            })}
-          </TableRows>
-        </TableBody>
-      </TableContainer>
-    </>
+          <TableBody>
+            <TableCol
+              listCol={[
+                { title: "Hieu" },
+                { title: "Hien" },
+                { title: "Edit" },
+              ]}
+            />
+            <TableRows>
+              {data_dummy.map((item) => {
+                return (
+                  <>
+                    <TableRow key={item}>
+                      <TableCell>
+                        <h6 className="mb-0 text-sm">{item.name}</h6>
+                      </TableCell>
+                      <TableCell>
+                        <h6 className="mb-0 text-sm">{item.name}</h6>
+                      </TableCell>
+                      <TableCell>
+                        <button type="type" className="btn btn-sm btn-danger">
+                          Remove
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  </>
+                );
+              })}
+            </TableRows>
+          </TableBody>
+        </TableContainer>
+      </> */}
+    </ContainerMainLayoutAdmin>
   );
 };
 
