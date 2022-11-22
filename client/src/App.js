@@ -9,8 +9,7 @@ const App = () => {
   return (
     <>
       <Provider store={store}>
-        {/* <Routerslink /> */}
-        <RoutersAdmin />
+        <Routerslink />
       </Provider>
     </>
   );

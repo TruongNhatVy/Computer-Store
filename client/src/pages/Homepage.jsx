@@ -15,34 +15,34 @@ import ProductCard from "../components/ProductCard/ProductCard";
 // import { productData, getProducts, getALLproducts } from "../api";
 import PageError from "../components/PageServerLoading/PageError";
 import PageLoading from "../components/PageServerLoading/PageLoading";
-import {  getproducts} from "../action/getProduct";
+import { getproducts } from "../action/getProduct";
 import Sliderlogo from "../components/Slider/Sliderlogo";
+import Layout from "../components/Layout/Layout";
 const Homepage = () => {
   const { isError, data, isLoading } = useQuery(["product"], getproducts, {
     staleTime: 1000,
   });
-  console.log(data)
-  useEffect(() => {
-    console.log("components mounted");
-  }, []);
-  if (isError) {
-    return (
-      <div>
-        <PageError />
-      </div>
-    );
-  }
+  // console.log(data);
+  // useEffect(() => {
+  //   console.log("components mounted");
+  // }, []);
+  // if (isError) {
+  //   return (
+  //     <div>
+  //       <PageError />
+  //     </div>
+  //   );
+  // }
 
-  if (isLoading) {
-    return (
-      <div>
-        <PageLoading />
-      </div>
-    );
-  }
-  console.log(data)
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <PageLoading />
+  //     </div>
+  //   );
+  // }
   return (
-    <div>
+    <Layout>
       {/* this is slider-content */}
       <Helmet title="Trang chủ">
         <Sliders data={sliderImage} />
@@ -79,7 +79,7 @@ const Homepage = () => {
           <SectionBody>
             <Grid col={4} mdCol={2} smCol={1} gap={20}>
               {data?.map((item, index) => {
-                console.log(item.Image)
+                console.log(item.Image);
                 return (
                   <ProductCard
                     key={index}
@@ -97,7 +97,7 @@ const Homepage = () => {
           </SectionBody>
         </Section>
       </Helmet>
-    </div>
+    </Layout>
   );
 };
 export default Homepage;
