@@ -4,13 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import { getproductfilter,getproducts} from "../action/getProduct";
   
 
-function Filter({ posts, setSearchResults }) {
+function Filter({ posts, setSearchResults,setFilter }) {
   const handleSearchChange = (e) => {
     if (!e.target.value) return setSearchResults(posts)
 
-    const resultsArray = posts.filter(post => post.title.includes(e.target.value) || post.body.includes(e.target.value))
+    const resultsArray = posts.filter(post => post.Name.includes(e.target.value))
 
     setSearchResults(resultsArray)
+}
+const handlleFilter=(item)=>{
+ 
+      const slug = item.CategoryId;
+      const result =  posts.filter(post => post.CategoryId === slug)
+      setFilter(result)
+      
+ 
 }
 const [current, setCurrent] = useState("");
 const { isError, data, isLoading } = useQuery(["productfilter"], getproductfilter, {
@@ -23,7 +31,7 @@ const { isError, data, isLoading } = useQuery(["productfilter"], getproductfilte
           <div className="catelog__filter__widget__content">
           <div className='search-box f_flex'>
             <i className='fa fa-search'></i>
-            <input type='text' placeholder='Search and hit enter...'    id="search"
+            <input type='text' placeholder='Search and hit enter...' id="search"
                     onChange={handleSearchChange} />
             <span>All Category</span>
           </div>
@@ -42,6 +50,7 @@ const { isError, data, isLoading } = useQuery(["productfilter"], getproductfilte
                       key={item._id}
                       title={item.Name}
                       icon={item.icon}
+                      onClick={()=>handlleFilter('CATEGORY',item)}
                     >
                     </Menu.SubMenu>
                   );

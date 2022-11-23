@@ -21,7 +21,6 @@ const Homepage = () => {
   const { isError, data, isLoading } = useQuery(["product"], getproducts, {
     staleTime: 1000,
   });
-  console.log(data)
   useEffect(() => {
     console.log("components mounted");
   }, []);

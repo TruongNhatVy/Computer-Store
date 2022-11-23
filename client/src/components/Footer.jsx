@@ -10,7 +10,7 @@ const footerLayoutLinks = [
   },
   {
     display: 'Liên hệ',
-    path: '/about',
+    path: '/Contact',
   },
   {
     display: 'Tuyển dụng',

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/images/logoLaptop.jpg";
 import Head from "./Header/Head";
 import Search from "./Header/Search";
 const NavItem = [
@@ -39,9 +38,9 @@ const Header = () => {
       document.body.scrollTop > 40 ||
       document.documentElement.scrollTop > 40
     ) {
-      headerRef.current.classList.add("shrink");
+      headerRef.current.classList.add("shrink-flex");
     } else {
-      headerRef.current.classList.remove("shrink");
+      headerRef.current.classList.remove("shrink-flex");
     }
   };
   useEffect(() => {

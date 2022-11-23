@@ -5,7 +5,7 @@
     import numberWithCommas from "../../utils/ConvertNumber";
     import { addToCart } from "../../redux/reducer/cartslice";
     import { useDispatch, useSelector } from "react-redux";
-    import { useNavigate } from "react-router";
+    
     import Swal from 'sweetalert2';
     import Star from "../Star/Star";
     const ProductCard = (props) => {
@@ -25,6 +25,7 @@
     return (
         <div className="product-card">
         <Link to={`/catelog/${props.CategoryId}/${props._id}`}>
+            {console.log(props.CategoryId)}
             <div className="product-card__image">
             <img src={props.Image2} alt="img" />
             <img src={props.Image} alt="img" />
@@ -33,7 +34,7 @@
             <h3 className="product-card__name">{props.Name}</h3>
             <Star rating={props.Quantity} />
             <div className="product-card__price">
-            {numberWithCommas(props.Price)}
+            {numberWithCommas(parseInt(props.Price))}
             <span className="product-card__price__old">
                 <del>{numberWithCommas(399999)}đ</del>
             </span>

@@ -1,6 +1,5 @@
 .header {
     background-color: $main-bg;
-    position: fixed;
     left: 0;
     right: 0;
     z-index: 99;
@@ -17,13 +16,13 @@
         height: $header-tablet-height;
     }
 
-    .container {}
 
-    &.shrink {
+    &.shrink-flex {
         height: $header-shrink-height;
         box-shadow: $box-shadow;
         z-index: 100;
         top: 0;
+        position: fixed;
 
     }
 

@@ -10,7 +10,7 @@ const Button = props => {
         <button 
             className ={`btn ${size} ${aninmation}`}
             onClick={props.onClick ? ()=>props.onClick():null}
-      
+            style={{background:"#4267b2",color:"#fff"}}
         >
         <span className="btn__txt">{props.children}</span>
         {

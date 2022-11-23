@@ -72,6 +72,8 @@
             pointer-events: none;
 
             img {
+                width: 100%;
+                background-color: none;
                 @include mobile {
                     width: 100%;
                     // object-fit: cover;

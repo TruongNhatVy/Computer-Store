@@ -1,14 +1,16 @@
+
 .btn {
     border: 0;
     outline: 0;
-    color: $btn-main-color;
+   
+
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     cursor: pointer;
     overflow: hidden;
     position: relative;
-    background-color: $main-color;
+   
 
     @include mobile {
         font-size: 1.1rem;

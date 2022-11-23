@@ -133,7 +133,6 @@ function withRouter(Component) {
       let location = useLocation();
       let navigate = useNavigate();
       let params = useParams();
-      console.log({...props});
       return (
         <Component
           {...props}
