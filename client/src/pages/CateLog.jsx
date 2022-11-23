@@ -10,11 +10,11 @@ import callApi from "../api";
 import Filter from "./Filter";
 import ReactPaginate from "react-paginate";
 import ListPage from "./ListPage";
-const CateLog = ( ) => {
+const CateLog = () => {
   const [item, setItem] = useState([]);
-  const [searchResults, setSearchResults] = useState([])
-  const [filter, setFilter] = useState([])
-  const [props, setProps] = useState([])
+  const [searchResults, setSearchResults] = useState([]);
+  const [filter, setFilter] = useState([]);
+  const [props, setProps] = useState([]);
 
   const [pageCount, setpageCount] = useState(0);
 
@@ -29,7 +29,7 @@ const CateLog = ( ) => {
     const products = response;
     return products.data;
   }
- 
+
   useEffect(() => {
     async function getALL() {
       const response = await callApi(
@@ -42,33 +42,34 @@ const CateLog = ( ) => {
         "GET",
         null
       );
-      const data= await response.data
+      const data = await response.data;
       const total = response2.data.length;
-      console.log(total)
+      console.log(total);
       setpageCount(Math.ceil(total / limit));
-      setSearchResults(data)
-    
-      setProps(response.data)
+      setSearchResults(data);
+
+      setProps(response.data);
     }
     getALL();
   }, [limit]);
 
   const handleClickPaginate = async (data) => {
-    const currentPage = data.selected+1 ;
+    const currentPage = data.selected + 1;
     const fetch = await fetchALL(currentPage);
     setSearchResults(fetch);
-    setFilter(fetch)
-
+    setFilter(fetch);
   };
   return (
-    
     <Helmet title="Sản phẩm">
       <div className="catelog">
-        <Filter posts={props} setSearchResults={setSearchResults} setFilter={setFilter} />
+        <Filter
+          getData={(e) => {
+            setItem(e.data);
+          }}
+        />
         <div className="catelog__content">
           <Grid col={4} mdCol={2} smCol={1} gap={20}>
-          <ListPage searchResults={searchResults} />
-            {/* {item.map((item, index) => (
+            {item.map((item, index) => (
               <ProductCard
                 key={index}
                 Image={item.Image}
@@ -78,7 +79,7 @@ const CateLog = ( ) => {
                 _id={item._id}
                 Quantity={item.Quantity}
               />
-            ))} */}
+            ))}
           </Grid>
           {/* <div style={{ width: "500px", margin: "auto" }}>
             <Pagination defaultCurrent={1} total={products.length} />
