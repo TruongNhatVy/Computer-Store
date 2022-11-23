@@ -3,6 +3,7 @@ import React from 'react'
 
 import Header from '../Header'
 import Footer from '../Footer'
+import ProductViewModal from '../ProductModal'
 
 const Layout = ({children}) => {
   return (
@@ -14,6 +15,7 @@ const Layout = ({children}) => {
         </div>
       </div>
       <Footer />
+      <ProductViewModal/>
     </div>
 
 

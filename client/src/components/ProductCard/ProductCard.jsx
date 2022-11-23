@@ -3,28 +3,16 @@
     import { Link } from "react-router-dom";
     import Button from "../Button/Button";
     import numberWithCommas from "../../utils/ConvertNumber";
-    import { addToCart } from "../../redux/reducer/cartslice";
+   import { set } from "../../redux/reducer/productModalSlice";
     import { useDispatch, useSelector } from "react-redux";
     
-    import Swal from 'sweetalert2';
     import Star from "../Star/Star";
     const ProductCard = (props) => {
     const dispatch = useDispatch();
 
-    const handleAddToCart = () => {
-        dispatch(addToCart(props));
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Thêm thành công',
-            showConfirmButton: false,
-            timer: 1500
-          })
-    };
-
-    return (
+      return (
         <div className="product-card">
-        <Link to={`/catelog/${props.CategoryId}/${props._id}`}>
+        <Link to={`/catelog/${props._id}`}>
             {console.log(props.CategoryId)}
             <div className="product-card__image">
             <img src={props.Image2} alt="img" />
@@ -46,7 +34,7 @@
             icon="cart"
             color="#fff"
             animation={false}
-            onClick={handleAddToCart}
+            onClick={() =>dispatch(set(props._id))}
             >
             Chọn mua
             </Button>

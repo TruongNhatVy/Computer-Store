@@ -10,9 +10,5 @@ export async function getproductfilter(){
     return products.data;
 }
 
-// export async function getproducts(id=null,{rejectValue}){
-//     const response = await callApi("products/getAllProducts", "GET", null);
-//     const products = response.data;
-//     return products.data;
-// }
+
 

@@ -23,7 +23,7 @@ const Routerslink = () => {
         
           <Route exact path="/" element={<Homepage />} />
           <Route exact path="/Homepage" element={<Homepage />} />
-          <Route exact path="catelog/:CategoryId/:_id" element={<Product />} />
+          <Route exact path="catelog/:_id" element={<Product />} />
           <Route exact path="*" element={<NoMatch />} />
           <Route exact path="/catelog" element={<CateLog />} /> 
           <Route exact path="/SignIn" element={<SignIn />} />

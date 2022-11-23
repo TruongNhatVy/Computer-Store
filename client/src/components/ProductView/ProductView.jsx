@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useDispatch } from 'react-redux'
+import Swal from 'sweetalert2';
 
+import {  addToCart } from '../../redux/reducer/cartslice'
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Button from "../Button/Button";
 import numberWithCommas from "../../utils/ConvertNumber";
@@ -28,13 +31,23 @@ const ProductView = (props) => {
     } else {
       setQuantity(quantity - 1 < 1 ? 1 : quantity - 1);
     }
-  };
+  };  
 
   useEffect(() => {
     setPreviewImg(product.Image);
     setQuantity(1);
   }, [product]);
-
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Thêm thành công',
+        showConfirmButton: false,
+        timer: 1500
+      })
+};
+const dispatch = useDispatch()
   return (
     <div className="product">
       <div className="product__images">
@@ -101,7 +114,7 @@ const ProductView = (props) => {
           </div>
         </div>
         <div className="product__info__item">
-          <Button>thêm vào giỏ</Button>
+          <Button onClick={handleAddToCart}>thêm vào giỏ</Button>
           <Button>mua ngay</Button>
         </div>
       </div>
