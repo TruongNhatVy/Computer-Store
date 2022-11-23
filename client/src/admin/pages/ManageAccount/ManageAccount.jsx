@@ -19,7 +19,7 @@ const ManageAccount = () => {
   const [page, setOffset] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [showPopupConfirm, setShowPopupConfirm] = useState(false);
-  // const [idItem, setIdItem] = useState("");
+  const [idAccount, setIdAccount] = useState("");
 
   useEffect(() => {
     axios
@@ -27,9 +27,10 @@ const ManageAccount = () => {
       .then((res) => setAccount(res.data));
   }, [page]);
 
-  // const handleRemovePopup = useCallback((value) => {
-  //   setIdItem(value);
-  // }, []);
+  const handleRemovePopup = useCallback((value) => {
+    setShowPopupConfirm(true);
+    setIdAccount(value);
+  }, []);
 
   return (
     <ContainerMainLayoutAdmin>
@@ -92,7 +93,7 @@ const ManageAccount = () => {
                       <button
                         type="type"
                         className="btn btn-sm btn-danger"
-                        // onClick={() => handleRemovePopup(item.id)}
+                        onClick={() => handleRemovePopup(item._id)}
                       >
                         <i class="fas fa-trash-alt"></i>
                       </button>
@@ -112,7 +113,8 @@ const ManageAccount = () => {
       <ConfirmRemove
         showPopup={showPopupConfirm}
         handleClosePopup={(e) => setShowPopupConfirm(e)}
-        // idItem={idItem}
+        idItem={idAccount}
+        // getListAccount={(e) => setAccount(e)}
       />
     </ContainerMainLayoutAdmin>
   );

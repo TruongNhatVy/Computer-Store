@@ -10,6 +10,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup }) => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [role, setRole] = useState("");
+  const [a, setA] = useState("chao a");
   // const [avatar, setAvatar] = useState("");
 
   const handleClose = useCallback(
@@ -32,7 +33,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup }) => {
       .post("http://localhost:5000/accounts/addAccount", account)
       .then((res) => res.json())
       .catch((error) => error);
-
+      
     handleClosePopup(false);
   }, [name, email, password, phone, address, role, handleClosePopup]);
 
@@ -52,6 +53,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Name"
+                defaultValue={a}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>

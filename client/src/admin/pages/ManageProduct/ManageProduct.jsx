@@ -33,11 +33,11 @@ const ManageProduct = () => {
       .then((res) => setProduct(res.data));
   }, [page, filterStatus]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:5000/brands/getBrandFilters`)
-  //     .then((res) => setBrand(res.data));
-  // }, [brands]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/brands/getBrandFilters`)
+      .then((res) => setBrand(res.data));
+  }, []);
 
   // useEffect(() => {
   //   axios

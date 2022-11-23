@@ -1,7 +1,20 @@
+import axios from "axios";
+import { useEffect } from "react";
 import { useCallback, useState } from "react";
 import Popup from "../../components/Popup/Popup";
 
-const ConfirmRemove = ({ showPopup, handleClosePopup, idItem }) => {
+const ConfirmRemove = ({
+  showPopup,
+  handleClosePopup,
+  idItem,
+  // getListAccount,
+}) => {
+  const [listAccount, setListAccount] = useState([]);
+
+  // useEffect(() => {
+  //   getListAccount(listAccount);
+  // }, [getListAccount, listAccount]);
+
   const handleClose = useCallback(
     (value) => {
       handleClosePopup(value);
@@ -9,19 +22,28 @@ const ConfirmRemove = ({ showPopup, handleClosePopup, idItem }) => {
     [handleClosePopup]
   );
 
-  const handleRemove = useCallback(() => {
-    // idItem: follow to call api this here
-  }, []);
+  const handleRemove = useCallback(async () => {
+    await axios
+      .delete(`/accounts/deleteAccount/${idItem}`)
+      .then((res) => res)
+      .catch((error) => error);
+
+    handleClosePopup(false);
+
+    // await axios
+    //   .get(`http://localhost:5000/accounts/getAccountsFilters?page=1`)
+    //   .then((res) => setListAccount(res.data));
+  }, [idItem, handleClosePopup]);
 
   return (
     <>
       <Popup
         showPopup={showPopup}
         name="Remove Account"
-        nameButton="Create"
+        nameButton="RemoveAccount"
         handleClosePopup={(e) => handleClose(e)}
         minWidth="500px"
-        modelBody={`Are you sure remove this trademark ?`}
+        modelBody={`Are you sure remove this account ?`}
         modelFooter={
           <button
             type="button"
