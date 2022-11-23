@@ -1,6 +1,6 @@
 import fs from "fs";
 
-module.exports = async function(req, res, next){
+export const uploadImage = async (req, res, next) => {
     try {
         if(!req.files || Object.keys(req.files).length === 0)
             return res.status(400).json({msg: "No file was uploaded."})

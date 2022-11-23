@@ -1,10 +1,10 @@
-import Users from "../models/user/UserModel";
+import AccountModel from "../models/data/AccountModel.js";
 
-const authAdmin = async (req, res, next) => {
+export const authAdmin = async (req, res, next) => {
     try {
-        const user = await Users.findOne({_id: req.user.id})
+        const account = await AccountModel.findOne({_id: req.account.id})
 
-        if(user.role !== 1) 
+        if(account.role !== 1) 
             return res.status(500).json({msg: "Admin resources access denied."})
 
         next()
@@ -12,5 +12,4 @@ const authAdmin = async (req, res, next) => {
         return res.status(500).json({msg: err.message})
     }
 }
-
-module.exports = authAdmin
+export default authAdmin;

@@ -1,7 +1,10 @@
 import nodeMailer from "nodemailer";
-import { google } from "googleapis";
+import {google} from "googleapis";
+import dotenv1 from "dotenv";
 const {OAuth2} = google.auth
 const OAUTH_PLAYGROUND = 'https://developers.google.com/oauthplayground'
+
+dotenv1.config();
 
 const {
     MAILING_SERVICE_CLIENT_ID,
@@ -18,7 +21,7 @@ const oauth2Client = new OAuth2(
 )
 
 //send mail
-const sendEmail = (to, url, txt) => {
+export const sendEmail = (to, url, txt) => {
     oauth2Client.setCredentials({
         refresh_token: MAILING_SERVICE_REFRESH_TOKEN
     })
@@ -57,5 +60,4 @@ const sendEmail = (to, url, txt) => {
         return infor
     })
 }
-
-module.exports = sendEmail
+export default sendEmail;

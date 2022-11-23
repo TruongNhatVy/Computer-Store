@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux'
-import auth from './authReducer'
-import token from './tokenReducer'
-import users from './usersReducer'
+import auth from "./AuthReducer.js"
+import token from "./TokenReducer.js"
+import accounts from "./AccountReducer.js"
 
 export default combineReducers({
     auth,
     token,
-    users
+    accounts
 })

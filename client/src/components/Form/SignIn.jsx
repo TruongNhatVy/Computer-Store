@@ -14,22 +14,22 @@ const initialState = {
 }
 
 function SignIn() {
-  const [user, setUser] = useState(initialState)
+  const [account, setAccount] = useState(initialState)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { email, password, err, success } = user
+  const { email, password, err, success } = account
 
   const handleChangeInput = e => {
     const { name, value } = e.target
-    setUser({ ...user, [name]: value, err: '', success: '' })
+    setAccount({ ...account, [name]: value, err: '', success: '' })
   }
 
   const handleSubmit = async e => {
     e.preventDefault()
     try {
-      const res = await axios.post("http://localhost:5000/accounts/addAccount", { email, password })
-      setUser({ ...user, err: '', success: res.data.msg })
+      const res = await axios.post("/account/login", { email, password })
+      setAccount({ ...account, err: '', success: res.data.msg })
 
       localStorage.setItem('firstLogin', true)
 
@@ -38,7 +38,7 @@ function SignIn() {
 
     } catch (err) {
       err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: '' })
+        setAccount({ ...account, err: err.response.data.msg, success: '' })
     }
   }
   return (
