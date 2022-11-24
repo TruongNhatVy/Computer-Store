@@ -10,14 +10,13 @@ const UpdateProductPopup = ({
   itemProduct,
   getData,
 }) => {
-  console.log(itemProduct);
-  const [name, setName] = useState(itemProduct.name);
-  const [email, setEmail] = useState(itemProduct.email);
-  const [password, setPassword] = useState(itemProduct.password);
-  const [phone, setPhone] = useState(itemProduct.phone);
-  const [address, setAddress] = useState(itemProduct.address);
-  const [role, setRole] = useState();
-  const [a, setA] = useState("chao a");
+  const [name, setName] = useState(itemProduct.Name);
+  const [brandId, setBrandId] = useState(itemProduct.BrandId);
+  const [categoryId, setCategoryId] = useState(itemProduct.CategoryId);
+  const [image, setImage] = useState(itemProduct.Image);
+  const [description, setDescription] = useState(itemProduct.Description);
+  const [price, setPrice] = useState(itemProduct.Price);
+  const [status, setStatus] = useState(itemProduct.Status);
 
   const handleClose = useCallback(
     (value) => {
@@ -27,22 +26,24 @@ const UpdateProductPopup = ({
   );
 
   useEffect(() => {
-    setName(itemProduct.name);
-    setEmail(itemProduct.email);
-    setPassword(itemProduct.password);
-    setPhone(itemProduct.phone);
-    setAddress(itemProduct.address);
-    setRole(itemProduct.role);
+    setName(itemProduct.Name);
+    setBrandId(itemProduct.BrandId);
+    setCategoryId(itemProduct.CategoryId);
+    setImage(itemProduct.Image);
+    setDescription(itemProduct.Description);
+    setPrice(itemProduct.Price);
+    setStatus(itemProduct.Status);
   }, [itemProduct]);
 
   const handleUpdateStaff = useCallback(async () => {
     const Product = {
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
-      address: address,
-      role: role,
+      Name: name,
+      BrandId: brandId,
+      CategoryId: categoryId,
+      Image: image,
+      Description: description,
+      Price: price,
+      Status: status,
     };
 
     await axios
@@ -60,11 +61,12 @@ const UpdateProductPopup = ({
       .then((res) => getData(res.data));
   }, [
     name,
-    email,
-    password,
-    phone,
-    address,
-    role,
+    brandId,
+    categoryId,
+    image,
+    description,
+    price,
+    status,
     handleClosePopup,
     itemProduct._id,
     getData,
@@ -91,51 +93,51 @@ const UpdateProductPopup = ({
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Email</label>
+              <label htmlFor="exampleFormControlInput1">Brand</label>
               <input
                 type="email"
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={brandId}
+                onChange={(e) => setBrandId(e.target.value)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Password</label>
+              <label htmlFor="exampleFormControlInput1">Category</label>
               <input
                 type="text"
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Phone</label>
+              <label htmlFor="exampleFormControlInput1">Image</label>
               <input
                 type="text"
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={image}
+                onChange={(e) => setImage(e.target.value)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Address</label>
+              <label htmlFor="exampleFormControlInput1">Description</label>
               <input
                 type="text"
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Role</label>
+              <label htmlFor="exampleFormControlInput1">Price</label>
               <input
                 type="number"
                 min="0"
@@ -143,8 +145,21 @@ const UpdateProductPopup = ({
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Ex: 0 - 1"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="exampleFormControlInput1">Status</label>
+              <input
+                type="number"
+                min="0"
+                max="1"
+                className="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Ex: 0 - 1"
+                value={status}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </div>
             {/* <div className="form-group">

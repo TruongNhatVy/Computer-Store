@@ -6,7 +6,6 @@ import TableHeader from "../../components/Table/TableHeader";
 import TableRows from "../../components/Table/TableRows";
 import TableRow from "../../components/Table/TableRow";
 import { useEffect, useState } from "react";
-
 import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import { useCallback } from "react";
@@ -34,30 +33,24 @@ const ManageProduct = () => {
   const [itemProduct, setItemProduct] = useState({});
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      await axios
-        .get(
-          `http://localhost:5000/products/getProductsFilters?page=${page}&Status=${filterStatus}`
-        )
-        .then((res) => setProduct(res.data));
-    };
-
-    const fetchBrands = async () => {
-      await axios
-        .get(`http://localhost:5000/brands/getBrandFilters`)
-        .then((res) => setBrand(res.data));
-    };
-
-    const fetchCategories = async () => {
-      await axios
-        .get(`http://localhost:5000/categories/getCategoriesFilters`)
-        .then((res) => setCategory(res.data));
-    };
-
-    fetchProducts();
-    //fetchBrands();
-    //fetchCategories();
+    axios
+      .get(
+        `http://localhost:5000/products/getProductsFilters?page=${page}&Status=${filterStatus}`
+      )
+      .then((res) => setProduct(res.data));
   }, [page, filterStatus]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/brands/getBrandFilters`)
+      .then((res) => setBrand(res.data));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/categories/getCategoriesFilters`)
+      .then((res) => setCategory(res.data));
+  }, []);
 
   const handleRemovePopup = useCallback((value) => {
     setShowPopupConfirm(true);
@@ -121,10 +114,10 @@ const ManageProduct = () => {
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          item.BrandId
-                          // (brands || []).find(
-                          //   (element) => element._id === item.BrandId
-                          // )?.Name
+                          //item.BrandId
+                          (brands || []).find(
+                            (element) => element._id === item.BrandId
+                          )?.Name
                         }
                       </h6>
                     </TableCell>
@@ -132,7 +125,7 @@ const ManageProduct = () => {
                       <h6 className="mb-0 text-sm">
                         {
                           item.CategoryId
-                          // .CategoryId(categories || [])
+                          // item.CategoryId(categories || [])
                           // .find((element) => element._id === item.CategoryId)
                           // ?.Name
                         }
