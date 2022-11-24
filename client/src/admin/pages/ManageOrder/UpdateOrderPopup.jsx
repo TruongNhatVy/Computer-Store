@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useCallback } from "react";
+import numberWithCommas from "../../../utils/ConvertNumber";
 import Popup from "../../components/Popup/Popup";
 
 const UpdateOrderPopup = ({
@@ -46,16 +47,16 @@ const UpdateOrderPopup = ({
       Address: address,
     };
     console.log(itemOrder.Date);
-    // await axios
-    //   .put(`http://localhost:5000/orders/updateOrder/${itemOrder._id}`, Order)
-    //   .then((res) => res.json())
-    //   .catch((error) => error);
+    await axios
+      .put(`http://localhost:5000/orders/updateOrder/${itemOrder._id}`, Order)
+      .then((res) => res.json())
+      .catch((error) => error);
 
-    // handleClosePopup(false);
+    handleClosePopup(false);
 
-    // await axios
-    //   .get(`http://localhost:5000/orders/getOrderFilters?page=1`)
-    //   .then((res) => getData(res.data));
+    await axios
+      .get(`http://localhost:5000/orders/getOrderFilters?page=1`)
+      .then((res) => getData(res.data));
   }, [
     accountId,
     date,
@@ -86,6 +87,7 @@ const UpdateOrderPopup = ({
                 id="exampleFormControlInput1"
                 placeholder="Name"
                 value={accountId}
+                disabled
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
@@ -97,6 +99,7 @@ const UpdateOrderPopup = ({
                 id="exampleFormControlInput1"
                 placeholder="Name"
                 value={date}
+                disabled
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
@@ -107,7 +110,8 @@ const UpdateOrderPopup = ({
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Name"
-                value={total}
+                value={numberWithCommas(total)}
+                disabled
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
@@ -131,6 +135,7 @@ const UpdateOrderPopup = ({
                 id="exampleFormControlInput1"
                 placeholder="Name"
                 value={email}
+                disabled
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
@@ -142,6 +147,7 @@ const UpdateOrderPopup = ({
                 id="exampleFormControlInput1"
                 placeholder="Name"
                 value={phone}
+                disabled
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
@@ -153,6 +159,7 @@ const UpdateOrderPopup = ({
                 id="exampleFormControlInput1"
                 placeholder="Name"
                 value={address}
+                disabled
                 onChange={(e) => setDate(e.target.value)}
               />
             </div>
