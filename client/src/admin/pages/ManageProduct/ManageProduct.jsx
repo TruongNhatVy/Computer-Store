@@ -55,8 +55,8 @@ const ManageProduct = () => {
     };
 
     fetchProducts();
-    fetchBrands();
-    fetchCategories();
+    //fetchBrands();
+    //fetchCategories();
   }, [page, filterStatus]);
 
   const handleRemovePopup = useCallback((value) => {
@@ -121,18 +121,20 @@ const ManageProduct = () => {
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          (brands || []).find(
-                            (element) => element._id === item.BrandId
-                          )?.Name
+                          item.BrandId
+                          // (brands || []).find(
+                          //   (element) => element._id === item.BrandId
+                          // )?.Name
                         }
                       </h6>
                     </TableCell>
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          (categories || []).find(
-                            (element) => element._id === item.CategoryId
-                          )?.Name
+                          item.CategoryId
+                          // .CategoryId(categories || [])
+                          // .find((element) => element._id === item.CategoryId)
+                          // ?.Name
                         }
                       </h6>
                     </TableCell>

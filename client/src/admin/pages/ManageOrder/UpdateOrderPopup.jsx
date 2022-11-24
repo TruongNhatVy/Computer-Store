@@ -9,7 +9,7 @@ const UpdateOrderPopup = ({
   showPopup,
   handleClosePopup,
   itemOrder,
-  getData,
+  // getData,
 }) => {
   const [accountId, setAccountId] = useState(itemOrder.AccountId);
   const [date, setDate] = useState(itemOrder.Date);
@@ -32,11 +32,11 @@ const UpdateOrderPopup = ({
     setStatus(itemOrder.Status);
     setTotal(itemOrder.Total);
     setEmail(itemOrder.Email);
-    setPhone(itemOrder.Phone)
-    setAddress(itemOrder.Address)
+    setPhone(itemOrder.Phone);
+    setAddress(itemOrder.Address);
   }, [itemOrder]);
 
-  const handleUpdateStaff = useCallback(async () => {
+  const handleUpdateStaff = useCallback(() => {
     const Order = {
       AccountId: accountId,
       Date: date,
@@ -46,17 +46,17 @@ const UpdateOrderPopup = ({
       Phone: phone,
       Address: address,
     };
-    console.log(itemOrder.Date);
-    await axios
+
+    axios
       .put(`http://localhost:5000/orders/updateOrder/${itemOrder._id}`, Order)
       .then((res) => res.json())
       .catch((error) => error);
 
     handleClosePopup(false);
 
-    await axios
-      .get(`http://localhost:5000/orders/getOrderFilters?page=1`)
-      .then((res) => getData(res.data));
+    // await axios
+    //   .get(`http://localhost:5000/orders/getOrderFilters?page=1`)
+    //   .then((res) => getData(res.data));
   }, [
     accountId,
     date,
@@ -67,7 +67,7 @@ const UpdateOrderPopup = ({
     address,
     handleClosePopup,
     itemOrder._id,
-    getData,
+    // getData,
   ]);
 
   return (

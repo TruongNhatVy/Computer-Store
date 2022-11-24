@@ -17,25 +17,15 @@ const listDataOption = [{ name: "Hieu", value: 1 }];
 const ManageOrder = () => {
   const [orders, setOrder] = useState([]);
   const [page, setOffset] = useState(1);
-  const [accounts, setAccount] = useState([]);
   const [showPopupUpdate, setShowPopupUpdate] = useState(false);
   const [itemOrder, setItemOrder] = useState({});
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      await axios
-        .get(`http://localhost:5000/orders/getOrderFilters?page=${page}`)
-        .then((res) => setOrder(res.data));
-    };
 
-    const fetchAccount = async () => {
-      await axios
-        .get(`http://localhost:5000/accounts/getAccountsFilters`)
-        .then((res) => setAccount(res.data));
-    };
+    axios
+      .get(`http://localhost:5000/orders/getOrderFilters?page=${page}`)
+      .then((res) => setOrder(res.data));
 
-    fetchProducts();
-    fetchAccount();
   }, [page]);
 
   const handleShowPopupUpdate = useCallback((value) => {
@@ -86,10 +76,9 @@ const ManageOrder = () => {
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          (accounts || []).find(
-                            (element) => element._id === item.AccountId
-                          )?.name
-                        }                       
+                          item.AccountId
+                         
+                        }
                       </h6>
                     </TableCell>
                     <TableCell>
@@ -129,12 +118,12 @@ const ManageOrder = () => {
         </TableBody>
       </TableContainer>
 
-      <UpdateOrderPopup
+      {/* <UpdateOrderPopup
         showPopup={showPopupUpdate}
         handleClosePopup={(e) => setShowPopupUpdate(e)}
         itemOrder={itemOrder}
-        getData={(e) => setOrder(e)}
-      />
+        // getData={(e) => setOrder(e)}
+      /> */}
     </ContainerMainLayoutAdmin>
   );
 };
