@@ -27,10 +27,10 @@ const UpdateOrderPopup = ({
 
   useEffect(() => {
     setAccountId(itemOrder.AccountId);
-    setDate(itemOrder.Name);
+    setDate(itemOrder.Date);
     setStatus(itemOrder.Status);
     setTotal(itemOrder.Total);
-    setEmail(itemOrder.email);
+    setEmail(itemOrder.Email);
     setPhone(itemOrder.Phone)
     setAddress(itemOrder.Address)
   }, [itemOrder]);
@@ -45,7 +45,7 @@ const UpdateOrderPopup = ({
       Phone: phone,
       Address: address,
     };
-    console.log(itemOrder);
+    console.log(itemOrder.Date);
     // await axios
     //   .put(`http://localhost:5000/orders/updateOrder/${itemOrder._id}`, Order)
     //   .then((res) => res.json())
