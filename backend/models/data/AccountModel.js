@@ -4,25 +4,25 @@ const schema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please enter your name !"],
+      required: [true, "Please enter your name !"]
     },
     email: {
       type: String,
       required: [true, "Please enter your email !"],
       trim: true,
-      unique: true,
+      unique: true
     },
     password: {
       type: String,
-      required: [true, "Please enter your password !"],
+      required: [true, "Please enter your password !"]
     },
     phone: {
       type: String,
-      required: [true, "Please enter your phone !"],
+      required: [true, "Please enter your phone !"]
     },
     address: {
       type: String,
-      required: [true, "Please enter your address !"],
+      required: [true, "Please enter your address !"]
     },
     role: {
       type: String,
@@ -36,7 +36,8 @@ const schema = new mongoose.Schema(
   },
   {
     collection: "accounts",
+    timestamps: true
   }
 );
 
-export const AccountModel = mongoose.model("accounts", schema);
+export default mongoose.model("accounts", schema);

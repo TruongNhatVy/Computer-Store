@@ -1,4 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "./reducer/AuthReducer";
+
 import cartReducer, { getTotals } from "./reducer/cartslice";
 import productModalReducer from "./reducer/productModalSlice"
 
