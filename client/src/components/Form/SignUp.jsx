@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import axios from 'axios'
 import { isEmpty, isMatch, isEmail, isLength, isPhoneNumber } from "../../utils/Validation";
-//import { showErrMsg, showSuccessMsg } from "../../utils/Notification";
+import { showErrMsg, showSuccessMsg } from "../../utils/Notification.js";
 import API_URL from "../../url/url";
 
 const initialState = {
@@ -57,8 +57,9 @@ function SignUp() {
   }
   return (
     <div className="form-container sign-up-container">
+      {err && showErrMsg(err)}
+      {success && showSuccessMsg(success)}
       <form onSubmit={handleSubmit}>
-        
         <h1>Create Account</h1>
 
         <div className="social-container">

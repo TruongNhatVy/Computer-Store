@@ -7,19 +7,19 @@ export const dispatchLogin = () => {
     }
 }
 
-// export const fetchUser = async (token) => {
-//     const res = await axios.get('user/infor', {
-//         headers: {Authorization: token}
-//     })
-//     return res
-// }
+export const fetchAccount = async (token) => {
+    const res = await axios.get('account/infor', {
+        headers: {Authorization: token}
+    })
+    return res
+}
 
-// export const dispatchGetUser = (res) => {
-//     return {
-//         type: ACTIONS.GET_USER,
-//         payload: {
-//             user: res.data,
-//             isAdmin: res.data.role === 1 ? true : false
-//         }
-//     }
-// }
+export const dispatchGetAccount = (res) => {
+    return {
+        type: ACTIONS.GET_ACCOUNT,
+        payload: {
+            account: res.data,
+            isAdmin: res.data.role === "1" ? true : false
+        }
+    }
+}
