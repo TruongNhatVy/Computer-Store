@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 import AddAccountPopup from "./AddAccountPopup";
-import ConfirmRemove from "./ConfirmRemove";
+import ConfirmRemove from "./ConfirmRemoveAccount";
 import { useCallback } from "react";
+import UpdateAccountPopup from "./UpdateAccountPopup";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
@@ -19,7 +20,9 @@ const ManageAccount = () => {
   const [page, setOffset] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
   const [showPopupConfirm, setShowPopupConfirm] = useState(false);
+  const [showPopupUpdate, setShowPopupUpdate] = useState(false);
   const [idAccount, setIdAccount] = useState("");
+  const [itemAccount, setItemAccount] = useState({});
 
   useEffect(() => {
     axios
@@ -30,6 +33,11 @@ const ManageAccount = () => {
   const handleRemovePopup = useCallback((value) => {
     setShowPopupConfirm(true);
     setIdAccount(value);
+  }, []);
+
+  const handleShowPopupUpdate = useCallback((value) => {
+    setShowPopupUpdate(true);
+    setItemAccount(value);
   }, []);
 
   return (
@@ -54,7 +62,7 @@ const ManageAccount = () => {
         <TableBody>
           <TableCol
             listCol={[
-              { title: "Id" },
+              // { title: "Id" },
               { title: "Name" },
               { title: "Email" },
               { title: "Phone" },
@@ -68,9 +76,9 @@ const ManageAccount = () => {
               return (
                 <>
                   <TableRow key={item}>
-                    <TableCell>
+                    {/* <TableCell>
                       <h6 className="mb-0 text-sm">{item._id}</h6>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <h6 className="mb-0 text-sm">{item.name}</h6>
                     </TableCell>
@@ -87,15 +95,19 @@ const ManageAccount = () => {
                       <h6 className="mb-0 text-sm">{item.role}</h6>
                     </TableCell>
                     <TableCell>
-                      <button type="type" className="btn btn-sm btn-info">
-                        <i class="fa-solid fa-pencil"></i>
+                      <button
+                        type="type"
+                        className="btn btn-sm btn-info"
+                        onClick={() => handleShowPopupUpdate(item)}
+                      >
+                        <i className="fa-solid fa-pencil"></i>
                       </button>
                       <button
                         type="type"
                         className="btn btn-sm btn-danger"
                         onClick={() => handleRemovePopup(item._id)}
                       >
-                        <i class="fas fa-trash-alt"></i>
+                        <i className="fas fa-trash-alt"></i>
                       </button>
                     </TableCell>
                   </TableRow>
@@ -109,12 +121,19 @@ const ManageAccount = () => {
       <AddAccountPopup
         showPopup={showPopup}
         handleClosePopup={(e) => setShowPopup(e)}
+        getData={(e) => setAccount(e)}
       />
       <ConfirmRemove
         showPopup={showPopupConfirm}
         handleClosePopup={(e) => setShowPopupConfirm(e)}
         idItem={idAccount}
-        // getListAccount={(e) => setAccount(e)}
+        getData={(e) => setAccount(e)}
+      />
+      <UpdateAccountPopup
+        showPopup={showPopupUpdate}
+        handleClosePopup={(e) => setShowPopupUpdate(e)}
+        itemAccount={itemAccount}
+        getData={(e) => setAccount(e)}
       />
     </ContainerMainLayoutAdmin>
   );

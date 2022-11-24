@@ -11,6 +11,9 @@ import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import { useCallback } from "react";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
+import AddProductPopup from "./AddProductPopup";
+import ConfirmRemove from "../ManageAccount/ConfirmRemoveAccount";
+import UpdateProductPopup from "./UpdateProductPopup";
 
 const listDataOption = [
   { name: "Trading", value: "Trading" },
@@ -24,26 +27,47 @@ const ManageProduct = () => {
   const [page, setOffset] = useState(1);
   const [brands, setBrand] = useState([]);
   const [categories, setCategory] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [showPopupConfirm, setShowPopupConfirm] = useState(false);
+  const [showPopupUpdate, setShowPopupUpdate] = useState(false);
+  const [idProduct, setIdProduct] = useState("");
+  const [itemProduct, setItemProduct] = useState({});
 
   useEffect(() => {
-    axios
-      .get(
-        `http://localhost:5000/products/getProductsFilters?page=${page}&Status=${filterStatus}`
-      )
-      .then((res) => setProduct(res.data));
+    const fetchProducts = async () => {
+      await axios
+        .get(
+          `http://localhost:5000/products/getProductsFilters?page=${page}&Status=${filterStatus}`
+        )
+        .then((res) => setProduct(res.data));
+    };
+
+    const fetchBrands = async () => {
+      await axios
+        .get(`http://localhost:5000/brands/getBrandFilters`)
+        .then((res) => setBrand(res.data));
+    };
+
+    const fetchCategories = async () => {
+      await axios
+        .get(`http://localhost:5000/categories/getCategoriesFilters`)
+        .then((res) => setCategory(res.data));
+    };
+
+    fetchProducts();
+    fetchBrands();
+    fetchCategories();
   }, [page, filterStatus]);
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/brands/getBrandFilters`)
-      .then((res) => setBrand(res.data));
+  const handleRemovePopup = useCallback((value) => {
+    setShowPopupConfirm(true);
+    setIdProduct(value);
   }, []);
 
-  // useEffect(() => {
-  //   axios
-  //     .get(`http://localhost:5000/categories/getCategoriesFilters`)
-  //     .then((res) => setCategory(res.data));
-  // }, [categories]);
+  const handleShowPopupUpdate = useCallback((value) => {
+    setShowPopupUpdate(true);
+    setItemProduct(value);
+  }, []);
 
   return (
     <ContainerMainLayoutAdmin>
@@ -59,6 +83,7 @@ const ManageProduct = () => {
           showNewButton={true}
           show={true}
           listDataOption={listDataOption}
+          handleShowPopup={(e) => setShowPopup(e)}
           handleSelect={(e) => {
             setFilterStatus(e);
           }}
@@ -66,7 +91,7 @@ const ManageProduct = () => {
         <TableBody>
           <TableCol
             listCol={[
-              { title: "Id" },
+              // { title: "Id" },
               { title: "Name" },
               { title: "Quantity" },
               { title: "BrandId" },
@@ -82,9 +107,9 @@ const ManageProduct = () => {
               return (
                 <>
                   <TableRow key={item}>
-                    <TableCell>
+                    {/* <TableCell>
                       <h5 className="mb-0 text-sm">{item._id}</h5>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <h5 className="mb-0 text-sm">{item.Name}</h5>
                     </TableCell>
@@ -94,10 +119,22 @@ const ManageProduct = () => {
                       </h5>
                     </TableCell>
                     <TableCell>
-                      <h6 className="mb-0 text-sm">{item.BrandId}</h6>
+                      <h6 className="mb-0 text-sm">
+                        {
+                          (brands || []).find(
+                            (element) => element._id === item.BrandId
+                          )?.Name
+                        }
+                      </h6>
                     </TableCell>
                     <TableCell>
-                      <h6 className="mb-0 text-sm">{item.CategoryId}</h6>
+                      <h6 className="mb-0 text-sm">
+                        {
+                          (categories || []).find(
+                            (element) => element._id === item.CategoryId
+                          )?.Name
+                        }
+                      </h6>
                     </TableCell>
                     {/* <TableCell>
                     <h6 className="mb-0 text-sm">{item.Description}</h6>
@@ -111,10 +148,18 @@ const ManageProduct = () => {
                       <h5 className="mb-0 text-sm">{item.Status}</h5>
                     </TableCell>
                     <TableCell>
-                      <button type="type" className="btn btn-sm btn-info">
+                      <button
+                        type="type"
+                        className="btn btn-sm btn-info"
+                        onClick={() => handleShowPopupUpdate(item)}
+                      >
                         <i className="fa-solid fa-pencil"></i>
                       </button>
-                      <button type="type" className="btn btn-sm btn-danger">
+                      <button
+                        type="type"
+                        className="btn btn-sm btn-danger"
+                        onClick={() => handleRemovePopup(item._id)}
+                      >
                         <i className="fas fa-trash-alt"></i>
                       </button>
                     </TableCell>
@@ -125,6 +170,25 @@ const ManageProduct = () => {
           </TableRows>
         </TableBody>
       </TableContainer>
+
+      <AddProductPopup
+        showPopup={showPopup}
+        brands={brands}
+        categories={categories}
+        handleClosePopup={(e) => setShowPopup(e)}
+      />
+      <ConfirmRemove
+        showPopup={showPopupConfirm}
+        handleClosePopup={(e) => setShowPopupConfirm(e)}
+        idItem={idProduct}
+        // getListProduct={(e) => setProduct(e)}
+      />
+      <UpdateProductPopup
+        showPopup={showPopupUpdate}
+        handleClosePopup={(e) => setShowPopupUpdate(e)}
+        itemProduct={itemProduct}
+        getData={(e) => setProduct(e)}
+      />
     </ContainerMainLayoutAdmin>
   );
 };

@@ -3,13 +3,10 @@ import { useState } from "react";
 import { useCallback } from "react";
 import Popup from "../../components/Popup/Popup";
 
-const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
+const AddBrandPopup = ({ showPopup, handleClosePopup, getData }) => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [role, setRole] = useState("");
+  const [status, setStatus] = useState("");
+
   // const [avatar, setAvatar] = useState("");
 
   const handleClose = useCallback(
@@ -20,31 +17,28 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
   );
 
   const handleCreateStaff = useCallback(async () => {
-    const account = {
-      name: name,
-      email: email,
-      password: password,
-      phone: phone,
-      address: address,
-      role: role,
+    const Brand = {
+      Name: name,
+      Status: status,
     };
+
     await axios
-      .post("http://localhost:5000/accounts/addAccount", account)
+      .post("http://localhost:5000/brands/addBrand", Brand)
       .then((res) => res.json())
       .catch((error) => error);
 
     handleClosePopup(false);
 
     await axios
-      .get(`http://localhost:5000/accounts/getAccountsFilters?page=1`)
+      .get(`http://localhost:5000/brands/getBrandFilters?page=1`)
       .then((res) => getData(res.data));
-  }, [name, email, password, phone, address, role, handleClosePopup, getData]);
+  }, [name, status, handleClosePopup, getData]);
 
   return (
     <>
       <Popup
         showPopup={showPopup}
-        name="Add Account"
+        name="Add Brand"
         handleClosePopup={(e) => handleClose(e)}
         minWidth="800px"
         modelBody={
@@ -60,57 +54,17 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Email</label>
-              <input
-                type="email"
+              <label htmlFor="exampleFormControlSelect1">Status</label>
+              <select
                 className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
+                id="exampleFormControlSelect1"
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="Cooperating">Cooperating</option>
+                <option value="Stop cooperate">Stop cooperate</option>
+              </select>
             </div>
-            <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Password</label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Phone</label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Phone"
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Address</label>
-              <input
-                type="text"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Address"
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Role</label>
-              <input
-                type="number"
-                min="0"
-                max="1"
-                className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Ex: 0 - 1"
-                onChange={(e) => setRole(e.target.value)}
-              />
-            </div>
+
             {/* <div className="form-group">
               <label htmlFor="exampleFormControlSelect1">Example select</label>
               <select className="form-control" id="exampleFormControlSelect1">
@@ -166,4 +120,4 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
   );
 };
 
-export default AddAccountPopup;
+export default AddBrandPopup;

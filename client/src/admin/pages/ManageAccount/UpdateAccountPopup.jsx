@@ -1,16 +1,23 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useCallback } from "react";
 import Popup from "../../components/Popup/Popup";
 
-const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [role, setRole] = useState("");
-  // const [avatar, setAvatar] = useState("");
+const UpdateAccountPopup = ({
+  showPopup,
+  handleClosePopup,
+  itemAccount,
+  getData,
+}) => {
+  console.log(itemAccount);
+  const [name, setName] = useState(itemAccount.name);
+  const [email, setEmail] = useState(itemAccount.email);
+  const [password, setPassword] = useState(itemAccount.password);
+  const [phone, setPhone] = useState(itemAccount.phone);
+  const [address, setAddress] = useState(itemAccount.address);
+  const [role, setRole] = useState();
+  const [a, setA] = useState("chao a");
 
   const handleClose = useCallback(
     (value) => {
@@ -19,7 +26,16 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
     [handleClosePopup]
   );
 
-  const handleCreateStaff = useCallback(async () => {
+  useEffect(() => {
+    setName(itemAccount.name);
+    setEmail(itemAccount.email);
+    setPassword(itemAccount.password);
+    setPhone(itemAccount.phone);
+    setAddress(itemAccount.address);
+    setRole(itemAccount.role);
+  }, [itemAccount]);
+
+  const handleUpdateStaff = useCallback(async () => {
     const account = {
       name: name,
       email: email,
@@ -28,8 +44,12 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
       address: address,
       role: role,
     };
+
     await axios
-      .post("http://localhost:5000/accounts/addAccount", account)
+      .put(
+        `http://localhost:5000/accounts/updateAccount/${itemAccount._id}`,
+        account
+      )
       .then((res) => res.json())
       .catch((error) => error);
 
@@ -38,13 +58,23 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
     await axios
       .get(`http://localhost:5000/accounts/getAccountsFilters?page=1`)
       .then((res) => getData(res.data));
-  }, [name, email, password, phone, address, role, handleClosePopup, getData]);
+  }, [
+    name,
+    email,
+    password,
+    phone,
+    address,
+    role,
+    handleClosePopup,
+    itemAccount._id,
+    getData,
+  ]);
 
   return (
     <>
       <Popup
         showPopup={showPopup}
-        name="Add Account"
+        name="Update Account"
         handleClosePopup={(e) => handleClose(e)}
         minWidth="800px"
         modelBody={
@@ -56,6 +86,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Name"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
@@ -66,6 +97,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Email"
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -76,6 +108,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -86,6 +119,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Phone"
+                value={phone}
                 onChange={(e) => setPhone(e.target.value)}
               />
             </div>
@@ -96,6 +130,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Address"
+                value={address}
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
@@ -108,6 +143,7 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
                 className="form-control"
                 id="exampleFormControlInput1"
                 placeholder="Ex: 0 - 1"
+                value={role}
                 onChange={(e) => setRole(e.target.value)}
               />
             </div>
@@ -155,9 +191,9 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={handleCreateStaff}
+              onClick={handleUpdateStaff}
             >
-              Create
+              Update
             </button>
           </>
         }
@@ -166,4 +202,4 @@ const AddAccountPopup = ({ showPopup, handleClosePopup, getData }) => {
   );
 };
 
-export default AddAccountPopup;
+export default UpdateAccountPopup;

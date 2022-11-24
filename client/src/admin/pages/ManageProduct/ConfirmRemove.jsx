@@ -7,13 +7,13 @@ const ConfirmRemove = ({
   showPopup,
   handleClosePopup,
   idItem,
-  // getListAccount,
+  // getListProduct,
 }) => {
-  const [listAccount, setListAccount] = useState([]);
+  const [listProduct, setListProduct] = useState([]);
 
   // useEffect(() => {
-  //   getListAccount(listAccount);
-  // }, [getListAccount, listAccount]);
+  //   getListProduct(listProduct);
+  // }, [getListProduct, listProduct]);
 
   const handleClose = useCallback(
     (value) => {
@@ -24,26 +24,26 @@ const ConfirmRemove = ({
 
   const handleRemove = useCallback(async () => {
     await axios
-      .delete(`/accounts/deleteAccount/${idItem}`)
+      .delete(`/Products/deleteProduct/${idItem}`)
       .then((res) => res)
       .catch((error) => error);
 
     handleClosePopup(false);
 
     // await axios
-    //   .get(`http://localhost:5000/accounts/getAccountsFilters?page=1`)
-    //   .then((res) => setListAccount(res.data));
+    //   .get(`http://localhost:5000/Products/getProductsFilters?page=1`)
+    //   .then((res) => setListProduct(res.data));
   }, [idItem, handleClosePopup]);
 
   return (
     <>
       <Popup
         showPopup={showPopup}
-        name="Remove Account"
-        nameButton="RemoveAccount"
+        name="Remove Product"
+        nameButton="RemoveProduct"
         handleClosePopup={(e) => handleClose(e)}
         minWidth="500px"
-        modelBody={`Are you sure remove this account ?`}
+        modelBody={`Are you sure remove this Product ?`}
         modelFooter={
           <button
             type="button"
