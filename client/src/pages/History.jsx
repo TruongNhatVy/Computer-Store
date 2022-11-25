@@ -23,9 +23,9 @@ const History = () => {
     <Layout>
     <div class="table-container">
     <table>
-      <caption>Our Client Data</caption>
+      <caption>Bạn chưa đặt đơn hàng nào</caption>
       <tr>
-        <th>Date</th>t ngu
+        <th>Date</th>
         <th>Total</th>
         <th>Status</th>
         <th>Email</th>

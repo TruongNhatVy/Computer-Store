@@ -1,31 +1,41 @@
 import React, { useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import Head from "./Header/Head";
 import Search from "./Header/Search";
-const NavItem = [
-  {
-    display: "Trang Chủ",
-    path: "/",
-  },
-  {
-    display: "Sản phẩm",
-    path: "/catelog",
-  },
-  {
-    display: "Liên hệ",
-    path: "/contact",
-  },
-  {
-    display: "Thanh Toán",
-    path:"/paypal"
 
-  },
-  {
-    display:"Lịch sử đơn hàng",
-    path:"/history/"
-  }
-];
 const Header = () => {
+  const auth = useSelector((state) => {
+    return state.rootReducer.auth;
+  });
+
+  const data = {
+    idAccount: auth.account.payload.id || [],
+  };
+
+  const NavItem = [
+    {
+      display: "Trang Chủ",
+      path: "/",
+    },
+    {
+      display: "Sản phẩm",
+      path: "/catelog",
+    },
+    {
+      display: "Liên hệ",
+      path: "/contact",
+    },
+    {
+      display: "Thanh Toán",
+      path: "/paypal",
+    },
+    {
+      display: "Lịch sử đơn hàng",
+      path: `/history/${data.idAccount}`,
+    },
+  ];
+
   const { pathname } = useLocation();
   const activeNavBar = NavItem.findIndex((e) => e.path === pathname);
   const headerRef = useRef(null); /// active param when handle
@@ -57,7 +67,6 @@ const Header = () => {
       <div className="header" ref={headerRef}>
         <Search />
 
-
         <div className="container">
           <div className="header__menu">
             <div className="header__menu__mobile-toggle" onClick={menuToggle}>
@@ -83,7 +92,6 @@ const Header = () => {
                 );
               })}
             </div>
-          
           </div>
         </div>
       </div>

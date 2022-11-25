@@ -28,7 +28,7 @@ const Cart = (
     idAccount:auth.account.payload.id || [],
     
   }
-  console.log(data)
+  //console.log(data)
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
@@ -71,7 +71,7 @@ const Cart = (
   const data3 ={...data,storeCart}
  console.log(data3)
  
-  const handleCheckout1=()=>{
+  const handleCheckout_Minh=()=>{
       
     axios.post("http://localhost:5000/orders/payment", data3)
     .then(response => {
@@ -99,8 +99,8 @@ console.log(data3);
         showConfirmButton: false,
         timer: 1500
       })
-      handleClearCart()
-      navigate(`/history/${data3.idAccount}`)
+      // handleClearCart()
+      // navigate(`/history/${data3.idAccount}`)
    
   }, []);
 
