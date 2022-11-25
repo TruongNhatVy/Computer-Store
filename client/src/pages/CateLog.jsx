@@ -75,9 +75,9 @@ const CateLog = () => {
                 return (
                   <ProductCard
                     key={index}
-                    Image={item.Image}
+                    Image={`../products-images/${item.Image}`}
                     Name={item.Name}
-                    Image2={item.Image}
+                    Image2={`../products-images/${item.Image}`}
                     Price={parseInt(item.Price)}
                     CategoryId={item.CategoryId}
                     _id={item._id}

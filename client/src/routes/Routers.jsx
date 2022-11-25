@@ -41,7 +41,7 @@ const RoutersClient = () => {
           <Route exact path="/account/activate/:activation_token" element={<ActivationEmail />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/contact" element={<Contact />} />
-          <Route exact path="/history" element={<History />} />
+          <Route exact path="/history/:accountId" element={<History />} />
           <Route exact path="catelog/:CategoryId/:_id" element={<Product />} />
           <Route exact path="*" element={<NoMatch />} />
           <Route exact path="/catelog" element={<CateLog />} />

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCart,
@@ -7,9 +7,10 @@ import {
   getTotals,
   removeFromCart,
 } from "../redux/reducer/cartslice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios'
 import Swal from "sweetalert2";
+import Layout from "../components/Layout/Layout";
 
 const Cart = (
 ) => {
@@ -17,6 +18,7 @@ const Cart = (
   const auth = useSelector((state)=>{
     return state.rootReducer.auth
   })
+  const navigate = useNavigate();
  const {account, isLogged, isAdmmin} = auth
   
  console.log(cart.cartItems);
@@ -69,16 +71,42 @@ const Cart = (
   const data3 ={...data,storeCart}
  console.log(data3)
  
-  const handleCheckout=()=>{
+  const handleCheckout1=()=>{
       
     axios.post("http://localhost:5000/orders/payment", data3)
     .then(response => {
-      this.setState({data3: response.data});
+      
+    console.log(response);
     })
     .catch(error => console.log(error));
 
   }
+
+  const handleCheckout = useCallback( () => {
+     axios
+      .post(
+        "http://localhost:5000/orders/payment", data3
+      )
+      .then((res) => res.json())
+      .catch((error) => error);
+
+console.log(data3);
+
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Thanh Toán thành công',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      handleClearCart()
+      navigate(`/history/${data3.idAccount}`)
+   
+  }, []);
+
   return (
+    <Layout>
+
     <div className="cart-container">
       <h2>Shopping Cart</h2>
       {cart.cartItems.length === 0 ? (
@@ -153,7 +181,7 @@ const Cart = (
                 <span className="amount">${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <button onClick={()=>handleCheckout}>Check out</button>
+              <button onClick={handleCheckout}>Check out</button>
               <div className="continue-shopping">
                 <Link to="/">
                   <svg
@@ -177,6 +205,7 @@ const Cart = (
         </div>
       )}
     </div>
+    </Layout>
   );
 };
 

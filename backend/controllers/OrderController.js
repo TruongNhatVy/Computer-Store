@@ -57,23 +57,24 @@ export const addOrder = async (req, res) => {
 export const payment = async (req, res) => {
   try {
     // const objReq = {
-    //   idAccount: "637f0920d149298950036d65",
+    //   idAccount: "637f256fcd947d681e5305de",
     //   storeCart: [
     //     {
     //       ProductId: "6363f9e950420980842dfd6d",
     //       UnitPrice: 25290000,
-    //       CartQuantity: 3,
+    //       CartQuantity: 7,
     //     },
     //     {
     //       ProductId: "6363f9e950420980842dfd70",
     //       UnitPrice: 32490000,
-    //       CartQuantity: 4,
+    //       CartQuantity: 6,
     //     },
     //   ],
     // };
 
     const objReq = req.body;
-    await OrderSvc.payment(objReq);
+    //console.log(objReq)
+     await OrderSvc.payment(objReq);
 
     return res.status(200).json({ Message: "ok" });
   } catch (err) {

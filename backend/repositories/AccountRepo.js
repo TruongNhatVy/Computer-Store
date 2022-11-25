@@ -1,4 +1,4 @@
-import  AccountModel  from "../models/data/AccountModel.js";
+import  {AccountModel}  from "../models/data/AccountModel.js";
 
 export const getFiltersAccount = async (query, skipAccounts, PAGE_SIZE) => {
   if (skipAccounts >= 0) {
