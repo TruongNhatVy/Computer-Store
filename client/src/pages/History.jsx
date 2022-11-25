@@ -25,6 +25,7 @@ const columns = [
   {
     title: 'Process',
     dataIndex: 'Process',
+    render:(text) => <a style={{color:'red'}}>{text} Detail</a>
   },
   
 ];
@@ -91,6 +92,7 @@ const History = () => {
         }}
         columns={columns}
         dataSource={data}
+        
       />
     </div>
   );
