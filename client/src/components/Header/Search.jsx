@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../../assets/images/logo.svg";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+//import authReducer from "../../redux/reducer/AuthReducer"
 import axios from "axios";
 
 const Search = () => {
@@ -10,9 +11,7 @@ const Search = () => {
     const search = document.querySelector(".search");
     search.classList.toggle("active", window.scrollY > 100);
   });
-
   const { cartTotalQuantity } = useSelector((state) => state.cart);
-
   const auth = useSelector((state) => {
     return state.rootReducer.auth;
   });
@@ -37,30 +36,38 @@ const Search = () => {
           <div className="container c_flex">
             <div className="logo width ">
               <img src={logo} alt="" />
+            </div>
 
-              <div className="header__menu__right">
-                <div className="header__menu__right__item header__menu__item">
-                  <Link to="/cart">
-                    <box-icon type="bx" name="cart"></box-icon>
-                  </Link>
-                  <span>{cartTotalQuantity}</span>
-                </div>
+            {/* <div className='search-box f_flex'>
+              <i className='fa fa-search'></i>
+              <input type='text' placeholder='Search and hit enter...' />
+              <span>All Category</span>
+            </div> */}
 
-                <div className="header__menu__right__item header__menu__item">
-                  <Link to="/">
-                    <i>{account.name}</i>
-                  </Link>
-                  <ul className="" style={{ display: "flex" }}>
-                    <li>
-                      <Link to="/">{localStorage.getItem("name")}</Link>
-                    </li>
-                    <li>
-                      <Link to="/" onClick={handleLogout}>
-                        Logout
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+            <div className="header__menu__right">
+              <div className="header__menu__right__item header__menu__item">
+                <Link to="/cart">
+                  <box-icon type="bx" name="cart">
+                    Cart
+                  </box-icon>
+                </Link>
+                <span>{cartTotalQuantity}</span>
+              </div>
+
+              <div className="header__menu__right__item header__menu__item">
+                <Link to="/">
+                  <i>{account.name}</i>
+                </Link>
+                <ul className="" style={{ display: "flex" }}>
+                  <li>
+                    <Link to="/">{localStorage.getItem("name")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/" onClick={handleLogout}>
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -146,6 +153,7 @@ const Search = () => {
                       Cart
                     </box-icon>
                   </Link>
+                  <span>{cartTotalQuantity}</span>
                 </div>
 
                 <div className="header__menu__right__item header__menu__item">
