@@ -12,17 +12,6 @@ import Star from "../Star/Star";
 const ProductCard = (props) => {
   const dispatch = useDispatch();
 
-  const handleAddToCart = () => {
-    dispatch(addToCart(props));
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Thêm thành công",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-  };
-
   return (
     <div className="product-card">
       <Link to={`/catelog/${props._id}`}>

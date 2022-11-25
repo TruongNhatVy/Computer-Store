@@ -11,7 +11,7 @@ import Filter from "./Filter";
 import ReactPaginate from "react-paginate";
 import ListPage from "./ListPage";
 const CateLog = () => {
-  const [item, setItem] = useState([]);
+  const [items, setItem] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [filter, setFilter] = useState([]);
   const [props, setProps] = useState([]);
@@ -47,7 +47,6 @@ const CateLog = () => {
       console.log(total);
       setpageCount(Math.ceil(total / limit));
       setSearchResults(data);
-
       setProps(response.data);
     }
     getALL();
@@ -69,17 +68,20 @@ const CateLog = () => {
         />
         <div className="catelog__content">
           <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {item.map((item, index) => (
+            {items?.map((item, index) => {
+              return(
               <ProductCard
-                key={index}
-                Image={item.Image}
-                Name={item.Name}
-                Price={parseInt(item.Price)}
-                CategoryId={item.CategoryId}
-                _id={item._id}
-                Quantity={item.Quantity}
-              />
-            ))}
+                 key={index}
+                    Image={item.Image}
+                    Name={item.Name}
+                    Image2={item.Image}
+                    Price={parseInt(item.Price)}
+                    CategoryId={item.CategoryId}
+                    _id={item._id}
+                    Quantity={item.Quantity}
+              /> 
+              )
+            })}
           </Grid>
           {/* <div style={{ width: "500px", margin: "auto" }}>
             <Pagination defaultCurrent={1} total={products.length} />

@@ -18,7 +18,7 @@ const ProductViewModal = () => {
     
       const getProductById = (_id) => {
         const findId = data?.find((e) => {
-          console.log(e._id)
+        //   console.log(e._id)
           return e._id === _id;
           
         });

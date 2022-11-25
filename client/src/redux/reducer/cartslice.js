@@ -9,6 +9,7 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  cartitem:0,
 };
 
 const cartSlice = createSlice({
@@ -75,24 +76,27 @@ const cartSlice = createSlice({
       });
     },
     getTotals(state, action) {
-      let { total, quantity } = state.cartItems.reduce(
+      let { total, quantity,itemtotal2 } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { Price, cartQuantity } = cartItem;
           const itemTotal = Price * cartQuantity;
-
+        
           cartTotal.total += itemTotal;
           cartTotal.quantity += cartQuantity;
-
+         cartTotal.itemtotal2=itemTotal
           return cartTotal;
         },
         {
           total: 0,
           quantity: 0,
+          itemtotal2:0,
         }
       );
       total = parseFloat(total.toFixed(2));
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
+      state.cartitem=itemtotal2
+      
     },
     clearCart(state, action) {
       state.cartItems = [];

@@ -9,27 +9,25 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import ProductView from "../components/ProductView/ProductView";
 import { useParams } from "react-router-dom";
 import productsData from "../assets/data-fake/product-data";
-import { getproducts } from "../action/getProduct";
+import { getallproducts, getproducts } from "../action/getProduct";
 import PageError from "../components/PageServerLoading/PageError";
 import PageLoading from "../components/PageServerLoading/PageLoading";
 
 const Product = () => {
   const params = useParams();
-  const { isError, data, isLoading } = useQuery(["products"], getproducts, {
-    staleTime: 1000,
+  const { isError, data, isLoading } = useQuery(["sllproducts"], getallproducts, {
+    staleTime: 0,
   });
-
+console.log(data)
   const getProductById = (_id) => {
     const findId = data?.find((e) => {
-      console.log(e._id)
       return e._id === _id;
     });
 
     return findId;
   };
-
+console.log(getProductById(params._id))
   const product = getProductById(params._id);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);
@@ -62,8 +60,7 @@ const Product = () => {
             {data?.map((item, index) => (
               <ProductCard
                 key={index}
-                Image2={item.Image}
-                title={item.Name}
+                Name={item.Name}
                 Image={item.Image}
                 Price={parseInt(item.Price)}
                 CategoryId={item.CategoryId}

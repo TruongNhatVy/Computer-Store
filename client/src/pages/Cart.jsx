@@ -8,12 +8,25 @@ import {
   removeFromCart,
 } from "../redux/reducer/cartslice";
 import { Link } from "react-router-dom";
+import axios from 'axios'
 import Swal from "sweetalert2";
 
-const Cart = () => {
+const Cart = (
+) => {
   const cart = useSelector((state) => state.cart);
+  const auth = useSelector((state)=>{
+    return state.rootReducer.auth
+  })
+ const {account, isLogged, isAdmmin} = auth
+  
+ console.log(cart.cartItems);
   const dispatch = useDispatch();
 
+  const data={ 
+    AccountId:auth.account.payload.id || [],
+    
+  }
+  console.log(data)
   useEffect(() => {
     dispatch(getTotals());
   }, [cart, dispatch]);
@@ -47,6 +60,25 @@ const Cart = () => {
   const handleClearCart = () => {
     dispatch(clearCart());
   };
+  const storeCart=cart.cartItems.map(item =>{ 
+    console.log(item)
+    const storeCart= {ProductId: item._id,UnitPrice:item.Price,cartQuantinty:item.cartQuantity}
+    const card=[]
+    card.push(storeCart)
+    return card
+  })
+  const data3 ={...data,storeCart}
+ console.log(data3)
+ 
+  const handleCheckout=()=>{
+      
+    axios.post("http://localhost:5000/orders/payment", data3)
+    .then(response => {
+      this.setState({data3: response.data});
+    })
+    .catch(error => console.log(error));
+
+  }
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
@@ -122,7 +154,7 @@ const Cart = () => {
                 <span className="amount">${cart.cartTotalAmount}</span>
               </div>
               <p>Taxes and shipping calculated at checkout</p>
-              <button>Check out</button>
+              <button onClick={()=>handleCheckout}>Check out</button>
               <div className="continue-shopping">
                 <Link to="/">
                   <svg

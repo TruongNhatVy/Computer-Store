@@ -7,6 +7,7 @@ import {dispatchLogin} from "../../redux/actions/AuthAction";
 import { showErrMsg, showSuccessMsg } from "../../utils/Notification";
 
 const initialState = {
+  id: '',
   name: '',
   email: '',
   password: '',
@@ -37,6 +38,7 @@ function SignIn() {
       localStorage.setItem('name', res.data.data.name)
       localStorage.setItem('email', res.data.data.email)
 
+      initialState.id = res.data.data.id;
       initialState.name = res.data.data.name;
       initialState.email = res.data.data.email;
       //initialState.password = '123456';
