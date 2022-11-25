@@ -6,10 +6,10 @@ import axios from "axios";
 
 const Search = () => {
   // fixed Header
-  //  window.addEventListener("scroll", function () {
-  //   const search = document.querySelector(".search")
-  //   search.classList.toggle("active", window.scrollY > 100)
-  // })
+  window.addEventListener("scroll", function () {
+    const search = document.querySelector(".search");
+    search.classList.toggle("active", window.scrollY > 100);
+  });
 
   const { cartTotalQuantity } = useSelector((state) => state.cart);
 
