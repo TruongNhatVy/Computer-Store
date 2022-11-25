@@ -22,7 +22,7 @@ const NavItem = [
   },
   {
     display:"Lịch sử đơn hàng",
-    path:"history"
+    path:"/history"
   }
 ];
 const Header = () => {

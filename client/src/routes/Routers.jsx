@@ -12,6 +12,7 @@ import Cart from "../pages/Cart";
 import Contact from "../pages/Contact";
 import Layout from "../components/Layout/Layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import History from "../pages/History";
 const client = new QueryClient();
 
 const Routerslink = () => {
@@ -29,7 +30,7 @@ const Routerslink = () => {
           <Route exact path="/SignIn" element={<SignIn />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/contact" element={<Contact />} />
-        
+          <Route exact path="/history" element={<History />} />
         </Routes>
         </Layout>
         </QueryClientProvider>
