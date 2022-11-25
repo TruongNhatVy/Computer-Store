@@ -70,10 +70,8 @@ const Cart = () => {
                 />
               </svg>
               <span>Start Shopping</span>
-              
             </Link>
           </div>
-          
         </div>
       ) : (
         <div>
@@ -88,7 +86,10 @@ const Cart = () => {
               cart.cartItems.map((cartItem) => (
                 <div className="cart-item" key={cartItem._id}>
                   <div className="cart-product">
-                    <img src={cartItem.Image} alt={cartItem.Name} />
+                    <img
+                      src={`./products-images/${cartItem.Image}`}
+                      alt={cartItem.Name}
+                    />
                     <div>
                       <h3>{cartItem.name}</h3>
                       <p>{cartItem.Description}</p>
