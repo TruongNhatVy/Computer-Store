@@ -53,7 +53,7 @@ const RoutersClient = () => {
           <Route path="/admin/brand" element={<ManageBrand />} />
           <Route path="/admin/category" element={<ManageCategory />} />
           <Route path="/admin/order" element={<ManageOrder />} />
-          <Route path="/admin/order/details" element={<OrderDetails />} />
+          <Route path="/admin/orderDetails/:orderId" element={<OrderDetails />} />
           <Route path="/admin/receipt" element={<ManageReceipt />} />
           <Route path="/admin/supplier" element={<ManageSupplier />} />
           {/* <Route path="/admin/statistic" element={<ManageStatistic />} /> */}

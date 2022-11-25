@@ -9,48 +9,37 @@ import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
-import UpdateOrderPopup from "./UpdateOrderPopup";
-
-const listDataOption = [{ name: "Hieu", value: 1 }];
+import { useParams } from "react-router-dom";
 
 const OrderDetails = () => {
-  const [orders, setOrder] = useState([]);
-  const [page, setOffset] = useState(1);
-  const [account, setAccount] = useState([]);
-  const [showPopupUpdate, setShowPopupUpdate] = useState(false);
-  const [itemOrder, setItemOrder] = useState({});
+  const [ordersDetails, setOrderDetails] = useState([]);
+  const [products, setProduct] = useState([]);
+  const { orderId } = useParams();
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/orders/getOrderFilters?page=${page}`)
-      .then((res) => setOrder(res.data));
-  }, [page]);
+      .get(
+        `http://localhost:5000/orderDetails/getOrderDetailsByOrderId/${orderId}`
+      )
+      .then((res) => setOrderDetails(res.data));
+  }, [orderId]);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/accounts/getAccountsFilters?page=1`)
-      .then((res) => setAccount(res.data));
-  }, []);
+      .get(`http://localhost:5000/products/getProductsFilters`)
+      .then((res) => setProduct(res.data));
 
-  const handleShowPopupUpdate = useCallback((value) => {
-    setShowPopupUpdate(true);
-    setItemOrder(value);
   }, []);
 
   return (
     <ContainerMainLayoutAdmin>
       <TableContainer
         showPagination={true}
-        totalPages={(orders || []).length}
-        activePage={page}
-        handleSelect={(e) => {
-          setOffset(e);
-        }}
+        totalPages={(ordersDetails || []).length}
       >
         <TableHeader
           showNewButton={false}
           show={false}
-          listDataOption={listDataOption}
           // handleSelect={(e) => {
           //   handleSelectRole(e);
           // }}
@@ -58,23 +47,14 @@ const OrderDetails = () => {
         <TableBody>
           <TableCol
             listCol={[
-              // { title: "Id" },
-              {
-                title:
-                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-              },
-              { title: "AccountId" },
-              { title: "Date" },
+              { title: "Product" },
+              { title: "UnitPrice" },
+              { title: "Quantity" },
               { title: "Total" },
-              { title: "Status" },
-              // { title: "Email" },
-              // { title: "Phone" },
-              // { title: "Address" },
-              { title: "Action" },
             ]}
           />
           <TableRows>
-            {(orders || []).map((item) => {
+            {(ordersDetails || []).map((item) => {
               return (
                 <>
                   <TableRow key={item}>
@@ -84,47 +64,26 @@ const OrderDetails = () => {
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          (account || []).find(
-                            (element) => element._id === item.AccountId
-                          )?.name
+                          (products || []).find(
+                            (element) => element._id === item.ProductId
+                          )?.Name
                         }
                       </h6>
                     </TableCell>
                     <TableCell>
-                      <h6 className="mb-0 text-sm">{item.Date}</h6>
+                      <h6 className="mb-0 text-sm">
+                        {numberWithCommas(item.UnitPrice)}
+                      </h6>
+                    </TableCell>
+                    <TableCell>
+                      <h6 className="mb-0 text-sm">
+                        {numberWithCommas(item.Quantity)}
+                      </h6>
                     </TableCell>
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {numberWithCommas(item.Total)}
                       </h6>
-                    </TableCell>
-                    <TableCell>
-                      <h6 className="mb-0 text-sm">{item.Status}</h6>
-                    </TableCell>
-                    {/* <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Email}</h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Phone}</h6>
-                  </TableCell>
-                  <TableCell>
-                    <h6 className="mb-0 text-sm">{item.Address}</h6>
-                  </TableCell> */}
-                    <TableCell>
-                      <button
-                        type="type"
-                        className="btn btn-sm btn-info"
-                        onClick={() => handleShowPopupUpdate(item)}
-                      >
-                        <i class="fa-solid fa-pencil"></i>
-                      </button>
-                      <button
-                        type="type"
-                        className="btn btn-sm btn-primary"
-                        // onClick={() => handleShowPopupUpdate(item)}
-                      >
-                        Details
-                      </button>
                     </TableCell>
                   </TableRow>
                 </>
@@ -133,13 +92,6 @@ const OrderDetails = () => {
           </TableRows>
         </TableBody>
       </TableContainer>
-
-      <UpdateOrderPopup
-        showPopup={showPopupUpdate}
-        handleClosePopup={(e) => setShowPopupUpdate(e)}
-        itemOrder={itemOrder}
-        getData={(e) => setOrder(e)}
-      />
     </ContainerMainLayoutAdmin>
   );
 };
