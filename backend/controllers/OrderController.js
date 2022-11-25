@@ -73,8 +73,10 @@ export const payment = async (req, res) => {
     // };
 
     const objReq = req.body;
+
     //console.log(objReq)
-     await OrderSvc.payment(objReq);
+
+    await OrderSvc.payment(objReq);
 
     return res.status(200).json({ Message: "ok" });
   } catch (err) {

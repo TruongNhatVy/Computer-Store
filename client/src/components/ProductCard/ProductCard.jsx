@@ -34,7 +34,7 @@ const ProductCard = (props) => {
           icon="cart"
           color="#fff"
           animation={false}
-          onClick={() =>dispatch(set(props._id))}
+          onClick={() => dispatch(set(props._id))}
         >
           Chọn mua
         </Button>

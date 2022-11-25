@@ -63,9 +63,9 @@ console.log(getProductById(params._id))
               {data?.map((item, index) => (
                 <ProductCard
                   key={index}
-                  Image2={item.Image}
+                  Image2={`./products-images/${item.Image}`}
                   title={item.Name}
-                  Image={item.Image}
+                  Image={`./products-images/${item.Image}`}
                   Price={parseInt(item.Price)}
                   CategoryId={item.CategoryId}
                   _id={item._id}

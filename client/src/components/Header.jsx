@@ -10,7 +10,7 @@ const Header = () => {
   });
 
   const data = {
-    idAccount: auth.account.payload.id || [],
+    idAccount: auth?.account?.payload?.id || [],
   };
 
   const NavItem = [

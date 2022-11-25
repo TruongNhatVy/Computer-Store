@@ -55,17 +55,17 @@ const dispatch = useDispatch()
             className="product__images__list__item"
             onClick={() => setPreviewImg(product.Image)}
           >
-            <img src={product.Image} alt="" />
+            <img src="" alt="" />
           </div>
           <div
             className="product__images__list__item"
             onClick={() => setPreviewImg(product.Image)}
           >
-            <img src={product.Image} alt="" />
+            <img src="" alt="" />
           </div>
         </div>
         <div className="product__images__main">
-          <img src={previewImg} alt="" />
+          <img src={`./products-images/${product.Image}`} alt="" />
         </div>
         <div
           className={`product-description ${descriptionExpand ? "expand" : ""}`}
@@ -89,7 +89,7 @@ const dispatch = useDispatch()
         <h1 className="product__info__title">Tên sản phẩm: {product.Name}</h1>
         <div className="product__info__item">
           <span className="product__info__item__price">
-              Giá Tiền: {numberWithCommas(product.Price)}
+            Giá Tiền: {numberWithCommas(product.Price)}
           </span>
         </div>
         <div className="product__info__item">
