@@ -7,11 +7,11 @@ import axios from 'axios'
 
 const Search = () => {
  // fixed Header
-//  window.addEventListener("scroll", function () {
-//   const search = document.querySelector(".search")
-//   search.classList.toggle("active", window.scrollY > 100)
-// })
-
+ window.addEventListener("scroll", function () {
+  const search = document.querySelector(".search")
+  search.classList.toggle("active", window.scrollY > 100)
+})
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
   const auth = useSelector(state => {
     return state.rootReducer.auth;
   })
@@ -50,6 +50,7 @@ const Search = () => {
                 <Link to="/cart">
                   <box-icon type="bx" name="cart">Cart</box-icon>
                 </Link>
+                <span>{cartTotalQuantity}</span>
               </div>
 
               <div className="header__menu__right__item header__menu__item">
@@ -135,6 +136,7 @@ const Search = () => {
                   <Link to="/cart">
                     <box-icon type="bx" name="cart">Cart</box-icon>
                   </Link>
+                  <span>{cartTotalQuantity}</span>
                 </div>
   
                 <div className="header__menu__right__item header__menu__item">
