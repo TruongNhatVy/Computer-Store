@@ -14,10 +14,10 @@ AccountRouter.get(
   AccountController.getFiltersAccount
 );
 
-// AccountRouter.get(
-//   "/accounts/getAccountById/:_id",
-//   AccountController.getAccountById
-// );
+AccountRouter.get(
+  "/accounts/getAccountById/:_id",
+  AccountController.getAccountById
+);
 AccountRouter.get(
   "/account/logout",
   AccountController.logout
@@ -32,13 +32,13 @@ AccountRouter.post("/account/forgot_password", AccountController.forgotPassword)
 AccountRouter.post("/account/reset", auth, AccountController.resetPassword);
 //AccountRouter.post("/account/upload_image", uploadImage, auth, uploadController.uploadCtrl.uploadAvatar);
 
-//AccountRouter.post("/account")
+AccountRouter.post("/account")
 
 //==================Put==================
-// AccountRouter.put(
-//   "/accounts/updateAccount/:_id",
-//   AccountController.updateAccount
-// );
+AccountRouter.put(
+  "/accounts/updateAccount/:_id",
+  AccountController.updateAccount
+);
 
 //==================Delete==================
 AccountRouter.delete(

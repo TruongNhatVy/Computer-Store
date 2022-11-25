@@ -173,7 +173,7 @@ const Cart = () => {
           </div>
         )}
       </div>
-    </Layout>
+     </Layout>
   );
 };
 
