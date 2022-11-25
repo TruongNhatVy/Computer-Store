@@ -10,6 +10,7 @@ import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 import UpdateOrderPopup from "./UpdateOrderPopup";
+import { Link } from "react-router-dom";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
@@ -114,13 +115,17 @@ const ManageOrder = () => {
                       >
                         <i class="fa-solid fa-pencil"></i>
                       </button>
-                      <button
-                        type="type"
-                        className="btn btn-sm btn-primary"
-                        // onClick={() => handleShowPopupUpdate(item)}
+                      <Link
+                        to={`/admin/orderDetails/${item._id}`}                      
                       >
-                        Details
-                      </button>
+                        <button
+                          type="type"
+                          className="btn btn-sm btn-primary"
+                          // onClick={() => handleShowPopupUpdate(item)}
+                        >
+                          Details
+                        </button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 </>

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
+import { Link } from "react-router-dom";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
@@ -66,13 +67,15 @@ const ManageReceipt = () => {
                       </h6>
                     </TableCell>
                     <TableCell>
-                      <button
-                        type="type"
-                        className="btn btn-sm btn-primary"
-                        // onClick={() => handleShowPopupUpdate(item)}
-                      >
-                        Details
-                      </button>
+                      <Link to={`/admin/receiptDetails/${item._id}`}>
+                        <button
+                          type="type"
+                          className="btn btn-sm btn-primary"
+                          // onClick={() => handleShowPopupUpdate(item)}
+                        >
+                          Details
+                        </button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 </>
