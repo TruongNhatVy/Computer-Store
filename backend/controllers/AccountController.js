@@ -1,5 +1,5 @@
-//import * as AccountSvc from "../services/AccountSvc.js";
-import AccountModel from "../models/data/AccountModel.js";
+import * as AccountSvc from "../services/AccountSvc.js";
+import {AccountModel} from "../models/data/AccountModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 //import sendMail from "./SendMail.js";
