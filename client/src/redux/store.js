@@ -10,8 +10,7 @@ const store = configureStore({
     cart: cartReducer,
     productModal: productModalReducer,
   },
-  
-});
+},);
 
 store.dispatch(getTotals());
 export default store;
