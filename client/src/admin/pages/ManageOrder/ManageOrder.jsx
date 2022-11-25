@@ -116,8 +116,7 @@ const ManageOrder = () => {
                         <i class="fa-solid fa-pencil"></i>
                       </button>
                       <Link
-                        to={`/admin/orderDetails/${item._id}`}
-                        params={{ orderId: "hello" }}
+                        to={`/admin/receiptDetails/${item._id}`}                      
                       >
                         <button
                           type="type"

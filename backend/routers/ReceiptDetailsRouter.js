@@ -9,10 +9,10 @@ ReceiptDetailsRouter.get(
   ReceiptDetailsController.getFiltersReceiptDetails
 );
 
-// ReceiptDetailsRouter.get(
-//   "/receiptDetails/getReceiptDetailsByReceiptId/:_id",
-//   ReceiptDetailsController.getReceiptDetailsByReceiptId
-// );
+ReceiptDetailsRouter.get(
+  "/receiptDetails/getReceiptDetailsByReceiptId/:_id",
+  ReceiptDetailsController.getReceiptDetailsByReceiptId
+);
 //==================Post==================
 ReceiptDetailsRouter.post(
   "/receiptDetails/addReceiptDetails",

@@ -46,9 +46,9 @@ export const getFiltersReceiptDetails = async (filters) => {
   );
 };
 
-// export const getReceiptDetailsByReceiptId = async (_id) => {
-//   return await ReceiptDetailsRepo.getReceiptDetailsByReceiptId(_id);
-// };
+export const getReceiptDetailsByReceiptId = async (_id) => {
+  return await ReceiptDetailsRepo.getReceiptDetailsByReceiptId(_id);
+};
 
 export const addReceiptDetails = async (receipt) => {
   return await ReceiptDetailsRepo.addReceiptDetails(receipt);

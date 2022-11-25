@@ -11,18 +11,18 @@ import numberWithCommas from "../../../utils/ConvertNumber";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
 import { useParams } from "react-router-dom";
 
-const OrderDetails = () => {
-  const [ordersDetails, setOrderDetails] = useState([]);
+const ReceiptDetails = () => {
+  const [receiptsDetails, setReceiptDetails] = useState([]);
   const [products, setProduct] = useState([]);
-  const { orderId } = useParams();
+  const {receiptId } = useParams();
 
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/orderDetails/getOrderDetailsByOrderId/${orderId}`
+        `http://localhost:5000/receiptDetails/getReceiptDetailsByReceiptId/${receiptId}`
       )
-      .then((res) => setOrderDetails(res.data));
-  }, [orderId]);
+      .then((res) => setReceiptDetails(res.data));
+  }, [receiptId]);
 
   useEffect(() => {
     axios
@@ -35,7 +35,7 @@ const OrderDetails = () => {
     <ContainerMainLayoutAdmin>
       <TableContainer
         showPagination={true}
-        totalPages={(ordersDetails || []).length}
+        totalPages={(receiptsDetails || []).length}
       >
         <TableHeader
           showNewButton={false}
@@ -54,7 +54,7 @@ const OrderDetails = () => {
             ]}
           />
           <TableRows>
-            {(ordersDetails || []).map((item) => {
+            {(receiptsDetails || []).map((item) => {
               return (
                 <>
                   <TableRow key={item}>
@@ -96,4 +96,4 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default ReceiptDetails;

@@ -13,9 +13,9 @@ export const getFiltersReceiptDetails = async (
   return await ReceiptDetailsModel.find(query);
 };
 
-// export const getReceiptDetailsByReceiptId = async (_id) => {
-//   return await ReceiptDetailsModel.find({ ReceiptId: _id });
-// };
+export const getReceiptDetailsByReceiptId = async (_id) => {
+  return await ReceiptDetailsModel.find({ ReceiptId: _id });
+};
 
 export const addReceiptDetails = async (receipt) => {
   return await ReceiptDetailsModel.create(receipt);
