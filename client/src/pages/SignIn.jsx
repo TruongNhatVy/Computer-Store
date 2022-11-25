@@ -1,9 +1,12 @@
 import React from "react";
 import Layout from "../components/Layout/Layout";
-export const NoMatch = () => {
+
+const SignIn = () => {
   return (
     <Layout>
-      <div className="Errorpage"> this Page is not found</div>
+      <div>SignIn</div>
     </Layout>
   );
 };
+
+export default SignIn;

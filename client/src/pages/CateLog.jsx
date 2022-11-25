@@ -10,8 +10,10 @@ import callApi from "../api";
 import Filter from "./Filter";
 import ReactPaginate from "react-paginate";
 import ListPage from "./ListPage";
+import Layout from "../components/Layout/Layout";
+
 const CateLog = () => {
-  const [item, setItem] = useState([]);
+  const [items, setItem] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [filter, setFilter] = useState([]);
   const [props, setProps] = useState([]);
@@ -47,7 +49,6 @@ const CateLog = () => {
       console.log(total);
       setpageCount(Math.ceil(total / limit));
       setSearchResults(data);
-
       setProps(response.data);
     }
     getALL();
@@ -60,46 +61,51 @@ const CateLog = () => {
     setFilter(fetch);
   };
   return (
-    <Helmet title="Sản phẩm">
-      <div className="catelog">
-        <Filter
-          getData={(e) => {
-            setItem(e.data);
-          }}
-        />
-        <div className="catelog__content">
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
-            {item.map((item, index) => (
-              <ProductCard
-                key={index}
-                Image={item.Image}
-                Name={item.Name}
-                Price={parseInt(item.Price)}
-                CategoryId={item.CategoryId}
-                _id={item._id}
-                Quantity={item.Quantity}
-              />
-            ))}
-          </Grid>
-          {/* <div style={{ width: "500px", margin: "auto" }}>
+    <Layout>
+      <Helmet title="Sản phẩm">
+        <div className="catelog">
+          <Filter
+            getData={(e) => {
+              setItem(e.data);
+            }}
+          />
+          <div className="catelog__content">
+            <Grid col={4} mdCol={2} smCol={1} gap={20}>
+              {items?.map((item, index) => {
+                return (
+                  <ProductCard
+                    key={index}
+                    Image={item.Image}
+                    Name={item.Name}
+                    Image2={item.Image}
+                    Price={parseInt(item.Price)}
+                    CategoryId={item.CategoryId}
+                    _id={item._id}
+                    Quantity={item.Quantity}
+                  />
+                );
+              })}
+            </Grid>
+            {/* <div style={{ width: "500px", margin: "auto" }}>
             <Pagination defaultCurrent={1} total={products.length} />
           </div> */}
+          </div>
         </div>
-      </div>
-      <ReactPaginate
-        previousLabel={"PREV"}
-        nextLabel={"NEXT"}
-        pageCount={pageCount}
-        marginPagesDisplayed={3}
-        pageRangeDisplayedge={6}
-        onPageChange={handleClickPaginate}
-        pageClassName={"page-item"}
-        containerClassName={"pagination justify-content-center"}
-        pageLinkClassName={"page-link"}
-        previousClassName={"page-link"}
-        nextClassName={"page-link"}
-      />
-    </Helmet>
+        <ReactPaginate
+          previousLabel={"PREV"}
+          nextLabel={"NEXT"}
+          pageCount={pageCount}
+          marginPagesDisplayed={3}
+          pageRangeDisplayedge={6}
+          onPageChange={handleClickPaginate}
+          pageClassName={"page-item"}
+          containerClassName={"pagination justify-content-center"}
+          pageLinkClassName={"page-link"}
+          previousClassName={"page-link"}
+          nextClassName={"page-link"}
+        />
+      </Helmet>
+    </Layout>
   );
 };
 export default CateLog;

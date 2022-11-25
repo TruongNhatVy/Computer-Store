@@ -9,8 +9,10 @@ import authAdmin from "../middleware/AuthAdmin.js";
 const AccountRouter = express.Router();
 
 //==================Get==================
-// AccountRouter.get("/accounts/getCategoriesFilters",AccountController.getFiltersAccount
-// );
+AccountRouter.get(
+  "/accounts/getAccountsFilters",
+  AccountController.getFiltersAccount
+);
 
 // AccountRouter.get(
 //   "/accounts/getAccountById/:_id",

@@ -7,53 +7,53 @@ import ItemSideBar from "./ItemSideBar";
 
 const dataItem = [
   {
-    name: "Mange Account",
-    icon: "single-02",
-    color: "text-warning",
-    link: "/admin/account",
-  },
-  {
-    name: "Mange Product",
+    name: "Manage Product",
     icon: "app",
-    color: "text-success",
+    color: "text-default",
     link: "/admin/product",
   },
   {
-    name: "Mange Trademark",
+    name: "Manage Account",
+    icon: "single-02",
+    color: "text-default",
+    link: "/admin/account",
+  },
+  {
+    name: "Manage Brand",
+    icon: "building",
+    color: "text-default",
+    link: "/admin/brand",
+  },
+  {
+    name: "Manage Category",
     icon: "bullet-list-67",
     color: "text-default",
-    link: "/admin/trademark",
+    link: "/admin/category",
   },
   {
-    name: "Mange Cart",
+    name: "Manage Order",
     icon: "cart",
-    color: "text-danger",
+    color: "text-default",
+    link: "/admin/order",
   },
   {
-    name: "Mange Goods",
+    name: "Manage Receipt",
     icon: "delivery-fast",
-    color: "text-info",
+    color: "text-default",
+    link: "/admin/receipt",
   },
   {
-    name: "Mange Goods",
-    icon: "delivery-fast",
-    color: "text-info",
+    name: "Manage Supplier",
+    icon: "istanbul",
+    color: "text-default",
+    link: "/admin/supplier",
   },
-  {
-    name: "Mange Goods",
-    icon: "delivery-fast",
-    color: "text-info",
-  },
-  {
-    name: "Mange Goods",
-    icon: "delivery-fast",
-    color: "text-info",
-  },
-  {
-    name: "Mange Goods",
-    icon: "delivery-fast",
-    color: "text-info",
-  },
+  // {
+  //   name: "Statistic",
+  //   icon: "chart-bar-32",
+  //   color: "text-default",
+  //   link: "/admin/statistic",
+  // },
 ];
 
 const SideBar = ({ currentAccount }) => {
@@ -87,7 +87,7 @@ const SideBar = ({ currentAccount }) => {
                   style={style.maxWidth}
                   alt="main_logo"
                 />
-                <span className="ms-1 font-weight-bold">Web Gear Gaming</span>
+                <span className="ms-1 font-weight-bold">Computer Store</span>
               </Link>
             </div>
             <hr className="my-3" />
