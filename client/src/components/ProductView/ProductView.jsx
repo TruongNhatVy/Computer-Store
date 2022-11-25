@@ -14,12 +14,11 @@ const ProductView = (props) => {
       Name: "",
       Price: "",
       Image: null,
-      categoryslug: "",
       Description: "",
-      Category: "",
+      CategoryId: "",
     };
 
-  const [previewImg, setPreviewImg] = useState(product.img);
+  const [previewImg, setPreviewImg] = useState(product.Image);
 
   const [descriptionExpand, setDescriptionExpand] = useState(false);
 

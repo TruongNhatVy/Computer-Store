@@ -1,5 +1,16 @@
 import { useState } from 'react';
 import {  Divider, Radio, Table  } from 'antd';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  clearCart,
+  decreaseCart,
+  getTotals,
+  removeFromCart,
+} from "../redux/reducer/cartslice";
+
+
 const columns = [
   {
     title: 'Name',
@@ -29,32 +40,6 @@ const columns = [
   },
   
 ];
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-  },
-  {
-    key: '4',
-    name: 'Disabled User',
-    age: 99,
-    address: 'Sidney No. 1 Lake Park',
-  },
-];
 
 // rowSelection object indicates the need for row selection
 const rowSelection = {
@@ -68,33 +53,32 @@ const rowSelection = {
   }),
 };
 const History = () => {
-  const [selectionType, setSelectionType] = useState('checkbox');
+  const cart = useSelector((state) => state.cart);
+  console.log(cart.cartItems)
   return (
 
-    <div>
-    <h1>Lịch sử đơn hàng </h1>
-      <Radio.Group
-        onChange={({ target: { value } }) => {
-          setSelectionType(value);
-        }}
-        value={selectionType}
-      >
-        <Radio value="checkbox">Checkbox</Radio>
-        <Radio value="radio">radio</Radio>
-      </Radio.Group>
-
-      <Divider />
-
-      <Table
-        rowSelection={{
-          type: selectionType,
-          ...rowSelection,
-        }}
-        columns={columns}
-        dataSource={data}
-        
-      />
-    </div>
+    <div class="table-container">
+    <table>
+      <caption>Our Client Data</caption>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>AccountId</th>
+        <th>Date</th>
+        <th>Quantity</th>
+        <th>Process</th>
+      </tr>
+      {cart.cartItems && cart.cartItems.map(cart => (
+        <tr>
+          <td>{cart._id}</td>
+          <td>mukit</td>
+          <td></td>
+          <td>Bangladesh</td>
+        </tr>
+      ))}
+      
+      </table>
+  </div>
   );
 };
 export default History
