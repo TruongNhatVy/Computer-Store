@@ -20,6 +20,7 @@ import ManageCategory from "../admin/pages/ManageCategory/ManageCategory";
 import ManageOrder from "../admin/pages/ManageOrder/ManageOrder";
 import ManageReceipt from "../admin/pages/ManageReceipt/ManageReceipt";
 import ManageSupplier from "../admin/pages/ManageSupplier/ManageSupplier";
+import OrderDetails from "../admin/pages/ManageOrder/OrderDetails";
 // import ManageStatistic from "../admin/pages/ManageSupplier/ManageStatistic";
 
 const client = new QueryClient();
@@ -44,6 +45,7 @@ const Routerslink = () => {
           <Route path="/admin/brand" element={<ManageBrand />} />
           <Route path="/admin/category" element={<ManageCategory />} />
           <Route path="/admin/order" element={<ManageOrder />} />
+          <Route path="/admin/order/details" element={<OrderDetails />} />
           <Route path="/admin/receipt" element={<ManageReceipt />} />
           <Route path="/admin/supplier" element={<ManageSupplier />} />
           {/* <Route path="/admin/statistic" element={<ManageStatistic />} /> */}

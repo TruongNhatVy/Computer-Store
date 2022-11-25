@@ -11,6 +11,7 @@ import ManageCategory from "../pages/ManageCategory/ManageCategory";
 import ManageOrder from "../pages/ManageOrder/ManageOrder";
 import ManageReceipt from "../pages/ManageReceipt/ManageReceipt";
 import ManageSupplier from "../pages/ManageSupplier/ManageSupplier";
+import OrderDetails from "../pages/ManageOrder/OrderDetails";
 
 const RoutersAdmin = ({ token, currentAccount, fetchCurrentAccount }) => {
   return (
@@ -23,6 +24,7 @@ const RoutersAdmin = ({ token, currentAccount, fetchCurrentAccount }) => {
           <Route path="/admin/brand" element={<ManageBrand />} />
           <Route path="/admin/category" element={<ManageCategory />} />
           <Route path="/admin/order" element={<ManageOrder />} />
+          <Route path="/admin/order/details" element={<OrderDetails />} />
           <Route path="/admin/receipt" element={<ManageReceipt />} />
           <Route path="/admin/supplier" element={<ManageSupplier />} />
         </Routes>

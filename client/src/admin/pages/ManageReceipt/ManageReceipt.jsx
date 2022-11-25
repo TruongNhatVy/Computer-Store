@@ -43,7 +43,7 @@ const ManageReceipt = () => {
         <TableBody>
           <TableCol
             listCol={[
-              { title: "Id" },
+              // { title: "Id" },
               { title: "Date" },
               { title: "Total" },
               { title: "Action" },
@@ -54,9 +54,9 @@ const ManageReceipt = () => {
               return (
                 <>
                   <TableRow key={item}>
-                    <TableCell>
+                    {/* <TableCell>
                       <h6 className="mb-0 text-sm">{item._id}</h6>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <h6 className="mb-0 text-sm">{item.Date}</h6>
                     </TableCell>
@@ -66,11 +66,12 @@ const ManageReceipt = () => {
                       </h6>
                     </TableCell>
                     <TableCell>
-                      <button type="type" className="btn btn-sm btn-info">
-                        <i class="fa-solid fa-pencil"></i>
-                      </button>
-                      <button type="type" className="btn btn-sm btn-danger">
-                        <i class="fas fa-trash-alt"></i>
+                      <button
+                        type="type"
+                        className="btn btn-sm btn-primary"
+                        // onClick={() => handleShowPopupUpdate(item)}
+                      >
+                        Details
                       </button>
                     </TableCell>
                   </TableRow>

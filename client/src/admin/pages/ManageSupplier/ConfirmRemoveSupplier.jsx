@@ -3,18 +3,7 @@ import { useEffect } from "react";
 import { useCallback, useState } from "react";
 import Popup from "../../components/Popup/Popup";
 
-const ConfirmRemove = ({
-  showPopup,
-  handleClosePopup,
-  idItem,
-  // getListProduct,
-}) => {
-  const [listProduct, setListProduct] = useState([]);
-
-  // useEffect(() => {
-  //   getListProduct(listProduct);
-  // }, [getListProduct, listProduct]);
-
+const ConfirmRemove = ({ showPopup, handleClosePopup, idItem, getData }) => {
   const handleClose = useCallback(
     (value) => {
       handleClosePopup(value);
@@ -24,26 +13,26 @@ const ConfirmRemove = ({
 
   const handleRemove = useCallback(async () => {
     await axios
-      .delete(`/Products/deleteProduct/${idItem}`)
+      .delete(`http://localhost:5000/suppliers/deleteSupplier/${idItem}`)
       .then((res) => res)
       .catch((error) => error);
 
     handleClosePopup(false);
 
-    // await axios
-    //   .get(`http://localhost:5000/Products/getProductsFilters?page=1`)
-    //   .then((res) => setListProduct(res.data));
-  }, [idItem, handleClosePopup]);
+    await axios
+      .get(`http://localhost:5000/suppliers/getSupplierFilters?page=1`)
+      .then((res) => getData(res.data));
+  }, [idItem, handleClosePopup, getData]);
 
   return (
     <>
       <Popup
         showPopup={showPopup}
-        name="Remove Product"
-        nameButton="RemoveProduct"
+        name="Remove Supplier"
+        nameButton="RemoveSupplier"
         handleClosePopup={(e) => handleClose(e)}
         minWidth="500px"
-        modelBody={`Are you sure remove this Product ?`}
+        modelBody={`Are you sure remove this Supplier ?`}
         modelFooter={
           <button
             type="button"

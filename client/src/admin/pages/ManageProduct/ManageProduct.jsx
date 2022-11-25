@@ -10,9 +10,9 @@ import axios from "axios";
 import numberWithCommas from "../../../utils/ConvertNumber";
 import { useCallback } from "react";
 import ContainerMainLayoutAdmin from "../../layoutsAdmin/MainLayoutAdmin/ContainerMainLayoutAdmin";
-import AddProductPopup from "./AddProductPopup";
-import ConfirmRemove from "../ManageAccount/ConfirmRemoveAccount";
 import UpdateProductPopup from "./UpdateProductPopup";
+import ConfirmRemoveProduct from "./ConfirmRemoveProduct";
+import AddProductPopup from "./AddProductPopup";
 
 const listDataOption = [
   { name: "Trading", value: "Trading" },
@@ -114,7 +114,6 @@ const ManageProduct = () => {
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          //item.BrandId
                           (brands || []).find(
                             (element) => element._id === item.BrandId
                           )?.Name
@@ -124,10 +123,9 @@ const ManageProduct = () => {
                     <TableCell>
                       <h6 className="mb-0 text-sm">
                         {
-                          item.CategoryId
-                          // item.CategoryId(categories || [])
-                          // .find((element) => element._id === item.CategoryId)
-                          // ?.Name
+                          (categories || []).find(
+                            (element) => element._id === item.CategoryId
+                          )?.Name
                         }
                       </h6>
                     </TableCell>
@@ -171,17 +169,20 @@ const ManageProduct = () => {
         brands={brands}
         categories={categories}
         handleClosePopup={(e) => setShowPopup(e)}
+        getData={(e) => setProduct(e)}
       />
-      <ConfirmRemove
+      <ConfirmRemoveProduct
         showPopup={showPopupConfirm}
         handleClosePopup={(e) => setShowPopupConfirm(e)}
         idItem={idProduct}
-        // getListProduct={(e) => setProduct(e)}
+        getData={(e) => setProduct(e)}
       />
       <UpdateProductPopup
         showPopup={showPopupUpdate}
         handleClosePopup={(e) => setShowPopupUpdate(e)}
         itemProduct={itemProduct}
+        brands={brands}
+        categories={categories}
         getData={(e) => setProduct(e)}
       />
     </ContainerMainLayoutAdmin>

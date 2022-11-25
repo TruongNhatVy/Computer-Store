@@ -48,12 +48,12 @@ const dataItem = [
     color: "text-default",
     link: "/admin/supplier",
   },
-  {
-    name: "Statistic",
-    icon: "chart-bar-32",
-    color: "text-default",
-    link: "/admin/statistic",
-  },
+  // {
+  //   name: "Statistic",
+  //   icon: "chart-bar-32",
+  //   color: "text-default",
+  //   link: "/admin/statistic",
+  // },
 ];
 
 const SideBar = ({ currentAccount }) => {
@@ -87,7 +87,7 @@ const SideBar = ({ currentAccount }) => {
                   style={style.maxWidth}
                   alt="main_logo"
                 />
-                <span className="ms-1 font-weight-bold">Web Gear Gaming</span>
+                <span className="ms-1 font-weight-bold">Computer Store</span>
               </Link>
             </div>
             <hr className="my-3" />

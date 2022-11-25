@@ -13,7 +13,7 @@ import UpdateOrderPopup from "./UpdateOrderPopup";
 
 const listDataOption = [{ name: "Hieu", value: 1 }];
 
-const ManageOrder = () => {
+const OrderDetails = () => {
   const [orders, setOrder] = useState([]);
   const [page, setOffset] = useState(1);
   const [account, setAccount] = useState([]);
@@ -59,6 +59,10 @@ const ManageOrder = () => {
           <TableCol
             listCol={[
               // { title: "Id" },
+              {
+                title:
+                  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              },
               { title: "AccountId" },
               { title: "Date" },
               { title: "Total" },
@@ -140,4 +144,4 @@ const ManageOrder = () => {
   );
 };
 
-export default ManageOrder;
+export default OrderDetails;

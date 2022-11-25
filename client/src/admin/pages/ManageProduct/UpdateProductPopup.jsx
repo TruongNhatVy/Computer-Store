@@ -8,6 +8,8 @@ const UpdateProductPopup = ({
   showPopup,
   handleClosePopup,
   itemProduct,
+  brands,
+  categories,
   getData,
 }) => {
   const [name, setName] = useState(itemProduct.Name);
@@ -93,26 +95,28 @@ const UpdateProductPopup = ({
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Brand</label>
-              <input
-                type="email"
+              <label htmlFor="exampleFormControlSelect1">Brand</label>
+              <select
                 className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Email"
-                value={brandId}
+                id="exampleFormControlSelect1"
                 onChange={(e) => setBrandId(e.target.value)}
-              />
+              >
+                {(brands || []).map((brand) => (
+                  <option value={brand?._id}>{brand?.Name}</option>
+                ))}
+              </select>
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Category</label>
-              <input
-                type="text"
+              <label htmlFor="exampleFormControlSelect1">Category</label>
+              <select
                 className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Password"
-                value={categoryId}
+                id="exampleFormControlSelect1"
                 onChange={(e) => setCategoryId(e.target.value)}
-              />
+              >
+                {(categories || []).map((category) => (
+                  <option value={category?._id}>{category?.Name}</option>
+                ))}
+              </select>
             </div>
             <div className="form-group">
               <label htmlFor="exampleFormControlInput1">Image</label>
@@ -126,14 +130,12 @@ const UpdateProductPopup = ({
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Description</label>
-              <input
-                type="text"
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
+              <textarea
                 className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Address"
+                id="exampleFormControlTextarea1"
+                rows={3}
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -150,17 +152,17 @@ const UpdateProductPopup = ({
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlInput1">Status</label>
-              <input
-                type="number"
-                min="0"
-                max="1"
+              <label htmlFor="exampleFormControlSelect1">Status</label>
+              <select
                 className="form-control"
-                id="exampleFormControlInput1"
-                placeholder="Ex: 0 - 1"
+                id="exampleFormControlSelect1"
                 value={status}
-                onChange={(e) => setPrice(e.target.value)}
-              />
+                onChange={(e) => setStatus(e.target.value)}
+              >
+                <option value="Trading">Trading</option>
+                <option value="Stop trading">Stop trading</option>
+                <option value="Sold out">Sold out</option>
+              </select>
             </div>
             {/* <div className="form-group">
               <label htmlFor="exampleFormControlSelect1">Example select</label>

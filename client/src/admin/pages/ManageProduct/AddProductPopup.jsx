@@ -3,12 +3,7 @@ import { useState } from "react";
 import { useCallback } from "react";
 import Popup from "../../components/Popup/Popup";
 
-const AddProductPopup = ({
-  showPopup,
-  handleClosePopup,
-  brands,
-  categories,
-}) => {
+const AddProductPopup = ({ showPopup, handleClosePopup, getData,brands,categories }) => {
   const [name, setName] = useState("");
   const [brandId, setBrandId] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -36,13 +31,15 @@ const AddProductPopup = ({
     };
 
     await axios
-      .post("http://localhost:5000/products/addProduct", product)
+      .post("http://localhost:5000/Products/addProduct", product)
       .then((res) => res.json())
       .catch((error) => error);
 
-    console.log(product);
-
     handleClosePopup(false);
+
+    await axios
+      .get(`http://localhost:5000/Products/getProductsFilters?page=1`)
+      .then((res) => getData(res.data));
   }, [
     name,
     brandId,
@@ -52,6 +49,7 @@ const AddProductPopup = ({
     description,
     status,
     handleClosePopup,
+    getData,
   ]);
 
   return (
@@ -113,19 +111,17 @@ const AddProductPopup = ({
                 type="text"
                 className="form-control"
                 id="exampleFormControlInput1"
-                placeholder="Email"
+                placeholder="Path Image"
                 onChange={(e) => setImage(e.target.value)}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="exampleFormControlTextarea1">
-                Description
-              </label>
+              <label htmlFor="exampleFormControlTextarea1">Description</label>
               <textarea
                 className="form-control"
                 id="exampleFormControlTextarea1"
+                placeholder="Description"
                 rows={3}
-                value = '1'
               />
             </div>
             <div className="form-group">
