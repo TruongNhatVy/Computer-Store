@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 import numberWithCommas from "../../utils/ConvertNumber";
 import { addToCart } from "../../redux/reducer/cartslice";
 import { useDispatch, useSelector } from "react-redux";
+import { set } from "../../redux/reducer/productModalSlice";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import Star from "../Star/Star";
@@ -24,7 +25,7 @@ const ProductCard = (props) => {
 
   return (
     <div className="product-card">
-      <Link to={`/catelog/${props.CategoryId}/${props._id}`}>
+      <Link to={`/catelog/${props._id}`}>
         <div className="product-card__image">
           <img src={props.Image} alt="img" />
           <img src={props.Image} alt="img" />
@@ -44,7 +45,7 @@ const ProductCard = (props) => {
           icon="cart"
           color="#fff"
           animation={false}
-          onClick={handleAddToCart}
+          onClick={() =>dispatch(set(props._id))}
         >
           Chọn mua
         </Button>
