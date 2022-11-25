@@ -26,8 +26,8 @@ const ProductCard = (props) => {
     <div className="product-card">
       <Link to={`/catelog/${props.CategoryId}/${props._id}`}>
         <div className="product-card__image">
-          <img src={props.Image} alt="img" />
-          <img src={props.Image} alt="img" />
+          <img src={`./products-images/${props.Image}`} alt="img" />
+          <img src={`./products-images/${props.Image}`} alt="img" />
         </div>
         <h3 className="product-card__name">{props.Name}</h3>
         <Star rating={props.Quantity} />
