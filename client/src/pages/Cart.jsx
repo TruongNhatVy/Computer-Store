@@ -23,7 +23,7 @@ const Cart = (
   const dispatch = useDispatch();
 
   const data={ 
-    AccountId:auth.account.payload.id || [],
+    idAccount:auth.account.payload.id || [],
     
   }
   console.log(data)
@@ -62,10 +62,9 @@ const Cart = (
   };
   const storeCart=cart.cartItems.map(item =>{ 
     console.log(item)
-    const storeCart= {ProductId: item._id,UnitPrice:item.Price,cartQuantinty:item.cartQuantity}
-    const card=[]
-    card.push(storeCart)
-    return card
+    const storeCart= {ProductId: item._id,UnitPrice:item.Price,CartQuantity:item.cartQuantity}
+    return storeCart
+    // return card
   })
   const data3 ={...data,storeCart}
  console.log(data3)
