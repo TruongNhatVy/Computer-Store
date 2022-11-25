@@ -126,7 +126,7 @@ const Cart = () => {
                     <div className="cart-product-price">${cartItem.price}</div>
                     <div className="cart-product-quantity">
                       <button onClick={() => handleDecreaseCart(cartItem)}>
-                        -
+                        
                       </button>
                       <div className="count">{cartItem.cartQuantity}</div>
                       <button onClick={() => handleAddToCart(cartItem)}>
