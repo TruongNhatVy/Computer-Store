@@ -1,9 +1,10 @@
 import ACTIONS from './index'
 import axios from 'axios'
 
-export const dispatchLogin = () => {
+export const dispatchLogin = (account) => {
     return {
-        type: ACTIONS.LOGIN
+        type: ACTIONS.LOGIN,
+        payload: account,
     }
 }
 

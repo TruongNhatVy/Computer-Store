@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "react-paginate": "^8.1.4",
-    "redux-persist": "^6.0.0"
-  }
-}

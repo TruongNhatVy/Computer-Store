@@ -90,8 +90,30 @@ export const login = async (req, res) => {
       path: '/account/refresh_token',
       maxAge: 7 * 24 * 60 * 60 * 1000 //7 days
     })
-
-    res.json({ msg: "Login success!" })
+    console.log(account);
+    res.json({ msg: "Login success!", data:{
+      id : account._id,
+      email : account.email,
+      name  : account.name,
+      phone : account.phone,
+      address : account.address,
+      role: account.role,
+      avatar : account.avatar
+    },
+    token : refresh_token})
+    // {
+    //   data: {
+    //     email: "",
+    //     name: "",
+    //     address: "",
+    //     phone: "",
+    //     token: {
+    //       token: "",
+    //       refresh_token: ""
+    //     }
+    //   },
+    //   status: "success"
+    // }
   } catch (err) {
     return res.status(500).json({ msg: err.message })
   }

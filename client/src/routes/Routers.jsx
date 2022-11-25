@@ -32,7 +32,6 @@ const RoutersClient = () => {
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/contact" element={<Contact />} />
 
-        
         </Routes>
         </Layout>
         </QueryClientProvider>

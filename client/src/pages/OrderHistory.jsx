@@ -1,12 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-const OrderHistory = props => {
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+ 
+export default function App() {
   return (
-    <div>OrderHistory</div>
-  )
+      <PayPalScriptProvider options={{ "ARPSotQgRrzn3Q3hFRpC2Ojsg9xOCyIAqFhBZapMWugHUNVHMZPIEsmPrG8uxdYX7pLPZJHzZPkPeRap": "test" }}>
+          <PayPalButtons style={{ layout: "horizontal" }} />
+      </PayPalScriptProvider>
+  );
 }
+// const OrderHistory = props => {
+//   return (
+//     <div>OrderHistory</div>
+//   )
+// }
 
-OrderHistory.propTypes = {}
+// OrderHistory.propTypes = {}
 
-export default OrderHistory
+// export default OrderHistory

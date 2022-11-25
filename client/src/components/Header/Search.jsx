@@ -1,21 +1,25 @@
-import React,{useState} from "react"
+import React from "react"
 import logo from "../../assets/images/logo.svg"
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import authReducer from "../../redux/reducer/AuthReducer"
+//import authReducer from "../../redux/reducer/AuthReducer"
 import axios from 'axios'
 
-const Search = ({ CartItem }) => {
+const Search = () => {
  // fixed Header
- window.addEventListener("scroll", function () {
-  const search = document.querySelector(".search")
-  search.classList.toggle("active", window.scrollY > 100)
-})
+//  window.addEventListener("scroll", function () {
+//   const search = document.querySelector(".search")
+//   search.classList.toggle("active", window.scrollY > 100)
+// })
 
-  const authReducer = useSelector(state => state.authReducer)
-  //console.log(auth);
-  const { account, isLogged, isAdmin } = authReducer
-  
+  const auth = useSelector(state => {
+    return state.rootReducer.auth;
+  })
+  console.log(auth);
+  //console.log(state)
+  const { account, isLogged, isAdmin } = auth
+  //console.log(typeof account)
+
   const handleLogout = async () => {
     try {
       await axios.get('/account/logout')
@@ -35,11 +39,11 @@ const Search = ({ CartItem }) => {
               <img src={logo} alt='' />
             </div>
 
-            <div className='search-box f_flex'>
+            {/* <div className='search-box f_flex'>
               <i className='fa fa-search'></i>
               <input type='text' placeholder='Search and hit enter...' />
               <span>All Category</span>
-            </div>
+            </div> */}
 
             <div className="header__menu__right">
               <div className="header__menu__right__item header__menu__item">
@@ -52,8 +56,8 @@ const Search = ({ CartItem }) => {
                 <Link to="/">
                 <i>{account.name}</i>
                 </Link>
-                <ul className="dropdown">
-                  <li><Link to="/">Profile</Link></li>
+                <ul className="" style={{display:"flex"}}>
+                  <li><Link to="/">{localStorage.getItem("name")}</Link></li>
                   <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                 </ul>
               </div>
@@ -73,11 +77,11 @@ const Search = ({ CartItem }) => {
               <img src={logo} alt='' />
             </div>
 
-            <div className='search-box f_flex'>
+            {/* <div className='search-box f_flex'>
               <i className='fa fa-search'></i>
               <input type='text' placeholder='Search and hit enter...' />
               <span>All Category</span>
-            </div>
+            </div> */}
 
             <div className="header__menu__right">
               {/* <div className="header__menu__right__item header__menu__item">
@@ -87,8 +91,9 @@ const Search = ({ CartItem }) => {
                 </div> */}
 
               <div className="header__menu__right__item header__menu__item">
+                
                 <Link to="/">
-                <i>{authReducer.state.account.name}</i>
+                <i>{account.name}</i>
                 </Link>
                 <ul className="dropdown">
                   <li><Link to="/">Profile</Link></li>
@@ -119,11 +124,11 @@ const Search = ({ CartItem }) => {
                 <img src={logo} alt='' />
               </div>
   
-              <div className='search-box f_flex'>
+              {/* <div className='search-box f_flex'>
                 <i className='fa fa-search'></i>
                 <input type='text' placeholder='Search and hit enter...' />
                 <span>All Category</span>
-              </div>
+              </div> */}
   
               <div className="header__menu__right">
                 <div className="header__menu__right__item header__menu__item">

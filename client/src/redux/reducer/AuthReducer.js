@@ -11,9 +11,10 @@ const authReducer = (state = initialState, action) => {
         case ACTIONS.LOGIN:
             return {
                 ...state,
+                account: action,
                 isLogged: true
             }
-        case ACTIONS.GET_USER:
+        case ACTIONS.GET_ACCOUNT:
             return {
                 ...state,
                 account: action.payload.account,

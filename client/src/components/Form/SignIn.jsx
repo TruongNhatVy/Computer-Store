@@ -7,6 +7,7 @@ import {dispatchLogin} from "../../redux/actions/AuthAction";
 import { showErrMsg, showSuccessMsg } from "../../utils/Notification";
 
 const initialState = {
+  name: '',
   email: '',
   password: '',
   err: '',
@@ -18,7 +19,7 @@ function SignIn() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { email, password, err, success } = account
+  const { name, email, password, err, success } = account
 
   const handleChangeInput = e => {
     const { name, value } = e.target
@@ -30,10 +31,18 @@ function SignIn() {
     try {
       const res = await axios.post("/account/login", { email, password })
       setAccount({ ...account, err: '', success: res.data.msg })
-
+      console.log(res.data.data)
       localStorage.setItem('firstLogin', true)
+      localStorage.setItem('id', res.data.data._id)
+      localStorage.setItem('name', res.data.data.name)
+      localStorage.setItem('email', res.data.data.email)
 
-      dispatch(dispatchLogin())
+      initialState.name = res.data.data.name;
+      initialState.email = res.data.data.email;
+      //initialState.password = '123456';
+      initialState.err = 'fail';
+      initialState.success = 'success';
+      dispatch(dispatchLogin(initialState))
       navigate('/')
 
     } catch (err) {
