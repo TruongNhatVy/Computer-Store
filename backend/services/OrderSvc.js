@@ -2,6 +2,7 @@ import * as OrderRepo from "../repositories/OrderRepo.js";
 import * as Utils from "../utils/Utils.js";
 import * as OrderDetailsSvc from "../services/OrderDetailsSvc.js";
 import * as ProductsSvc from "../services/ProductSvc.js";
+import * as AccountSvc from "../services/AccountSvc.js";
 import { OrderFiltersModel } from "../models/filters/OrderFiltersModel.js";
 import moment from "moment";
 import { Router } from "express";
@@ -65,58 +66,59 @@ export const addOrder = async (order) => {
   return await OrderRepo.addOrder(order);
 };
 
-export const payment = async (storeAccount, storeCart) => {
+export const payment = async (objReq) => {
+  const account = await AccountSvc.getAccountById(objReq.idAccount);
   const orderDetails = [];
-  const productsNotProvideEnough = [];
+  // const productsNotProvideEnough = [];
 
   // bat loi khong du so luong cung cap
-  for (let i = 0; i < storeCart.length; i++) {
-    const product = await ProductsSvc.getProductById(storeCart[i]._id);
+  // for (let i = 0; i < objectReq.storeCart.length; i++) {
+  //   const product = await ProductsSvc.getProductById(objectReq.storeCart[i]._id);
 
-    if (product.Quantity < storeCart[i].cartQuantity) {
-      const b = {
-        _id: storeCart[i]._id,
-        Name: storeCart[i].Name,
-        RemainingQuantity: product.Quantity,
-        QuantityRequired: storeCart[i].cartQuantity,
-      };
+  //   if (product.Quantity < objectReq.storeCart[i].cartQuantity) {
+  //     const b = {
+  //       _id: objectReq.storeCart[i]._id,
+  //       Name: objectReq.storeCart[i].Name,
+  //       RemainingQuantity: product.Quantity,
+  //       QuantityRequired: objectReq.storeCart[i].cartQuantity,
+  //     };
 
-      productsNotProvideEnough[i] = b;
-    }
-  }
+  //     productsNotProvideEnough[i] = b;
+  //   }
+  // }
 
-  if (productsNotProvideEnough.length > 0) {
-    const error = {
-      Message: "Some products are not enough to provide !",
-      Products: productsNotProvideEnough,
-    };
+  // if (productsNotProvideEnough.length > 0) {
+  //   const error = {
+  //     Message: "Some products are not enough to provide !",
+  //     Products: productsNotProvideEnough,
+  //   };
 
-    throw(error);
-  }
+  //   throw(error);
+  // }
 
   //xu ly thanh toan
   const cart = {
-    AccountId: storeAccount.payload.user._id,
+    AccountId: account._id,
     Date: moment(Date.now()).format("yyyy-MM-DD"),
     Total: 0, //160940000
-    Status: "Processing",
-    Email: storeAccount.payload.user.email,
-    Phone: storeAccount.payload.user.phone,
-    Address: storeAccount.payload.user.address,
+    Status: "Unconfirmed",
+    Email: account.email,
+    Phone: account.phone,
+    Address: account.address,
   };
 
-  storeCart.forEach((element) => {
-    cart.Total += element.cartQuantity * element.Price;
+  objReq.storeCart.forEach((element) => {
+    cart.Total += element.CartQuantity * element.UnitPrice;
   });
 
   const orderAdd = await addOrder(cart);
 
-  for (let i = 0; i < storeCart.length; i++) {
+  for (let i = 0; i < objReq.storeCart.length; i++) {
     let orderDetailsItem = {
       OrderId: orderAdd._id,
-      ProductId: storeCart[i]._id,
-      UnitPrice: storeCart[i].Price,
-      Quantity: storeCart[i].cartQuantity,
+      ProductId: objReq.storeCart[i].ProductId,
+      UnitPrice: objReq.storeCart[i].UnitPrice,
+      Quantity: objReq.storeCart[i].CartQuantity,
       Total: 0,
     };
     orderDetailsItem.Total =
