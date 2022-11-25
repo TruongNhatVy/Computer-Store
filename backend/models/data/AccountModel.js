@@ -39,5 +39,5 @@ const schema = new mongoose.Schema(
     timestamps: true
   }
 );
-
-export default mongoose.model("accounts", schema);
+export const AccountModel = mongoose.model("accounts", schema);
+// export default mongoose.model("accounts", schema);
