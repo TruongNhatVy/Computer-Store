@@ -12,6 +12,7 @@ import Contact from "../pages/Contact";
 import Layout from "../components/Layout/Layout";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ActivationEmail from "../components/Form/ActivationMail";
+import History from "../pages/History";
 const client = new QueryClient();
 
 const RoutersClient = () => {
@@ -31,7 +32,7 @@ const RoutersClient = () => {
           <Route exact path="/account/activate/:activation_token" element={<ActivationEmail />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/contact" element={<Contact />} />
-
+          <Route exact path="/history" element={<History />} />
         </Routes>
         </Layout>
         </QueryClientProvider>
